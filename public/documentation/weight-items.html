@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Weighed &amp; scale items · POS User Guide</title>
+  <meta name="description" content="Selling products by weight: the weight-prompt at checkout and scale barcodes that carry the weight so the POS reads it automatically." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+  <link rel="stylesheet" href="/documentation/assets/docs.css?v=20" />
+  <script>
+    (function () { try { var t = localStorage.getItem("docs-theme"); if (!t) t = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"; document.documentElement.setAttribute("data-theme", t); } catch (e) {} })();
+  </script>
+</head>
+<body data-nav="weight-items">
+  <div class="doc-progress"><div class="doc-progress__bar" id="docs-progress-bar"></div></div>
+
+  <header class="doc-topbar">
+    <button class="doc-iconbtn doc-menubtn" id="docs-menu-btn" aria-label="Open menu"></button>
+    <a class="doc-brand" href="/documentation/index.html">
+      <span class="doc-brand__mark"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M3 9h18M7 21h10"/></svg></span>
+      <span class="doc-brand__name">POS <span style="color:var(--text-tertiary);font-weight:500">User Guide</span></span>
+      <span class="doc-brand__tag">Docs</span>
+    </a>
+    <div class="doc-topbar__spacer"></div>
+    <button class="doc-searchbtn" data-open-search aria-label="Search">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <span class="label">Search the guide…</span>
+      <kbd>Ctrl K</kbd>
+    </button>
+    <button class="doc-iconbtn" id="docs-theme-btn" aria-label="Toggle dark mode">
+      <svg class="theme-moon" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg>
+      <svg class="theme-sun" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4 12H2M22 12h-2M5 5 4 4M20 20l-1-1M5 19l-1 1M20 4l-1 1"/></svg>
+    </button>
+  </header>
+
+  <div class="doc-search" id="docs-search" role="dialog" aria-label="Search">
+    <div class="doc-search__backdrop"></div>
+    <div class="doc-search__panel">
+      <div class="doc-search__input">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="docs-search-input" type="text" placeholder="Search for a feature…" autocomplete="off" />
+      </div>
+      <div class="doc-search__results" id="docs-search-results"></div>
+    </div>
+  </div>
+
+  <div class="doc-scrim" id="docs-scrim"></div>
+
+  <div class="doc-layout">
+    <aside class="doc-sidebar scroll-y"><nav id="docs-sidebar-nav"></nav></aside>
+
+    <main class="doc-main">
+      <nav class="doc-breadcrumb" id="docs-breadcrumbs"></nav>
+
+      <article class="doc-article">
+        <h1>Weighed &amp; scale items</h1>
+        <p class="lead">Some things aren't sold one-at-a-time — they're sold by weight, like fruit, vegetables, loose grains or deli meats. The POS handles these with a quick weight prompt at the counter, or by reading a barcode that a weighing scale prints with the weight already inside it.</p>
+
+        <div class="glance">
+          <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m9 12 2 2 4-4"/></svg><div><b>Who uses it</b><span>Supermarkets, grocers and any shop with loose goods.</span></div></div>
+          <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg><div><b>How long it takes</b><span>Type a weight, or scan a scale label in one move.</span></div></div>
+          <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9v11h14V9"/></svg><div><b>Where to find it</b><span>On the <a href="/documentation/cashier.html">POS screen</a> when you add a weighed product.</span></div></div>
+        </div>
+
+        <h2 id="overview">Overview</h2>
+        <p>A normal product is priced "per item" — one tin of beans costs the same every time. A <strong>weighed product</strong> is priced "per kilogram" (or per gram), so the price depends on how much the customer is buying. The POS needs to know the weight to work out the price.</p>
+        <p>There are two ways it learns the weight:</p>
+        <ul>
+          <li><strong>You type it in.</strong> When you add the product, a small <strong>weight prompt</strong> appears and you enter the weight.</li>
+          <li><strong>A scale barcode carries it.</strong> A weighing scale weighs the item and prints a barcode label with the weight built into it. When you scan that label, the POS reads the weight automatically — no typing.</li>
+        </ul>
+        <p>The owner decides which products are sold by weight (set on the product) and configures how scale barcodes are read in <a href="/documentation/settings.html">Settings</a>. As a cashier, you just add the item the same way you always do.</p>
+
+        <figure class="shot">
+          <div class="shot__frame">
+            <div class="shot__bar"><i></i><i></i><i></i></div>
+            <img src="/assets/documentation/images/weight-prompt.png" alt="The weight-prompt window asking for the weight of a loose item on the POS screen" />
+          </div>
+          <figcaption>The weight prompt: enter the weight and the POS works out the line price for you.</figcaption>
+        </figure>
+
+        <h2 id="why">Why it's useful</h2>
+        <ul>
+          <li><strong>It prices loose goods correctly.</strong> Fruit, veg and grains are charged by exactly what's on the scale — fair to you and the customer.</li>
+          <li><strong>It removes mental maths.</strong> No multiplying price-per-kilo by weight in your head — the POS does it instantly.</li>
+          <li><strong>Scale labels make it one scan.</strong> If items are weighed and labelled in the aisle or at a counter, checkout is as fast as any other product.</li>
+          <li><strong>It keeps stock accurate.</strong> The POS records the fractional quantity, so your weight-based stock stays right.</li>
+        </ul>
+
+        <h2 id="steps">Selling a weighed item, step by step</h2>
+
+        <h3 id="manual">When you enter the weight by hand</h3>
+        <ol class="steps">
+          <li>
+            <span class="step-title">Add the product</span>
+            <p>Scan its barcode or tap its tile on the <a href="/documentation/cashier.html">POS screen</a> as usual.</p>
+          </li>
+          <li>
+            <span class="step-title">Enter the weight when prompted</span>
+            <p>Because it's sold by weight, a weight prompt opens. Type the weight (for example <code>0.450</code> kg) from your counter scale.</p>
+          </li>
+          <li>
+            <span class="step-title">Confirm</span>
+            <p>The POS multiplies the weight by the price-per-unit and adds the line with the correct amount. The cart line shows the weight and the price.</p>
+          </li>
+          <li>
+            <span class="step-title">Continue the sale</span>
+            <p>Add more items or take payment — see <a href="/documentation/payments.html">Taking payments</a>.</p>
+          </li>
+        </ol>
+
+        <h3 id="scale-barcode">When a scale barcode does it for you</h3>
+        <ol class="steps">
+          <li>
+            <span class="step-title">Scan the scale label</span>
+            <p>Items weighed at a scale come with a printed barcode label. Scan it like any barcode.</p>
+          </li>
+          <li>
+            <span class="step-title">The POS reads the weight automatically</span>
+            <p>The label's barcode encodes the product and the weight together. The POS recognises it, pulls out the weight, and adds the line with the right price — no prompt, no typing.</p>
+          </li>
+          <li>
+            <span class="step-title">Carry on</span>
+            <p>The line appears in the cart exactly as a hand-entered one would. Finish the sale as normal.</p>
+          </li>
+        </ol>
+
+        <h2 id="scale-barcodes-explained">What a scale barcode is</h2>
+        <p>A weighing scale with a label printer doesn't just weigh an item — it prints a special barcode that contains a product code <em>and</em> the measured weight (or the price). When that barcode reaches the POS, the system knows it's a scale label, splits out the parts, and uses the weight to price the line.</p>
+        <p>For this to work, two things are set up once by the owner:</p>
+        <div class="doc-tablewrap">
+          <table>
+            <thead><tr><th>Set on</th><th>What it does</th></tr></thead>
+            <tbody>
+              <tr><td><strong>The product</strong> <span class="badge">Products</span></td><td>Marks the item as sold by weight and gives it a short scale code that the scale and the POS share. See <a href="/documentation/products.html">Products</a>.</td></tr>
+              <tr><td><strong>Settings → Scale</strong> <span class="badge">Settings</span></td><td>Tells the POS how your scale's barcodes are laid out, so it reads the weight from the right place. See <a href="/documentation/settings.html">General settings</a>.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Once that's done, a cashier never thinks about it again — scanning a scale label simply works.</p>
+
+        <h2 id="tips">Tips &amp; best practices</h2>
+        <div class="callout callout--tip">
+          <span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.2 1 2.5h6c0-1.3.3-1.8 1-2.5A6 6 0 0 0 12 3z"/></svg></span>
+          <div class="callout__body">
+            <ul>
+              <li><strong>Read the weight from the scale, not by eye.</strong> When typing manually, copy the exact figure your counter scale shows.</li>
+              <li><strong>Mind the units.</strong> If a product is priced per kilogram, enter the weight in kilograms (for example <code>0.250</code>, not <code>250</code>).</li>
+              <li><strong>Prefer scale labels for busy counters.</strong> Weighing and labelling before checkout turns a weighed item into a single fast scan.</li>
+            </ul>
+          </div>
+        </div>
+
+        <h2 id="warnings">Notes &amp; warnings</h2>
+        <div class="callout callout--warning">
+          <span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 2.5 20h19z"/><path d="M12 10v4M12 17h.01"/></svg></span>
+          <div class="callout__body">
+            <p><strong>If scanning a scale label adds the wrong item or no weight</strong>, the scale settings may not match your scale's barcode layout. Ask the owner to check <a href="/documentation/settings.html">Settings → Scale</a> — the cashier screen can't fix this on its own.</p>
+            <p><strong>A weight of zero won't sell anything.</strong> Make sure the prompt shows a real weight before confirming.</p>
+          </div>
+        </div>
+
+        <hr />
+        <p style="color:var(--text-tertiary);font-size:14px">Related: <a href="/documentation/cashier.html">The POS screen</a> · <a href="/documentation/products.html">Products</a> · <a href="/documentation/settings.html">General settings</a> · <a href="/documentation/units.html">Units of measure</a></p>
+
+        <nav class="doc-pager" id="docs-pager"></nav>
+      </article>
+    </main>
+
+    <aside class="doc-toc scroll-y"><nav id="docs-toc"></nav></aside>
+  </div>
+
+  <script src="/documentation/assets/nav.js?v=22"></script>
+  <script src="/documentation/assets/docs.js?v=20"></script>
+</body>
+</html>

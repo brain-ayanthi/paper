@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Setting up the cron job · POS User Guide</title>
+  <meta name="description" content="Add one scheduled task on your server so the POS can run its background work — automatic backups, scheduled report emails, low-stock alerts and update checks — on its own." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+  <link rel="stylesheet" href="/documentation/assets/docs.css?v=20" />
+  <script>
+    (function () { try { var t = localStorage.getItem("docs-theme"); if (!t) t = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"; document.documentElement.setAttribute("data-theme", t); } catch (e) {} })();
+  </script>
+</head>
+<body data-nav="cron">
+  <div class="doc-progress"><div class="doc-progress__bar" id="docs-progress-bar"></div></div>
+
+  <header class="doc-topbar">
+    <button class="doc-iconbtn doc-menubtn" id="docs-menu-btn" aria-label="Open menu"></button>
+    <a class="doc-brand" href="/documentation/index.html">
+      <span class="doc-brand__mark"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M3 9h18M7 21h10"/></svg></span>
+      <span class="doc-brand__name">POS <span style="color:var(--text-tertiary);font-weight:500">User Guide</span></span>
+      <span class="doc-brand__tag">Docs</span>
+    </a>
+    <div class="doc-topbar__spacer"></div>
+    <button class="doc-searchbtn" data-open-search aria-label="Search">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <span class="label">Search the guide…</span>
+      <kbd>Ctrl K</kbd>
+    </button>
+    <button class="doc-iconbtn" id="docs-theme-btn" aria-label="Toggle dark mode">
+      <svg class="theme-moon" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg>
+      <svg class="theme-sun" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4 12H2M22 12h-2M5 5 4 4M20 20l-1-1M5 19l-1 1M20 4l-1 1"/></svg>
+    </button>
+  </header>
+
+  <div class="doc-search" id="docs-search" role="dialog" aria-label="Search">
+    <div class="doc-search__backdrop"></div>
+    <div class="doc-search__panel">
+      <div class="doc-search__input">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="docs-search-input" type="text" placeholder="Search for a feature…" autocomplete="off" />
+      </div>
+      <div class="doc-search__results" id="docs-search-results"></div>
+    </div>
+  </div>
+
+  <div class="doc-scrim" id="docs-scrim"></div>
+
+  <div class="doc-layout">
+    <aside class="doc-sidebar scroll-y"><nav id="docs-sidebar-nav"></nav></aside>
+
+    <main class="doc-main">
+      <nav class="doc-breadcrumb" id="docs-breadcrumbs"></nav>
+
+      <article class="doc-article">
+        <h1>Setting up the cron job</h1>
+        <p class="lead">A few POS features work quietly in the background — emailing your scheduled reports, taking automatic backups, warning you about low stock. For any of that to happen, your server needs to poke the POS once a minute. That poke is called a <strong>cron job</strong>, and you set it up once, in about two minutes.</p>
+
+        <div class="glance">
+          <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m9 12 2 2 4-4"/></svg><div><b>Who sets it up</b><span>Whoever installed the POS — you, your developer, or your host's support team.</span></div></div>
+          <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg><div><b>How long it takes</b><span>Two minutes, once — right after installing.</span></div></div>
+          <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9v11h14V9"/></svg><div><b>Where to start</b><span><strong>Settings → Scheduler</strong> in the POS — it hands you the exact command to paste into your hosting panel.</span></div></div>
+        </div>
+
+        <h2 id="overview">What a cron job is</h2>
+        <p>A cron job is your server's alarm clock. You tell it "run this command every minute", and from then on it does — day and night, whether or not anyone is logged in.</p>
+        <p>The POS uses a single one. Every minute the server runs one short command; the POS looks at its to-do list, sees whether anything is due right now, and either does it or goes straight back to sleep. When nothing is due — which is most minutes — it costs practically nothing.</p>
+
+        <div class="callout callout--info">
+          <span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg></span>
+          <div class="callout__body">
+            <div class="callout__title">You only ever need one cron job.</div>
+            <p>Not one per feature. This single entry drives every background task the POS has — now and after future updates. Set it up once and forget about it.</p>
+          </div>
+        </div>
+
+        <h2 id="why">What needs it</h2>
+        <p>The POS works perfectly well without a cron job for selling, stock and reports you run yourself. What stops working is everything that's meant to happen <em>on its own</em>:</p>
+        <div class="doc-tablewrap">
+          <table>
+            <thead><tr><th>Feature</th><th>Without the cron job</th></tr></thead>
+            <tbody>
+              <tr><td><strong><a href="/documentation/scheduled-reports.html">Scheduled reports</a></strong></td><td>Never sent. Schedules can be created, but nothing arrives by email.</td></tr>
+              <tr><td><strong><a href="/documentation/backup.html">Automatic backups</a></strong></td><td>Never taken. Manual backups still work — but only if you remember.</td></tr>
+              <tr><td><strong>Low-stock alerts</strong></td><td>No daily bell notification when items drop to their reorder level.</td></tr>
+              <tr><td><strong><a href="/documentation/updates.html">Update checks</a></strong></td><td>No "a new version is available" banner unless you check manually.</td></tr>
+              <tr><td><strong><a href="/documentation/dashboard.html">Dashboard &amp; trend figures</a></strong></td><td>Still correct, but recalculated live each time — slower on big catalogs.</td></tr>
+              <tr><td><strong><a href="/documentation/returns.html">Online refund retries</a></strong></td><td>A card refund that failed because the gateway was down isn't retried automatically.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="scheduler-page">Start here: Settings → Scheduler</h2>
+        <p>Before you go anywhere near your hosting panel, open <strong>Settings → Scheduler</strong> in the POS. It does most of this page's work for you:</p>
+        <ul>
+          <li><strong>It tells you whether the cron job is already running</strong> — a plain <em>Working</em>, <em>Working, but slowly</em>, <em>Cron job not set up</em> or <em>Stopped</em>, with the time it last ran.</li>
+          <li><strong>It shows the exact command to paste</strong>, already filled in with your installation's real folder path — nothing to work out by hand. There's a <strong>Copy</strong> button next to it.</li>
+          <li><strong>It offers a second version of the command</strong> with the full path to PHP, for hosts where the plain one doesn't run.</li>
+          <li><strong>It has a Test button</strong> that watches for the next run and tells you within a minute or two whether your cron job is really firing.</li>
+          <li><strong>It has a fallback</strong> for hosts that don't offer cron at all — see <a href="#url-cron">no cron on your hosting?</a></li>
+        </ul>
+        <p>The rest of this page explains what that command means and where to paste it in the common hosting panels.</p>
+
+        <h2 id="command">The command</h2>
+        <p>This is the whole thing. It's the same on every host — only the folder path and the word <code>php</code> may need adjusting for yours, and <strong>Settings → Scheduler</strong> has already filled the path in for you.</p>
+
+        <div class="doc-code">
+          <div class="doc-code__label">Run every minute</div>
+          <pre><code>cd /home/username/public_html &amp;&amp; php artisan schedule:run &gt;&gt; /dev/null 2&gt;&amp;1</code></pre>
+        </div>
+
+        <p>Read left to right, it says: go into the folder where the POS is installed, run its scheduler, and throw away any output so your inbox doesn't fill up. Three things in it are yours to fill in:</p>
+        <div class="doc-tablewrap">
+          <table>
+            <thead><tr><th>Part</th><th>What to put</th></tr></thead>
+            <tbody>
+              <tr><td><code>/home/username/public_html</code></td><td>The folder your POS files are in — the one containing <code>artisan</code> and the <code>public</code> folder. <strong>Settings → Scheduler</strong> shows yours; or see <a href="#paths">finding your paths</a>.</td></tr>
+              <tr><td><code>php</code></td><td>Usually fine as-is. If your host runs several PHP versions, use the full path to PHP 8.2+ instead — again, see <a href="#paths">finding your paths</a>.</td></tr>
+              <tr><td><code>&gt;&gt; /dev/null 2&gt;&amp;1</code></td><td>Leave it. It silences the output. Drop it temporarily if you're <a href="#verify">testing</a> and want to see errors.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>And the schedule itself — "every minute" — is written as five stars:</p>
+        <div class="doc-code">
+          <div class="doc-code__label">Timing (the five fields)</div>
+          <pre><code>*     *     *     *     *
+│     │     │     │     │
+│     │     │     │     └─ day of week   (0–6)
+│     │     │     └─────── month         (1–12)
+│     │     └───────────── day of month  (1–31)
+│     └─────────────────── hour          (0–23)
+└───────────────────────── minute        (0–59)</code></pre>
+        </div>
+        <p>All stars means "every value" — so, every minute of every hour of every day. In most control panels you don't type the stars at all; you pick <strong>Once per minute</strong> from a dropdown.</p>
+
+        <h2 id="cpanel">cPanel, step by step</h2>
+        <p>The most common setup on shared hosting.</p>
+        <ol class="steps">
+          <li>
+            <span class="step-title">Open Cron Jobs</span>
+            <p>Log in to cPanel and, under <strong>Advanced</strong>, click <strong>Cron Jobs</strong>. (Use the panel's search box if you can't spot it.)</p>
+          </li>
+          <li>
+            <span class="step-title">Set the schedule to every minute</span>
+            <p>Under <strong>Add New Cron Job</strong>, open <strong>Common Settings</strong> and choose <strong>Once Per Minute (* * * * *)</strong>. The five boxes below fill themselves in.</p>
+          </li>
+          <li>
+            <span class="step-title">Paste the command</span>
+            <p>In the <strong>Command</strong> box, paste the command from above, with your own folder path in place of <code>/home/username/public_html</code>.</p>
+          </li>
+          <li>
+            <span class="step-title">Add the cron job</span>
+            <p>Click <strong>Add New Cron Job</strong>. It appears in the list below and starts running within a minute. That's it.</p>
+          </li>
+          <li>
+            <span class="step-title">Stop the email notifications (optional)</span>
+            <p>cPanel emails you the output of every run by default. Clear the <strong>Cron Email</strong> field at the top of the page, or your inbox will get 1,440 messages a day.</p>
+          </li>
+        </ol>
+
+        <h2 id="plesk">Plesk, step by step</h2>
+        <ol class="steps">
+          <li>
+            <span class="step-title">Open Scheduled Tasks</span>
+            <p>Go to <strong>Websites &amp; Domains</strong> → your domain → <strong>Scheduled Tasks</strong>, then <strong>Add Task</strong>.</p>
+          </li>
+          <li>
+            <span class="step-title">Choose "Run a command"</span>
+            <p>Set <strong>Task type</strong> to <strong>Run a command</strong>. In <strong>Command</strong>, enter the full path to PHP followed by <code>artisan schedule:run</code>, and set the working directory to your POS folder if Plesk offers the option.</p>
+          </li>
+          <li>
+            <span class="step-title">Run it every minute</span>
+            <p>Set <strong>Run</strong> to <strong>Cron style</strong> and enter <code>* * * * *</code>.</p>
+          </li>
+          <li>
+            <span class="step-title">Test, then switch notifications off</span>
+            <p>Use <strong>Run Now</strong> to check it doesn't error, set <strong>Notify</strong> to <strong>Do not notify</strong>, then <strong>OK</strong> to save.</p>
+          </li>
+        </ol>
+
+        <h2 id="directadmin">DirectAdmin &amp; other panels</h2>
+        <p>Every panel has the same two boxes — <em>when</em> and <em>what</em> — under a name like Cron Jobs, Scheduled Tasks or Task Scheduler. In DirectAdmin it's <strong>Advanced Features</strong> → <strong>Cronjobs</strong>. Set the five timing fields to <code>*</code> and paste the same command. If you genuinely can't find it, send your host's support team this line: <em>"Please add a cron job that runs <code>php artisan schedule:run</code> every minute in my POS folder."</em> — they do this daily.</p>
+
+        <h2 id="ssh">VPS or dedicated server (SSH)</h2>
+        <p>If you have terminal access, edit the crontab of the user that owns the site files:</p>
+        <div class="doc-code">
+          <div class="doc-code__label">Terminal</div>
+          <pre><code>crontab -e</code></pre>
+        </div>
+        <p>Add this line at the end, save, and exit:</p>
+        <div class="doc-code">
+          <div class="doc-code__label">crontab entry</div>
+          <pre><code>* * * * * cd /var/www/pos &amp;&amp; /usr/bin/php artisan schedule:run &gt;&gt; /dev/null 2&gt;&amp;1</code></pre>
+        </div>
+        <p>Confirm it saved with <code>crontab -l</code>.</p>
+
+        <div class="callout callout--warning">
+          <span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 2.5 20h19z"/><path d="M12 10v4M12 17h.01"/></svg></span>
+          <div class="callout__body">
+            <p><strong>Use the site's own user, not <code>root</code>.</strong> A cron running as root can create log and cache files the web server then can't write to, which breaks the POS in confusing ways. If in doubt, match the user that owns your POS folder.</p>
+          </div>
+        </div>
+
+        <h2 id="url-cron">No cron on your hosting?</h2>
+        <p>A few budget plans offer no cron job at all — only "open this web address on a schedule". The POS has a fallback for exactly that case, in <strong>Settings → Scheduler</strong>, at the bottom of the page.</p>
+        <ol class="steps">
+          <li>
+            <span class="step-title">Generate a cron URL</span>
+            <p>Click <strong>Generate cron URL</strong>. You get a private web address unique to your shop. Until you do this, the address doesn't exist at all — nothing is exposed on a normal install.</p>
+          </li>
+          <li>
+            <span class="step-title">Point something at it every minute</span>
+            <p>Use your host's "fetch a URL on a schedule" feature, or a free external service such as cron-job.org. The page also gives you a <code>wget</code> version if your panel wants a command rather than a link.</p>
+          </li>
+          <li>
+            <span class="step-title">Check the status turns green</span>
+            <p>Come back to <strong>Settings → Scheduler</strong> after a minute or two — the status at the top should say the scheduler is working.</p>
+          </li>
+        </ol>
+
+        <div class="callout callout--warning">
+          <span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 2.5 20h19z"/><path d="M12 10v4M12 17h.01"/></svg></span>
+          <div class="callout__body">
+            <p><strong>Treat that URL like a password.</strong> Anyone who has it can trigger your scheduled tasks — it doesn't expose any of your data, but don't publish it. If it ever leaks, generate a new one and the old address stops working immediately.</p>
+            <p><strong>Use a real cron job if your host offers one.</strong> A URL ping depends on an outside service still being up and still remembering you. The proper cron job doesn't.</p>
+          </div>
+        </div>
+
+        <h2 id="paths">Finding your folder and PHP paths</h2>
+
+        <h3>The folder path</h3>
+        <p>You need the folder that contains the file called <code>artisan</code> — the same folder you uploaded during <a href="/documentation/installation.html">installation</a>. In cPanel's <strong>File Manager</strong>, open that folder and read the path shown at the top; it usually looks like <code>/home/username/public_html</code>, or <code>/home/username/public_html/pos</code> if you installed into a subfolder. Over SSH, <code>cd</code> into it and run <code>pwd</code>.</p>
+
+        <div class="callout callout--danger">
+          <span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2h8l6 6v8l-6 6H8l-6-6V8z"/><path d="M12 8v5M12 16h.01"/></svg></span>
+          <div class="callout__body">
+            <p><strong>Point at the app folder, not the <code>public</code> folder.</strong> <code>artisan</code> sits one level <em>above</em> <code>public</code>. If your cron says <code>.../public_html/public</code>, it will fail every minute with "Could not open input file: artisan".</p>
+          </div>
+        </div>
+
+        <h3>The PHP path</h3>
+        <p>Plain <code>php</code> works on most hosts. But many shared hosts keep several PHP versions installed and the default one for cron can be older than the one your website uses — and the POS needs <strong>PHP 8.2 or newer</strong>. If you hit that, use the full path instead. Common ones:</p>
+        <div class="doc-tablewrap">
+          <table>
+            <thead><tr><th>Host type</th><th>Typical PHP path</th></tr></thead>
+            <tbody>
+              <tr><td>cPanel (EasyApache)</td><td><code>/opt/cpanel/ea-php82/root/usr/bin/php</code></td></tr>
+              <tr><td>CloudLinux / LiteSpeed</td><td><code>/usr/local/bin/ea-php82</code> or <code>/opt/alt/php82/usr/bin/php</code></td></tr>
+              <tr><td>Plesk</td><td><code>/opt/plesk/php/8.2/bin/php</code></td></tr>
+              <tr><td>Ubuntu / Debian VPS</td><td><code>/usr/bin/php</code> or <code>/usr/bin/php8.2</code></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Not sure which? Your host's PHP selector page normally shows the exact path, and support will tell you in a one-line reply. Over SSH, <code>which php</code> and <code>php -v</code> answer it in a second.</p>
+
+        <h2 id="daily-tasks">How daily tasks behave</h2>
+        <p>Daily work such as scheduled backups uses the configured company/store timezone. A task claims its eligible window before running, so frequent cron ticks do not start overlapping copies. If a shared-host cron misses the opening minute and returns later in the allowed window, the task can catch up once rather than disappearing for the day.</p>
+        <p>The Scheduler page records heartbeat and task-run evidence. A manual backup or other manual action does not pretend that its scheduled version ran. Failed or interrupted work remains visible for investigation instead of retrying blindly every minute.</p>
+
+        <h2 id="verify">Checking that it works</h2>
+        <ol class="steps">
+          <li>
+            <span class="step-title">Open Settings → Scheduler and press "Test my cron job"</span>
+            <p>This is the direct answer, and it takes under a minute. The page watches for your server to run the scheduler and turns green the moment it does. It never runs anything itself — so a pass is proof that <em>your</em> cron job fired, not just that the POS is alive.</p>
+          </li>
+          <li>
+            <span class="step-title">Read the status at the top of that page</span>
+            <p>Even without running a test, the page always shows one of: <strong>Working</strong>, <strong>Working but slowly</strong> (your host limits how often cron may run — usually fine), <strong>Cron job not set up</strong>, or <strong>Stopped</strong>. <strong>Settings → System Health</strong> repeats the same verdict alongside the other install checks.</p>
+          </li>
+          <li>
+            <span class="step-title">If the test times out, look at the output</span>
+            <p>Temporarily remove <code>&gt;&gt; /dev/null 2&gt;&amp;1</code> from the end of the command so the server emails you what the run printed. The error message is usually self-explanatory — see the table below. Put it back once fixed.</p>
+          </li>
+          <li>
+            <span class="step-title">End-to-end proof (optional)</span>
+            <p>Create a <a href="/documentation/scheduled-reports.html">scheduled report</a> to your own address a few minutes ahead and wait for it to land. This also exercises your <a href="/documentation/settings.html">email settings</a> — use <strong>Run now</strong> first to rule email out.</p>
+          </li>
+        </ol>
+
+        <h2 id="troubleshooting">Common problems</h2>
+        <div class="doc-tablewrap">
+          <table>
+            <thead><tr><th>What you see</th><th>What it means</th></tr></thead>
+            <tbody>
+              <tr><td><code>Could not open input file: artisan</code></td><td>The folder path is wrong — most often it points at the <code>public</code> folder instead of the one above it.</td></tr>
+              <tr><td><code>php: command not found</code></td><td>Cron can't find PHP. Use the second command on <strong>Settings → Scheduler</strong> — the one with the full path to PHP already filled in.</td></tr>
+              <tr><td>Status says <strong>Working, but slowly</strong></td><td>Your cron is alive but running less often than every minute — usually a host-imposed limit. Backups and reports still go out, just a few minutes late. Nothing to fix unless you set it to hourly yourself.</td></tr>
+              <tr><td>Status says <strong>Stopped</strong></td><td>It worked before and has since quit. Check the cron job still exists in your panel — server migrations and panel resets are the usual culprits.</td></tr>
+              <tr><td>"requires PHP 8.2" or a syntax error</td><td>Cron is using an older PHP than your website. Again, full path to the newer binary.</td></tr>
+              <tr><td>Nothing at all happens</td><td>Check the job is actually saved and enabled in your panel, and that the schedule is <code>* * * * *</code> — not hourly or daily.</td></tr>
+              <tr><td>Hundreds of emails from your server</td><td>Normal behaviour, wrong setting. Clear the cron email address in your panel and keep <code>&gt;&gt; /dev/null 2&gt;&amp;1</code> on the command.</td></tr>
+              <tr><td>Reports arrive at the wrong time</td><td>The server clock or the POS timezone. Set your timezone under <a href="/documentation/settings.html">Settings → Regional</a>.</td></tr>
+              <tr><td>Backups run but reports don't</td><td>Cron is fine — it's email. Check your SMTP settings in <a href="/documentation/settings.html">Settings</a>.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="tips">Tips &amp; best practices</h2>
+        <div class="callout callout--tip">
+          <span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.2 1 2.5h6c0-1.3.3-1.8 1-2.5A6 6 0 0 0 12 3z"/></svg></span>
+          <div class="callout__body">
+            <ul>
+              <li><strong>Do it straight after installing.</strong> It takes two minutes and it's the difference between backups that happen and backups you meant to take.</li>
+              <li><strong>Every minute is the right frequency.</strong> It's deliberately cheap. Don't be tempted to "save resources" by making it hourly.</li>
+              <li><strong>If your host caps cron frequency</strong> — some allow only every 5 or 15 minutes — set the shortest they allow. Everything still works; scheduled reports simply go out at the next allowed tick rather than exactly on the minute.</li>
+              <li><strong>One cron job, not several.</strong> Adding the same line twice just doubles the work. If you're unsure whether it's already set up, check the existing list before adding another.</li>
+              <li><strong>Recheck it after moving hosts.</strong> Migrations bring the files and database across, but almost never the cron job. It's the most common reason backups quietly stop after a move.</li>
+            </ul>
+          </div>
+        </div>
+
+        <h2 id="warnings">Notes &amp; warnings</h2>
+        <div class="callout callout--warning">
+          <span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 2.5 20h19z"/><path d="M12 10v4M12 17h.01"/></svg></span>
+          <div class="callout__body">
+            <p><strong>The POS won't warn you loudly if the cron job is missing.</strong> Selling carries on as normal — it's the silent, automatic things that stop. Confirm it's working once, and check again after any server change.</p>
+            <p><strong>A missed run isn't a disaster.</strong> If the server is down for an hour, due tasks simply run at the next opportunity. Nothing is lost, it's just late.</p>
+          </div>
+        </div>
+
+        <hr />
+        <p style="color:var(--text-tertiary);font-size:14px">Related: <a href="/documentation/installation.html">Installation &amp; setup</a> · <a href="/documentation/scheduled-reports.html">Scheduled reports</a> · <a href="/documentation/backup.html">Backup &amp; restore</a> · <a href="/documentation/troubleshooting.html">Troubleshooting</a></p>
+
+        <nav class="doc-pager" id="docs-pager"></nav>
+      </article>
+    </main>
+
+    <aside class="doc-toc scroll-y"><nav id="docs-toc"></nav></aside>
+  </div>
+
+  <script src="/documentation/assets/nav.js?v=22"></script>
+  <script src="/documentation/assets/docs.js?v=20"></script>
+</body>
+</html>

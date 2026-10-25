@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Shelf locations · POS User Guide</title>
+  <meta name="description" content="Record where every product physically sits — aisle, rack, shelf, bin — at each store, so staff can find stock in seconds. Set them one by one, in bulk, or by import." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+  <link rel="stylesheet" href="/documentation/assets/docs.css?v=20" />
+  <script>
+    (function () { try { var t = localStorage.getItem("docs-theme"); if (!t) t = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"; document.documentElement.setAttribute("data-theme", t); } catch (e) {} })();
+  </script>
+</head>
+<body data-nav="shelf-locations">
+  <div class="doc-progress"><div class="doc-progress__bar" id="docs-progress-bar"></div></div>
+
+  <header class="doc-topbar">
+    <button class="doc-iconbtn doc-menubtn" id="docs-menu-btn" aria-label="Open menu"></button>
+    <a class="doc-brand" href="/documentation/index.html">
+      <span class="doc-brand__mark"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M3 9h18M7 21h10"/></svg></span>
+      <span class="doc-brand__name">POS <span style="color:var(--text-tertiary);font-weight:500">User Guide</span></span>
+      <span class="doc-brand__tag">Docs</span>
+    </a>
+    <div class="doc-topbar__spacer"></div>
+    <button class="doc-searchbtn" data-open-search aria-label="Search">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <span class="label">Search the guide…</span>
+      <kbd>Ctrl K</kbd>
+    </button>
+    <button class="doc-iconbtn" id="docs-theme-btn" aria-label="Toggle dark mode">
+      <svg class="theme-moon" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg>
+      <svg class="theme-sun" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4 12H2M22 12h-2M5 5 4 4M20 20l-1-1M5 19l-1 1M20 4l-1 1"/></svg>
+    </button>
+  </header>
+
+  <div class="doc-search" id="docs-search" role="dialog" aria-label="Search">
+    <div class="doc-search__backdrop"></div>
+    <div class="doc-search__panel">
+      <div class="doc-search__input">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="docs-search-input" type="text" placeholder="Search for a feature…" autocomplete="off" />
+      </div>
+      <div class="doc-search__results" id="docs-search-results"></div>
+    </div>
+  </div>
+
+  <div class="doc-scrim" id="docs-scrim"></div>
+
+  <div class="doc-layout">
+    <aside class="doc-sidebar scroll-y"><nav id="docs-sidebar-nav"></nav></aside>
+
+    <main class="doc-main">
+      <nav class="doc-breadcrumb" id="docs-breadcrumbs"></nav>
+
+      <article class="doc-article">
+        <h1>Shelf locations</h1>
+        <p class="lead">A shelf location records <em>where a product physically sits</em> in your shop — aisle A3, rack R-12, the fridge, the locked cabinet out back. Once it's recorded, anyone can find the item in seconds: it shows on the cashier screen, on your stock lists, on transfers and purchase deliveries, on printed labels, and on the count sheet you carry round the shop.</p>
+
+        <div class="glance">
+          <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m9 12 2 2 4-4"/></svg><div><b>Who uses it</b><span>Everyone — cashiers looking an item up, stock staff putting deliveries away, managers running counts.</span></div></div>
+          <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9v11h14V9"/></svg><div><b>Where to find it</b><span>Open a product and scroll to <strong>Shelf locations</strong>, or use <strong>Set location</strong> on the products list.</span></div></div>
+          <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg><div><b>Set it up</b><span><strong>Settings → Stock locations</strong> — choose which fields you use and what to call them.</span></div></div>
+        </div>
+
+        <h2 id="overview">Overview</h2>
+        <p>"Where do we keep the ibuprofen?" is one of the most common questions in any shop, and until now the answer lived in someone's head. A shelf location writes it down. You describe the spot using up to four coordinates — <strong>aisle</strong>, <strong>rack</strong>, <strong>shelf</strong> and <strong>bin</strong> — and POS shows that wherever the product appears.</p>
+        <p>Two things make it work in the real world:</p>
+        <ul>
+          <li><strong>Locations are recorded per store.</strong> Branch A can keep a product on rack 12 while Branch B keeps it on rack 3, and each branch's staff see their own answer.</li>
+          <li><strong>A product can be kept in more than one place.</strong> A pharmacy might keep one SKU on the dispensing rack, another few boxes in the godown, some in the fridge, and the controlled stock in a locked cabinet. You can record all four.</li>
+        </ul>
+        <p>One of those places is marked as the <strong>main spot</strong> — the shelf people pick from. That's the one that shows in the products list, on labels, and as the badge on the cashier screen; the rest are one tap away.</p>
+
+        <figure class="shot">
+          <div class="shot__frame">
+            <div class="shot__bar"><i></i><i></i><i></i></div>
+            <img src="/assets/documentation/images/product-locations-editor.png" alt="The Shelf locations section on a product, showing a main shelf, a back stock location and a refrigerated location" />
+          </div>
+          <figcaption>The <strong>Shelf locations</strong> section on a product — one row per place the item is kept, with the main spot marked.</figcaption>
+        </figure>
+
+        <div class="callout callout--info">
+          <span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg></span>
+          <div class="callout__body">
+            <div class="callout__title">Locations say <em>where</em>, not <em>how many</em></div>
+            <p>A location records where stock is kept — it does not hold a quantity. How much you have stays on the product's stock and batch records, exactly as before. So you'll never have to "move" stock between shelves to keep your numbers right.</p>
+          </div>
+        </div>
+
+        <h2 id="why">Why it's useful</h2>
+        <ul>
+          <li><strong>New staff find things on day one.</strong> No more walking the aisles or asking the person who's been there longest.</li>
+          <li><strong>Deliveries get put away in the right place.</strong> Receiving a purchase shows each line's location, so the person unpacking knows where it belongs.</li>
+          <li><strong>Counts happen in walk order.</strong> The printable count sheet is grouped by location, so you count the shop the way you actually walk it — no criss-crossing.</li>
+          <li><strong>Expiry sweeps get quicker.</strong> The batches list shows where each batch lives, so pulling short-dated stock is one lap, not several.</li>
+          <li><strong>Customers get an answer at the counter.</strong> The cashier can see the location on the product tile without leaving the cart.</li>
+        </ul>
+
+        <h2 id="steps">Recording a location, step by step</h2>
+        <ol class="steps">
+          <li>
+            <span class="step-title">Open the product</span>
+            <p>Go to <strong>Products</strong>, open the item, and scroll to the <strong>Shelf locations</strong> section.</p>
+          </li>
+          <li>
+            <span class="step-title">Add a location</span>
+            <p>Click <strong>Add a location</strong> and fill in the coordinates you use — for example Aisle <code>A3</code>, Rack <code>R-12</code>. You only fill the fields your shop actually uses; the rest can be switched off entirely (see <a href="#fields">Naming the fields</a>).</p>
+          </li>
+          <li>
+            <span class="step-title">Say what kind of place it is</span>
+            <p>Pick a <strong>type of place</strong> — main shelf, back stock, refrigerated, locked cabinet, or other. This is how staff know whether they're being sent to the shop floor or the store room.</p>
+          </li>
+          <li>
+            <span class="step-title">Mark the main spot</span>
+            <p>Tick <strong>Main spot</strong> on the shelf people pick from. Each store has exactly one — ticking a new one moves the mark off the old one.</p>
+          </li>
+          <li>
+            <span class="step-title">Add a note if it helps</span>
+            <p>The optional <strong>Note</strong> field is for the bit that doesn't fit a coordinate — "behind the counter", "top shelf, needs the step stool".</p>
+          </li>
+          <li>
+            <span class="step-title">Save</span>
+            <p>Save the product. The location appears immediately across the app — including on tills, which pick it up on their next sync.</p>
+          </li>
+        </ol>
+
+        <h3 id="kinds">The types of place</h3>
+        <div class="doc-tablewrap">
+          <table>
+            <thead><tr><th>Type</th><th>What it means</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Main shelf</strong></td><td>The shelf customers or staff pick from. Each store has one — it's what shows on labels and in the products list.</td></tr>
+              <tr><td><strong>Back stock</strong></td><td>Reserve stock kept out back — a godown, store room, or overflow rack.</td></tr>
+              <tr><td><strong>Refrigerated</strong></td><td>Fridge or cold-chain storage, for anything that must stay chilled.</td></tr>
+              <tr><td><strong>Locked cabinet</strong></td><td>Secured storage — controlled drugs, high-value items.</td></tr>
+              <tr><td><strong>Other</strong></td><td>Anywhere that doesn't fit the types above.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="fields">Naming the fields to match your shop</h2>
+        <p>Every shop describes its space differently. A supermarket says "aisle"; a pharmacy says "rack"; a warehouse says "bin". Go to <strong>Settings → Stock locations</strong> and you can:</p>
+        <ul>
+          <li><strong>Turn fields on or off.</strong> Out of the box, <em>Aisle</em> and <em>Rack</em> are on and <em>Shelf</em> and <em>Bin</em> are off — so a small shop only ever sees two boxes to fill.</li>
+          <li><strong>Rename them.</strong> Call "Aisle" a <em>Section</em>, or "Bin" a <em>Tray</em>, and that name is used everywhere in the app.</li>
+        </ul>
+        <p>Turning a field off only hides it. Anything already recorded is kept and comes straight back if you switch it on again. You must keep at least one field on, otherwise there'd be nothing to fill in.</p>
+
+        <div class="callout callout--tip">
+          <span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.2 1 2.5h6c0-1.3.3-1.8 1-2.5A6 6 0 0 0 12 3z"/></svg></span>
+          <div class="callout__body">
+            <p><strong>Sort order is handled for you.</strong> POS sorts locations the way a human walks them, so <code>A3</code> comes before <code>A10</code> — not after it, the way plain alphabetical sorting would put it.</p>
+          </div>
+        </div>
+
+        <h2 id="bulk">Setting locations in bulk</h2>
+        <p>Typing a location into a few thousand products one at a time is nobody's idea of a good afternoon. From the <strong>Products</strong> list you can do a whole aisle at once:</p>
+        <ol class="steps">
+          <li>
+            <span class="step-title">Filter to the products you're placing</span>
+            <p>Filter by category, brand, supplier — whatever describes the shelf you're standing at. There's also a <strong>Location</strong> filter with <em>Has a location</em> and <em>No location yet</em>, which is how you find what's still missing.</p>
+          </li>
+          <li>
+            <span class="step-title">Select the rows</span>
+            <p>Tick individual products, or tick the header box to take the whole page. If your filter matches more than one page, POS offers <strong>Select all … matching</strong> so you can apply to every matching product, not just the ones on screen.</p>
+          </li>
+          <li>
+            <span class="step-title">Choose Set location</span>
+            <p>Fill in only the fields you want to change. Anything you leave blank keeps its current value — so you can stamp a new rack across 200 products without touching their aisles.</p>
+          </li>
+          <li>
+            <span class="step-title">Apply</span>
+            <p>POS confirms how many products it updated. Very large runs are done in batches — if there's more to do it tells you, so you can narrow the filter and finish the rest.</p>
+          </li>
+        </ol>
+        <p><strong>Clear location</strong> works the same way and removes the <em>main</em> shelf location for the selected products at the current store. Back stock, refrigerated and locked-cabinet locations are deliberately left alone.</p>
+
+        <div class="callout callout--warning">
+          <span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 2.5 20h19z"/><path d="M12 10v4M12 17h.01"/></svg></span>
+          <div class="callout__body">
+            <p>Bulk changes apply to <strong>the store you're currently working in</strong>. Check the store shown in the top bar before you apply — you don't want to stamp branch A's rack numbers onto branch B.</p>
+          </div>
+        </div>
+
+        <h2 id="import">Importing locations from a spreadsheet</h2>
+        <p>If you already keep a shelf map in Excel, import it. The product importer accepts location columns alongside everything else — map them in the wizard's column-matching step, and bare headers like <code>Aisle</code>, <code>Rack</code> or <code>Bin</code> are matched automatically.</p>
+        <div class="doc-tablewrap">
+          <table>
+            <thead><tr><th>Column</th><th>What it sets</th></tr></thead>
+            <tbody>
+              <tr><td><code>Location — aisle</code></td><td>The aisle of the main shelf at your current store.</td></tr>
+              <tr><td><code>Location — rack</code></td><td>The rack.</td></tr>
+              <tr><td><code>Location — shelf</code></td><td>The shelf.</td></tr>
+              <tr><td><code>Location — bin</code></td><td>The bin.</td></tr>
+              <tr><td><code>Location — note</code></td><td>The free-text note.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Blank cells are <strong>left alone</strong>, never blanked out — so re-importing a price list will not wipe the locations you've already entered. The same location columns come back out in a product <strong>export</strong>, which makes "export → fill in the gaps → re-import" a perfectly good way to map a whole shop.</p>
+
+        <h2 id="where">Where locations show up</h2>
+        <div class="doc-tablewrap">
+          <table>
+            <thead><tr><th>Screen</th><th>What you see</th></tr></thead>
+            <tbody>
+              <tr><td><a href="/documentation/cashier.html">The POS screen</a></td><td>A small location badge on the product tile and list row. Tap it to see <em>every</em> place that item is kept, without leaving the cart. It works offline too.</td></tr>
+              <tr><td><a href="/documentation/products.html">Products list</a></td><td>A <strong>Location</strong> column, plus a filter for products that still have none.</td></tr>
+              <tr><td><a href="/documentation/inventory.html">Stock levels &amp; low stock</a></td><td>The location beside each row, so a re-order walk is a single lap of the shop. Included in the export.</td></tr>
+              <tr><td><a href="/documentation/batches.html">Batches &amp; expiry</a></td><td>Where each batch is kept — turning an expiry sweep into a walk list. Included in the export.</td></tr>
+              <tr><td><a href="/documentation/stock-takes.html">Stock reconciliation</a></td><td>A location column, a per-aisle filter, and the <a href="#count-sheet">printable count sheet</a> below.</td></tr>
+              <tr><td><a href="/documentation/transfers.html">Stock transfers</a></td><td>Both ends of the move: <strong>Pick from</strong> at the sending store and <strong>Put away at</strong> at the receiving store.</td></tr>
+              <tr><td><a href="/documentation/purchases.html">Receiving a purchase</a></td><td>A put-away hint on each line, so the delivery goes straight to the right shelf.</td></tr>
+              <tr><td><a href="/documentation/labels.html">Barcode labels</a></td><td>An optional <strong>Shelf location</strong> field on the printed label (off by default).</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Every one of these screens shows the location <strong>for its own store</strong> — the transfer's source store, the stock take's store, the purchase order's store — never whichever store you happen to have selected in the top bar.</p>
+
+        <h2 id="count-sheet">The printable count sheet</h2>
+        <p>Open a stock take and choose <strong>Print count sheet</strong>. You get a clean, print-first page with the lines <strong>grouped by shelf location in walk order</strong>, so you count the shop in one pass instead of hunting up and down for the next product on the list. Items with no location yet are grouped together at the end under <em>No location set</em> — a handy to-do list.</p>
+        <p>There's a <strong>Hide expected (blind count)</strong> option on the sheet. A blind count hides what the system thinks you have, so whoever's counting writes down what they genuinely see rather than what they're expected to see. It's the honest way to run a count, and worth using for any count that matters.</p>
+
+        <figure class="shot">
+          <div class="shot__frame">
+            <div class="shot__bar"><i></i><i></i><i></i></div>
+            <img src="/assets/documentation/images/stock-take-count-sheet.png" alt="A printable count sheet grouped by aisle, with blank boxes for the counted quantity" />
+          </div>
+          <figcaption>The printable count sheet — grouped by location, with room to write. In blind mode the expected column is hidden.</figcaption>
+        </figure>
+
+        <h2 id="tips">Tips &amp; best practices</h2>
+        <div class="callout callout--tip">
+          <span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.2 1 2.5h6c0-1.3.3-1.8 1-2.5A6 6 0 0 0 12 3z"/></svg></span>
+          <div class="callout__body">
+            <ul>
+              <li><strong>Decide your naming scheme first.</strong> Ten minutes agreeing that aisles are <code>A1…A9</code> and racks are <code>R-01…R-40</code> saves re-typing the lot later.</li>
+              <li><strong>Map the shop aisle by aisle.</strong> Filter the products list to one category, stand in the aisle, and bulk-set. A mid-size shop is an afternoon's work.</li>
+              <li><strong>Use the "No location yet" filter as your progress bar.</strong> When it's empty, you're done.</li>
+              <li><strong>Don't over-describe.</strong> Two coordinates people actually use beat four they don't. Switch off the fields you'll leave blank.</li>
+              <li><strong>Put the location on labels for the store room.</strong> It's off by default, but on back-stock labels it earns its space.</li>
+              <li><strong>Re-check after a re-merchandise.</strong> When you move a fixture, bulk-set the affected products the same day.</li>
+            </ul>
+          </div>
+        </div>
+
+        <h2 id="warnings">Notes &amp; warnings</h2>
+        <div class="callout callout--warning">
+          <span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 2.5 20h19z"/><path d="M12 10v4M12 17h.01"/></svg></span>
+          <div class="callout__body">
+            <p><strong>Locations don't hold stock.</strong> They tell you where to look, not how much is there. If you need per-shelf quantities, that's warehouse management — a different job from a shop's POS.</p>
+            <p><strong>One main spot per store.</strong> Marking a new location as the main spot moves the mark off the previous one; it doesn't create a second pick face.</p>
+            <p><strong>A location belongs to the product at a store</strong>, not to individual variants. Size- or colour-level bins aren't part of this version.</p>
+            <p><strong>Editing a product only affects the stores you can see.</strong> Saving from one branch never disturbs another branch's shelf map.</p>
+          </div>
+        </div>
+
+        <hr />
+        <p style="color:var(--text-tertiary);font-size:14px">Related: <a href="/documentation/products.html">Products</a> · <a href="/documentation/inventory.html">Stock overview</a> · <a href="/documentation/stock-takes.html">Stock reconciliation</a> · <a href="/documentation/labels.html">Barcode labels</a> · <a href="/documentation/settings.html">Settings</a></p>
+
+        <nav class="doc-pager" id="docs-pager"></nav>
+      </article>
+    </main>
+
+    <aside class="doc-toc scroll-y"><nav id="docs-toc"></nav></aside>
+  </div>
+
+  <script src="/documentation/assets/nav.js?v=22"></script>
+  <script src="/documentation/assets/docs.js?v=20"></script>
+</body>
+</html>

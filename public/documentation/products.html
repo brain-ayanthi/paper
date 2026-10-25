@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Products · POS User Guide</title>
+  <meta name="description" content="Add, edit and safely delete products, set prices and barcodes, organise them with categories, brands and units, search your catalog, and import or export in bulk with CSV or Excel." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+  <link rel="stylesheet" href="/documentation/assets/docs.css?v=20" />
+  <script>
+    (function () { try { var t = localStorage.getItem("docs-theme"); if (!t) t = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"; document.documentElement.setAttribute("data-theme", t); } catch (e) {} })();
+  </script>
+</head>
+<body data-nav="products">
+  <div class="doc-progress"><div class="doc-progress__bar" id="docs-progress-bar"></div></div>
+
+  <header class="doc-topbar">
+    <button class="doc-iconbtn doc-menubtn" id="docs-menu-btn" aria-label="Open menu"></button>
+    <a class="doc-brand" href="/documentation/index.html">
+      <span class="doc-brand__mark"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M3 9h18M7 21h10"/></svg></span>
+      <span class="doc-brand__name">POS <span style="color:var(--text-tertiary);font-weight:500">User Guide</span></span>
+      <span class="doc-brand__tag">Docs</span>
+    </a>
+    <div class="doc-topbar__spacer"></div>
+    <button class="doc-searchbtn" data-open-search aria-label="Search">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <span class="label">Search the guide…</span>
+      <kbd>Ctrl K</kbd>
+    </button>
+    <button class="doc-iconbtn" id="docs-theme-btn" aria-label="Toggle dark mode">
+      <svg class="theme-moon" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg>
+      <svg class="theme-sun" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4 12H2M22 12h-2M5 5 4 4M20 20l-1-1M5 19l-1 1M20 4l-1 1"/></svg>
+    </button>
+  </header>
+
+  <div class="doc-search" id="docs-search" role="dialog" aria-label="Search">
+    <div class="doc-search__backdrop"></div>
+    <div class="doc-search__panel">
+      <div class="doc-search__input">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="docs-search-input" type="text" placeholder="Search for a feature…" autocomplete="off" />
+      </div>
+      <div class="doc-search__results" id="docs-search-results"></div>
+    </div>
+  </div>
+
+  <div class="doc-scrim" id="docs-scrim"></div>
+
+  <div class="doc-layout">
+    <aside class="doc-sidebar scroll-y"><nav id="docs-sidebar-nav"></nav></aside>
+
+    <main class="doc-main">
+      <nav class="doc-breadcrumb" id="docs-breadcrumbs"></nav>
+
+      <article class="doc-article">
+        <h1>Products</h1>
+        <p class="lead">A product is anything you sell — a tin of beans, a shirt, a box of medicine, a haircut. Your product list (called your <strong>catalog</strong>) is the heart of the system: it feeds the checkout screen, your stock counts, your reports and your receipts. Get it right and everything else just works.</p>
+
+        <div class="glance">
+          <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m9 12 2 2 4-4"/></svg><div><b>Who uses it</b><span>Owners and managers setting up what the shop sells.</span></div></div>
+          <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg><div><b>How long it takes</b><span>A minute per product by hand, or seconds each in bulk via import.</span></div></div>
+          <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9v11h14V9"/></svg><div><b>Where to find it</b><span>Click <strong>Products</strong> in the sidebar, or open <code>/admin/products</code>.</span></div></div>
+        </div>
+
+        <h2 id="overview">Overview</h2>
+        <p>The <strong>Products</strong> screen shows everything you sell in one searchable table — with the product's picture, code, category, current stock, price and an on/off status switch. From here you add new products, edit existing ones, print barcode labels, and import or export your whole catalog as a spreadsheet.</p>
+        <p>Every product carries the details the rest of the system needs: its <strong>name</strong>, a unique code (its <strong>SKU</strong>), an optional <strong>barcode</strong> for scanning, the <strong>selling price</strong>, what it <strong>cost</strong> you, which <strong>category</strong>, <strong>brand</strong> and <strong>unit</strong> it belongs to, and the <strong>tax</strong> that applies. You only have to fill in a few of these to start selling — the rest you can add whenever you're ready.</p>
+
+        <figure class="shot">
+          <div class="shot__frame">
+            <div class="shot__bar"><i></i><i></i><i></i></div>
+            <img src="/assets/documentation/images/products-list.png" alt="The products list with images, codes, stock, prices and a status switch on each row" />
+          </div>
+          <figcaption>The product list: search at the top, one row per product, status switch on the end.</figcaption>
+        </figure>
+
+        <h2 id="why">Why it's useful</h2>
+        <ul>
+          <li><strong>It powers the till.</strong> Anything in your catalog can be scanned or tapped into a sale instantly. Nothing sells that isn't a product first.</li>
+          <li><strong>It keeps prices consistent.</strong> Set a price once and every sale uses it — no more guessing or sticky notes.</li>
+          <li><strong>It tracks your stock.</strong> Because each sale knows which product left the shelf, your stock counts stay accurate automatically.</li>
+          <li><strong>It scales to thousands of items.</strong> Bulk import and export mean you never have to type a big catalog by hand.</li>
+        </ul>
+
+        <h2 id="steps">Adding a product, step by step</h2>
+        <ol class="steps">
+          <li>
+            <span class="step-title">Open the products list and click "Add product"</span>
+            <p>Go to <strong>Products</strong> in the sidebar, then click the <strong>Add product</strong> button at the top of the list. A form opens.</p>
+          </li>
+          <li>
+            <span class="step-title">Give it a name and a code</span>
+            <p>Type the product's <strong>name</strong> (this is what staff and customers see). The <strong>SKU</strong> — a short unique code used internally — is optional: <strong>leave it blank and one is created for you</strong> when you save. If the item has a printed barcode, type or scan it into the <strong>Barcode</strong> field. For loose or own-made goods with no barcode at all, click <strong>Generate</strong> to mint one. See <a href="#codes">Product codes</a> below.</p>
+          </li>
+          <li>
+            <span class="step-title">Set the prices</span>
+            <p>Enter the <strong>selling price</strong> (what the customer pays) and the <strong>cost price</strong> (what you pay your supplier). The cost is used to work out your profit in reports — it never shows to customers.</p>
+          </li>
+          <li>
+            <span class="step-title">Choose category, brand and unit</span>
+            <p>Pick a <strong>category</strong> and <strong>brand</strong> to keep the product organised (see <a href="/documentation/categories.html">Categories &amp; brands</a>), and a <strong>unit</strong> — for example <em>piece</em>, <em>kg</em> or <em>litre</em> (see <a href="/documentation/units.html">Units of measure</a>). The unit shows on the cart, receipts and reports.</p>
+          </li>
+          <li>
+            <span class="step-title">Set the tax</span>
+            <p>Choose the <strong>tax group</strong> that applies (for example VAT or GST). The till then adds the right tax to every sale automatically. See <a href="/documentation/taxes.html">Taxes</a> if you haven't set up your tax rates yet.</p>
+          </li>
+          <li>
+            <span class="step-title">Add a picture and stock details (optional)</span>
+            <p>Upload a photo so the product is easy to spot on the touch screen. If you keep stock, switch on <strong>Track stock</strong> and set a <strong>reorder level</strong> so you're warned before you run out. You can enter your <strong>opening stock</strong> here too.</p>
+          </li>
+          <li>
+            <span class="step-title">Save</span>
+            <p>Click <strong>Save</strong>. The product appears in the list immediately and is ready to sell at the counter.</p>
+          </li>
+        </ol>
+
+        <div class="callout callout--success">
+          <span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8 12 2.5 2.5L16 9"/></svg></span>
+          <div class="callout__body">
+            <div class="callout__title">Only three fields are required</div>
+            <p>To save a product you just need a <strong>name</strong>, a <strong>selling price</strong> and a <strong>unit</strong>. The SKU fills itself in if you leave it blank, and everything else can wait until you have time.</p>
+          </div>
+        </div>
+
+        <h2 id="codes">Product codes: SKU and barcode</h2>
+        <p>Two codes identify a product, and they do different jobs. The <strong>SKU</strong> is <em>your</em> internal reference — the one you use in spreadsheets and stock counts. The <strong>barcode</strong> is the number printed on the packet that a scanner reads. Neither has to be typed by hand any more.</p>
+
+        <h3 id="auto-sku">SKUs fill themselves in</h3>
+        <p>Leave the SKU field blank and the system generates one the moment you save — following the pattern you set, and continuing from the highest number already in use. The default pattern is <code>SKU-00001</code>, giving <code>SKU-00001</code>, <code>SKU-00002</code> and so on.</p>
+        <ul>
+          <li><strong>A SKU you type is always kept exactly as entered.</strong> Nothing is ever renamed behind your back.</li>
+          <li><strong>Click <em>Generate</em></strong> next to the field if you'd like to see the suggested code before saving. Previewing doesn't reserve it — you can click it twice and get the same answer.</li>
+          <li><strong>Change the pattern</strong> under <strong>Settings → Numbering</strong>, where a live preview shows what the next code will look like. See <a href="/documentation/settings.html#money">Settings</a>.</li>
+          <li><strong>Products with variants</strong> get sensible codes too — a blank variant SKU becomes the parent's code plus the variant's options, such as <code>SKU-00007-RED-S</code>.</li>
+          <li><strong>Deleted codes are never reused</strong>, so an old spreadsheet can't suddenly point at a different product.</li>
+        </ul>
+        <p>One exception: <strong>importing</strong> products still requires a SKU in the file. It's the column that decides whether a row updates an existing product or creates a new one — without it, re-importing the same sheet would make duplicates. See <a href="#import-export">Importing &amp; exporting in bulk</a>.</p>
+
+        <h3 id="generate-barcode">Barcodes for items that don't have one</h3>
+        <p>Most goods arrive with a barcode printed on them — scan it into the field and you're done. But loose produce, repacked goods, home-made items and services have nothing to scan. For those, click <strong>Generate</strong> next to the Barcode field and the system mints a proper <strong>EAN-13</strong> barcode: thirteen digits with a correct check digit, so any scanner and any label printer will read it back perfectly.</p>
+        <ul>
+          <li><strong>It never happens automatically.</strong> Save a product with an empty barcode and it stays empty — a barcode is only ever created when you ask for one. (That's deliberate: an invented number printed on a label would disagree with the box.)</li>
+          <li><strong>It can't clash with a real product.</strong> Generated codes start with the in-store prefix <code>20</code> by default, a range the worldwide barcode standard reserves for shops' own use. You can change the prefix under <strong>Settings → Numbering</strong>.</li>
+          <li><strong>Each one is unique</strong>, including across the variants of a single product, and codes belonging to deleted products are skipped.</li>
+          <li><strong>Print it and go.</strong> Send the product to <a href="/documentation/labels.html">Barcode labels</a>, stick the label on, and it scans at the till like anything else.</li>
+        </ul>
+        <div class="callout callout--warning">
+          <span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 2.5 20h19z"/><path d="M12 10v4M12 17h.01"/></svg></span>
+          <div class="callout__body">
+            <p><strong>Using weighing-scale labels too?</strong> Keep the in-store barcode prefix different from your scale's prefix, so the till can always tell a priced-by-weight label apart from a shop-generated barcode. Both are set in <strong>Settings</strong> — see <a href="/documentation/weight-items.html">Weighed &amp; scale items</a>.</p>
+          </div>
+        </div>
+
+        <h2 id="more">Other things you can do here</h2>
+
+        <h3 id="editing">Editing a product</h3>
+        <p>Click any row in the list to open that product and change anything — its price, picture, category, tax and so on. Save your changes and they take effect on the next sale.</p>
+
+        <figure class="shot">
+          <div class="shot__frame">
+            <div class="shot__bar"><i></i><i></i><i></i></div>
+            <img src="/assets/documentation/images/products-edit.png" alt="The product edit form with name, code, price, category and tax fields" />
+          </div>
+          <figcaption>The product form — the same fields whether you're adding or editing.</figcaption>
+        </figure>
+
+        <h3 id="status">The active / inactive switch</h3>
+        <p>Every row has a status switch. An <strong>active</strong> product can be sold and shows on the till; an <strong>inactive</strong> one is hidden from checkout but kept on file with all its history. Use <em>inactive</em> for items you've stopped selling but don't want to delete — a seasonal line, say, or a product you may bring back. Deleting is for genuine mistakes only.</p>
+
+        <h3 id="search">Searching &amp; filtering</h3>
+        <p>The search box at the top finds products by name, code or barcode as you type. You can also filter the list — by category, brand, whether it's in stock, low or out, and active or inactive — to zero in on exactly the items you want.</p>
+
+        <h3 id="bulk-delete">Deleting several products at once</h3>
+        <p>If test items, duplicate entries or other products were added by mistake, you can remove several of them together from the <strong>Products</strong> list. Bulk delete is available to users who have permission to delete products.</p>
+        <ol class="steps">
+          <li>
+            <span class="step-title">Switch to the table view</span>
+            <p>Open <strong>Products</strong> and use the table view. The selection checkboxes are not shown in the card view.</p>
+          </li>
+          <li>
+            <span class="step-title">Tick the products you want to remove</span>
+            <p>Tick each required row, or use the checkbox in the table heading to select every product on the current page. The bulk action bar appears above the table and shows how many rows are selected.</p>
+          </li>
+          <li>
+            <span class="step-title">Click "Delete" and review the warning</span>
+            <p>Click <strong>Delete</strong> in the bulk action bar. Check the number in the confirmation message, then click <strong>Delete products</strong> to continue.</p>
+          </li>
+          <li>
+            <span class="step-title">Check the result</span>
+            <p>A message tells you how many products were deleted. If your selection included products that already have sales, those products are kept and the message tells you how many were blocked.</p>
+          </li>
+        </ol>
+
+        <figure class="shot">
+          <div class="shot__frame">
+            <div class="shot__bar"><i></i><i></i><i></i></div>
+            <img src="/assets/documentation/images/products-bulk-delete.png" alt="The products table with several rows selected and the bulk Delete action visible" />
+          </div>
+          <figcaption>Select the exact rows to remove; the bulk action bar shows the Delete option for that explicit selection.</figcaption>
+        </figure>
+
+        <div class="callout callout--warning">
+          <span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 2.5 20h19z"/><path d="M12 10v4M12 17h.01"/></svg></span>
+          <div class="callout__body">
+            <div class="callout__title">Bulk delete only uses explicitly checked rows</div>
+            <p>The <strong>Select all matching</strong> option can cover products across many result pages, so it cannot be used for deletion. Clear that selection and tick the exact rows you want to remove on the current page.</p>
+            <p>Products with sales cannot be deleted because they are needed for receipts and reports. Make those products <strong>inactive</strong> instead.</p>
+          </div>
+        </div>
+
+        <h3 id="batches-weight">Batches, expiry &amp; weighed items</h3>
+        <p>Some products need a little extra. Medicines and perishables can <strong>track batches and expiry dates</strong> so older stock sells first and expired stock is blocked — see <a href="/documentation/batches.html">Batches &amp; expiry</a>. Loose goods like fruit or grains can be <strong>sold by weight</strong>, with the price worked out from what's on the scale — see <a href="/documentation/weight-items.html">Weighed &amp; scale items</a>. Turn these on per product when you need them.</p>
+
+        <h3 id="kits-bundles">Kits &amp; bundles</h3>
+        <p>A <strong>kit</strong> is a single product made up of other products — a gift hamper, a starter pack, a "buy the whole set" bundle. On the product form, choose the <strong>Kit</strong> type, then add each <strong>component</strong> (the products inside the bundle) and how many of each the kit contains.</p>
+        <p>You don't have to work out the price yourself. As you add components, the kit's <strong>selling price</strong> and <strong>cost price</strong> fill in automatically as the sum of every component's price times its quantity. Add a component, change a quantity or swap in a different variant, and the total updates on the spot. If a component has variants — a particular size or colour — that variant's own price is the one used.</p>
+        <p>Want to set your own bundle price instead, perhaps a discount for buying the set? Just type your figure into the price field — from that moment the system stops overwriting it, so your price stays put. Changed your mind, or added more components afterwards? Click <strong>Recalculate</strong> to snap the price back to the current sum of the components.</p>
+
+        <figure class="shot">
+          <div class="shot__frame">
+            <div class="shot__bar"><i></i><i></i><i></i></div>
+            <img src="/assets/documentation/images/products-kit-pricing.png" alt="A kit product with its components listed and the price filled in automatically from their combined total, with a Recalculate link" />
+          </div>
+          <figcaption>A kit's price is added up from its components — with a Recalculate link to reset it.</figcaption>
+        </figure>
+
+        <div class="callout callout--warning">
+          <span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 2.5 20h19z"/><path d="M12 10v4M12 17h.01"/></svg></span>
+          <div class="callout__body">
+            <div class="callout__title">Once you edit the price by hand, auto-fill stops</div>
+            <p>The moment you type your own selling or cost price, the system stops updating that field from the components — so changing a component afterwards won't move your price. Use <strong>Recalculate</strong> if you want it back to the components total.</p>
+          </div>
+        </div>
+
+        <h3 id="import-export">Importing &amp; exporting in bulk</h3>
+        <p>For big catalogs, typing every product by hand isn't practical. Use the <strong>Export</strong> button to download your whole catalog as a CSV or Excel spreadsheet, and the <strong>Import</strong> button to upload one.</p>
+        <p>Import walks you through it in a few steps:</p>
+        <div class="doc-tablewrap">
+          <table>
+            <thead><tr><th>Step</th><th>What happens</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Upload</strong></td><td>Pick your CSV or Excel file. You can download a template that matches the right column layout.</td></tr>
+              <tr><td><strong>Match columns</strong></td><td>The system lines up your spreadsheet's columns with its own fields automatically; you can adjust any that don't match.</td></tr>
+              <tr><td><strong>Preview</strong></td><td>See the first rows with any problems flagged before anything is saved. You can skip bad rows or create missing categories and brands on the fly.</td></tr>
+              <tr><td><strong>Import</strong></td><td>The file is processed in the background. You get a summary of how many were created, updated and skipped — with a downloadable report of any that failed.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Existing products are matched by their SKU, so importing the same file again updates rather than duplicates. This makes import handy for bulk price changes too.</p>
+        <p>The importer only changes the columns you actually mapped. A narrow update sheet with just <em>SKU</em> and <em>Selling price</em> touches the price and nothing else — descriptions, tax settings, shelf locations and flags are all left exactly as they are.</p>
+
+        <h3 id="locations">Where each product sits — shelf locations</h3>
+        <p>Every product can record <strong>where it physically lives</strong> in your shop: aisle A3, rack R-12, the fridge, the locked cabinet. Open a product and scroll to <strong>Shelf locations</strong> to add as many places as the item actually occupies, and mark one as the main spot people pick from.</p>
+        <p>From this list you can also do it in bulk. Filter to the products you're placing, tick them (or <em>select all matching</em> to take every product behind your filter, not just this page), and choose <strong>Set location</strong> or <strong>Clear location</strong>. There's a <strong>Location</strong> column and a filter for products that don't have one yet, and the location columns come along in both import and export.</p>
+        <p>It's a feature with its own guide — see <a href="/documentation/shelf-locations.html">Shelf locations</a> for the full picture, including naming the fields to match how your team talks and printing a count sheet in walk order.</p>
+
+        <h2 id="bulk-images">Bulk product images</h2>
+        <p>Adding a photo to every product one at a time is slow when you have hundreds of them. The <strong>Bulk product images</strong> screen lets you attach pictures to lots of products in a single pass — you drop in a whole folder of photos and the system files each one to the right product for you. Find it under <strong>Products → Bulk images</strong>, or open <code>/admin/products/bulk-images</code>.</p>
+        <p>It works hand in hand with import. Rather than matching photos by SKU or barcode, the system matches each picture to a product by the <strong>filename you put in the import's Image column</strong>. So the photo <code>apple-front.jpg</code> goes to whichever product had <code>apple-front.jpg</code> in its <strong>Image</strong> column — you never have to rename your files to codes.</p>
+
+        <ol class="steps">
+          <li>
+            <span class="step-title">Name each photo in your import</span>
+            <p>In your product spreadsheet, fill the <strong>Image</strong> column with each product's photo filename — for example <code>apple-front.jpg</code>. Then import as usual (see <a href="#import-export">Importing &amp; exporting in bulk</a> above).</p>
+          </li>
+          <li>
+            <span class="step-title">Open Bulk images and drop your photos</span>
+            <p>Drag your folder of pictures onto the drop zone, or click to choose them. Accepted types are <strong>JPG</strong>, <strong>PNG</strong> and <strong>WEBP</strong>, up to <strong>4 MB</strong> each. Anything that isn't a supported image, or is too big, is skipped.</p>
+          </li>
+          <li>
+            <span class="step-title">Check the matches</span>
+            <p>Before anything uploads you get a summary — <em>"X matched · Y unmatched"</em> — with the matched photos lined up against their products and any leftovers listed separately. Products that already have a photo are flagged so you know theirs will be replaced.</p>
+          </li>
+          <li>
+            <span class="step-title">Upload</span>
+            <p>Click <strong>Upload</strong>. The photos go up in small batches so it works on any hosting, even shared hosting; you can leave the tab open while it runs and each row ticks off as it finishes.</p>
+          </li>
+        </ol>
+
+        <figure class="shot">
+          <div class="shot__frame">
+            <div class="shot__bar"><i></i><i></i><i></i></div>
+            <img src="/assets/documentation/images/products-bulk-images.png" alt="The bulk product images screen showing dropped photos matched to their products, with a matched and unmatched summary before uploading" />
+          </div>
+          <figcaption>Dropped photos matched to their products, with a matched / unmatched summary before you upload.</figcaption>
+        </figure>
+
+        <p>Any photo that couldn't be placed appears in an <strong>Unmatched</strong> list, for one of two reasons: no product declared that filename, or more than one product claimed it — in which case the system can't tell which you meant, so it leaves it alone. You can <strong>download the unmatched list</strong> as a spreadsheet, fix the names, and try again.</p>
+
+        <div class="callout callout--warning">
+          <span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 2.5 20h19z"/><path d="M12 10v4M12 17h.01"/></svg></span>
+          <div class="callout__body">
+            <div class="callout__title">The filename has to match exactly</div>
+            <p>A photo only lands on a product if its filename matches what's in that product's <strong>Image</strong> column, including the <code>.jpg</code> / <code>.png</code> ending. Upper- or lower-case doesn't matter (<code>Apple.JPG</code> and <code>apple.jpg</code> are treated the same), but a stray space, a typo or a different extension will leave the photo unmatched.</p>
+          </div>
+        </div>
+
+        <h2 id="image-urls">Fetching product images from URLs</h2>
+        <p>The <strong>Products → Bulk images</strong> screen has a <strong>Fetch from URLs</strong> tab for catalogs whose pictures already live online. Product import can supply an <strong>Image URL</strong>, or you can paste <code>SKU, URL</code> rows copied from a spreadsheet.</p>
+        <ol class="steps">
+          <li><span class="step-title">Open the URL tab</span><p>After a product import, follow its image link to load pending URLs, or open Bulk images and choose <strong>Fetch from URLs</strong>.</p></li>
+          <li><span class="step-title">Paste SKU and URL rows</span><p>Use one product per line. Tab-separated spreadsheet rows are accepted, and a signed URL containing commas remains intact when pasted as columns.</p></li>
+          <li><span class="step-title">Preview the matches</span><p>Hyper POS matches the exact SKU and shows matched, unknown, duplicate and malformed rows before any download starts.</p></li>
+          <li><span class="step-title">Fetch the valid images</span><p>Public HTTPS JPG, PNG and WebP files are downloaded in small batches. Valid rows continue even when another URL fails, and remaining work can resume.</p></li>
+        </ol>
+        <figure class="shot"><div class="shot__frame"><div class="shot__bar"><i></i><i></i><i></i></div><img src="/assets/documentation/images/products-image-urls.png" alt="Bulk product images URL tab showing SKU and public image URL matches before fetching" /></div><figcaption>Preview exact SKU-to-URL matches, then fetch the valid public images in manageable batches.</figcaption></figure>
+        <div class="callout callout--warning"><span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3 2.5 20h19z"/><path d="M12 10v4M12 17h.01"/></svg></span><div class="callout__body"><p>For safety, local/private-network addresses, HTTP links, redirects to private hosts, HTML/SVG/non-image responses and oversized files are rejected. Use a public HTTPS image URL. Re-importing the same successful URL does not download it again; changing the URL makes it pending.</p></div></div>
+
+        <h2 id="tips">Tips &amp; best practices</h2>
+        <div class="callout callout--tip">
+          <span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.2 1 2.5h6c0-1.3.3-1.8 1-2.5A6 6 0 0 0 12 3z"/></svg></span>
+          <div class="callout__body">
+            <ul>
+              <li><strong>Add a barcode to anything that has one.</strong> Scanning is far faster and more accurate at the till than searching by name — and for the items that don't have one, <a href="#generate-barcode">generate a barcode</a> and print a label.</li>
+              <li><strong>Let SKUs generate themselves.</strong> Set the pattern once in Settings → Numbering and leave the field blank; you'll never have to invent a code or check for clashes again.</li>
+              <li><strong>Add a photo for touch-screen items.</strong> Pictures make products easy to find when there's no barcode to scan — handy for bakery and produce.</li>
+              <li><strong>Keep your cost prices honest.</strong> Your profit reports are only as accurate as the cost you enter.</li>
+              <li><strong>Build big catalogs with import.</strong> Export the template, fill it in your spreadsheet program, and import once — much faster than the form.</li>
+              <li><strong>Set reorder levels.</strong> They trigger low-stock warnings so you reorder before the shelf is empty.</li>
+            </ul>
+          </div>
+        </div>
+
+        <h2 id="warnings">Notes &amp; warnings</h2>
+        <div class="callout callout--warning">
+          <span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 2.5 20h19z"/><path d="M12 10v4M12 17h.01"/></svg></span>
+          <div class="callout__body">
+            <p><strong>SKUs and barcodes must be unique.</strong> Two products can't share the same code — otherwise a scan wouldn't know which one you meant. The form warns you if a code is already in use.</p>
+            <p><strong>Hide, don't delete, items you've stopped selling.</strong> Switch a product to <em>inactive</em> so its sales and stock history stays intact for your reports.</p>
+          </div>
+        </div>
+        <div class="callout callout--danger">
+          <span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2h8l6 6v8l-6 6H8l-6-6V8z"/><path d="M12 8v5M12 16h.01"/></svg></span>
+          <div class="callout__body">
+            <p><strong>Once a product has been sold, you can't change its type.</strong> Decide early whether something is a simple item, has variants (like sizes), is a service, or is sold by weight — this is locked after the first sale to keep your records straight.</p>
+          </div>
+        </div>
+
+        <hr />
+        <p style="color:var(--text-tertiary);font-size:14px">Related: <a href="/documentation/categories.html">Categories &amp; brands</a> · <a href="/documentation/shelf-locations.html">Shelf locations</a> · <a href="/documentation/units.html">Units of measure</a> · <a href="/documentation/labels.html">Barcode labels</a> · <a href="/documentation/batches.html">Batches &amp; expiry</a> · <a href="/documentation/weight-items.html">Weighed &amp; scale items</a></p>
+
+        <nav class="doc-pager" id="docs-pager"></nav>
+      </article>
+    </main>
+
+    <aside class="doc-toc scroll-y"><nav id="docs-toc"></nav></aside>
+  </div>
+
+  <script src="/documentation/assets/nav.js?v=22"></script>
+  <script src="/documentation/assets/docs.js?v=20"></script>
+</body>
+</html>

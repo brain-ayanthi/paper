@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Stock transfers · POS User Guide</title>
+  <meta name="description" content="Move stock between your stores or locations: create a transfer, send it from the source store, and receive it at the destination — stock falls at one end and rises at the other." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+  <link rel="stylesheet" href="/documentation/assets/docs.css?v=20" />
+  <script>
+    (function () { try { var t = localStorage.getItem("docs-theme"); if (!t) t = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"; document.documentElement.setAttribute("data-theme", t); } catch (e) {} })();
+  </script>
+</head>
+<body data-nav="transfers">
+  <div class="doc-progress"><div class="doc-progress__bar" id="docs-progress-bar"></div></div>
+
+  <header class="doc-topbar">
+    <button class="doc-iconbtn doc-menubtn" id="docs-menu-btn" aria-label="Open menu"></button>
+    <a class="doc-brand" href="/documentation/index.html">
+      <span class="doc-brand__mark"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M3 9h18M7 21h10"/></svg></span>
+      <span class="doc-brand__name">POS <span style="color:var(--text-tertiary);font-weight:500">User Guide</span></span>
+      <span class="doc-brand__tag">Docs</span>
+    </a>
+    <div class="doc-topbar__spacer"></div>
+    <button class="doc-searchbtn" data-open-search aria-label="Search">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <span class="label">Search the guide…</span>
+      <kbd>Ctrl K</kbd>
+    </button>
+    <button class="doc-iconbtn" id="docs-theme-btn" aria-label="Toggle dark mode">
+      <svg class="theme-moon" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg>
+      <svg class="theme-sun" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4 12H2M22 12h-2M5 5 4 4M20 20l-1-1M5 19l-1 1M20 4l-1 1"/></svg>
+    </button>
+  </header>
+
+  <div class="doc-search" id="docs-search" role="dialog" aria-label="Search">
+    <div class="doc-search__backdrop"></div>
+    <div class="doc-search__panel">
+      <div class="doc-search__input">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="docs-search-input" type="text" placeholder="Search for a feature…" autocomplete="off" />
+      </div>
+      <div class="doc-search__results" id="docs-search-results"></div>
+    </div>
+  </div>
+
+  <div class="doc-scrim" id="docs-scrim"></div>
+
+  <div class="doc-layout">
+    <aside class="doc-sidebar scroll-y"><nav id="docs-sidebar-nav"></nav></aside>
+
+    <main class="doc-main">
+      <nav class="doc-breadcrumb" id="docs-breadcrumbs"></nav>
+
+      <article class="doc-article">
+        <h1>Stock transfers</h1>
+        <p class="lead">If you run more than one store or location, a stock transfer is how you move products from one to another. You create the transfer at the sending store, send it, and the receiving store confirms it — stock comes <strong>down</strong> at the source and <strong>up</strong> at the destination, automatically.</p>
+
+        <div class="glance">
+          <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m9 12 2 2 4-4"/></svg><div><b>Who uses it</b><span>Managers across two or more stores.</span></div></div>
+          <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg><div><b>When to use it</b><span>To balance stock between locations.</span></div></div>
+          <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9v11h14V9"/></svg><div><b>Where to find it</b><span>Open <strong>Inventory → Stock transfers</strong>.</span></div></div>
+        </div>
+
+        <h2 id="overview">Overview</h2>
+        <p>One store runs low while another has plenty? Instead of guessing or adjusting counts by hand at both ends, you create a transfer. It's a single document that the two stores share. It keeps both locations' counts honest because the stock leaves one and arrives at the other as a recorded, matched movement — never a manual fudge.</p>
+        <p>A transfer is a journey with stages. It starts as a draft, then it's sent (stock leaves the source), and finally it's received (stock arrives at the destination). Each side does its part, and you can always see where a transfer is up to.</p>
+
+        <figure class="shot">
+          <div class="shot__frame">
+            <div class="shot__bar"><i></i><i></i><i></i></div>
+            <img src="/assets/documentation/images/transfer-create.png" alt="The create stock transfer screen with a destination store and product lines" />
+          </div>
+          <figcaption>Creating a transfer: choose the destination store and add the products and quantities to send.</figcaption>
+        </figure>
+
+        <h2 id="why">Why it's useful</h2>
+        <ul>
+          <li><strong>Both stores stay accurate.</strong> Stock drops at the sender and rises at the receiver in one matched action — no double entry, no drift.</li>
+          <li><strong>You move stock to where it sells.</strong> Shift slow-moving items from a quiet branch to a busy one before they expire or tie up cash.</li>
+          <li><strong>There's a clear paper trail.</strong> Every transfer is a document you can look back on, and each end appears in <a href="/documentation/inventory.html">Stock Activity</a>.</li>
+          <li><strong>Stock in transit is visible.</strong> You can see what has left one store but not yet arrived at the other.</li>
+        </ul>
+
+        <h2 id="stages">The stages of a transfer</h2>
+        <div class="doc-tablewrap">
+          <table>
+            <thead><tr><th>Stage</th><th>What it means</th><th>Effect on stock</th></tr></thead>
+            <tbody>
+              <tr><td><span class="badge">Draft</span></td><td>Being prepared at the source store.</td><td>None yet.</td></tr>
+              <tr><td><span class="badge">In transit</span></td><td>Sent — stock has left the source and is on its way.</td><td>Lowered at the source.</td></tr>
+              <tr><td><span class="badge">Received</span></td><td>The destination has confirmed what arrived.</td><td>Raised at the destination.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="steps">Making a transfer, step by step</h2>
+        <ol class="steps">
+          <li>
+            <span class="step-title">Create the transfer</span>
+            <p>At the sending store, open <strong>Inventory → Stock transfers</strong> and start a new one. Choose the <strong>destination store</strong> (one of the locations you have access to), and optionally an expected arrival date.</p>
+          </li>
+          <li>
+            <span class="step-title">Add the products</span>
+            <p>Search for each product and enter how many to send. For <a href="/documentation/batches.html">batch-tracked</a> products, pick the specific source batch you're moving. The picker shows useful expiry, cost, selling-price and MRP context where available. Split one product across separate lines when units must come from different batches.</p>
+          </li>
+          <li>
+            <span class="step-title">Send it</span>
+            <p>When you dispatch the transfer, the stock is <strong>removed from the source store</strong> and the transfer becomes <span class="badge">In transit</span>. The items are now on their way and accounted for as in transit.</p>
+          </li>
+          <li>
+            <span class="step-title">Receive it at the other end</span>
+            <p>At the destination store, open the transfer and confirm what arrived, entering the received quantity per line. This <strong>adds the stock to the destination store</strong> and marks the transfer <span class="badge">Received</span>.</p>
+          </li>
+          <li>
+            <span class="step-title">Handle any shortfall</span>
+            <p>If less arrived than was sent (a box went missing, something was damaged), enter the smaller number and give a reason. Only what actually arrived is added to the destination; the shortfall is returned to the exact source batch so neither store's figures drift.</p>
+          </li>
+        </ol>
+
+        <h3 id="batch-prices">Batch values travel with the stock</h3>
+        <p>When the transfer is received, the destination creates or reuses the matching batch with the source batch number, dates, cost, selling price and MRP. The destination can then sell the received lot at the correct <a href="/documentation/batches.html#batch-pricing">batch-wise price</a> without re-entering it.</p>
+        <figure class="shot">
+          <div class="shot__frame">
+            <div class="shot__bar"><i></i><i></i><i></i></div>
+            <img src="/assets/documentation/images/transfer-batch-pricing.png" alt="Stock transfer batch picker showing quantity, cost, selling price and MRP for each source batch" />
+          </div>
+          <figcaption>Choose the exact source lot; its identity and price context remain attached through dispatch and receipt.</figcaption>
+        </figure>
+
+        <h3 id="locations">Knowing where to pick from and where to put away</h3>
+        <p>A transfer names both ends of the journey. If your products have <a href="/documentation/shelf-locations.html">shelf locations</a> recorded, each line shows <strong>Pick from</strong> — where the item sits at the sending store — and <strong>Put away at</strong>, where it belongs once it arrives. The receiving screen shows only the destination, which is all the person unpacking the box needs to know.</p>
+        <p>Because locations are recorded per store, the two are genuinely different answers: rack 12 at the branch you're sending from, aisle B at the branch receiving it.</p>
+
+        <h3 id="scanning">Scanning items in</h3>
+        <p>Instead of searching for each product, you can build a transfer with a <strong>barcode scanner</strong>. Press <kbd>F8</kbd> to jump to the scan box, then scan away: a product that isn't on the transfer yet gets a new line, and one that's already there has its quantity <strong>bumped by one</strong>. Scanning a product's <strong>variant</strong> barcode picks that exact variant, and on a tablet or phone you can scan with the <strong>camera</strong> instead of a hardware scanner. It's the same scan box you'll find on stock adjustments — see <a href="/documentation/adjustments.html#scanning">Scanning items in</a> for the full walkthrough.</p>
+
+        <div class="callout callout--success">
+          <span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8 12 2.5 2.5L16 9"/></svg></span>
+          <div class="callout__body">
+            <div class="callout__title">Two people, two stores, one document</div>
+            <p>The sender and receiver can be different people at different locations. If you have access to both stores, you can do both ends yourself — but you never have to coordinate counts by hand.</p>
+          </div>
+        </div>
+
+        <h2 id="tips">Tips &amp; best practices</h2>
+        <div class="callout callout--tip">
+          <span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.2 1 2.5h6c0-1.3.3-1.8 1-2.5A6 6 0 0 0 12 3z"/></svg></span>
+          <div class="callout__body">
+            <ul>
+              <li><strong>Receive promptly.</strong> Until the destination confirms, the stock shows as in transit rather than on the shelf — confirm it the day it arrives.</li>
+              <li><strong>Count what arrives.</strong> Check the boxes against the transfer; recording an honest shortfall keeps both stores accurate.</li>
+              <li><strong>Set an expected arrival date.</strong> It helps the receiving store know when to look out for the delivery.</li>
+              <li><strong>Use transfers, not adjustments, between stores.</strong> Adjusting stock down at one store and up at the other by hand breaks the link — a transfer keeps them matched.</li>
+            </ul>
+          </div>
+        </div>
+
+        <h2 id="warnings">Notes &amp; warnings</h2>
+        <div class="callout callout--warning">
+          <span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 2.5 20h19z"/><path d="M12 10v4M12 17h.01"/></svg></span>
+          <div class="callout__body">
+            <p><strong>Stock leaves the source as soon as you send.</strong> Once a transfer is in transit, those items are no longer available to sell at the source store — make sure you're sending the right quantities.</p>
+            <p><strong>Transfers need more than one store.</strong> If your company has a single location there's nowhere to transfer to; use <a href="/documentation/adjustments.html">adjustments</a> for corrections instead.</p>
+          </div>
+        </div>
+
+        <hr />
+        <p style="color:var(--text-tertiary);font-size:14px">Related: <a href="/documentation/inventory.html">Stock overview</a> · <a href="/documentation/stores.html">Stores</a> · <a href="/documentation/batches.html">Batches &amp; expiry</a> · <a href="/documentation/shelf-locations.html">Shelf locations</a></p>
+
+        <nav class="doc-pager" id="docs-pager"></nav>
+      </article>
+    </main>
+
+    <aside class="doc-toc scroll-y"><nav id="docs-toc"></nav></aside>
+  </div>
+
+  <script src="/documentation/assets/nav.js?v=22"></script>
+  <script src="/documentation/assets/docs.js?v=20"></script>
+</body>
+</html>

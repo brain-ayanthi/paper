@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Reports · POS User Guide</title>
+  <meta name="description" content="See how your shop is doing: the Sales summary over any date range, your best and worst sellers, who owes you money, and a record of offline sales syncing — with one-click export to CSV or Excel." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+  <link rel="stylesheet" href="/documentation/assets/docs.css?v=20" />
+  <script>
+    (function () { try { var t = localStorage.getItem("docs-theme"); if (!t) t = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"; document.documentElement.setAttribute("data-theme", t); } catch (e) {} })();
+  </script>
+</head>
+<body data-nav="reports">
+  <div class="doc-progress"><div class="doc-progress__bar" id="docs-progress-bar"></div></div>
+
+  <header class="doc-topbar">
+    <button class="doc-iconbtn doc-menubtn" id="docs-menu-btn" aria-label="Open menu"></button>
+    <a class="doc-brand" href="/documentation/index.html">
+      <span class="doc-brand__mark"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M3 9h18M7 21h10"/></svg></span>
+      <span class="doc-brand__name">POS <span style="color:var(--text-tertiary);font-weight:500">User Guide</span></span>
+      <span class="doc-brand__tag">Docs</span>
+    </a>
+    <div class="doc-topbar__spacer"></div>
+    <button class="doc-searchbtn" data-open-search aria-label="Search">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <span class="label">Search the guide…</span>
+      <kbd>Ctrl K</kbd>
+    </button>
+    <button class="doc-iconbtn" id="docs-theme-btn" aria-label="Toggle dark mode">
+      <svg class="theme-moon" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg>
+      <svg class="theme-sun" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4 12H2M22 12h-2M5 5 4 4M20 20l-1-1M5 19l-1 1M20 4l-1 1"/></svg>
+    </button>
+  </header>
+
+  <div class="doc-search" id="docs-search" role="dialog" aria-label="Search">
+    <div class="doc-search__backdrop"></div>
+    <div class="doc-search__panel">
+      <div class="doc-search__input">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="docs-search-input" type="text" placeholder="Search for a feature…" autocomplete="off" />
+      </div>
+      <div class="doc-search__results" id="docs-search-results"></div>
+    </div>
+  </div>
+
+  <div class="doc-scrim" id="docs-scrim"></div>
+
+  <div class="doc-layout">
+    <aside class="doc-sidebar scroll-y"><nav id="docs-sidebar-nav"></nav></aside>
+
+    <main class="doc-main">
+      <nav class="doc-breadcrumb" id="docs-breadcrumbs"></nav>
+
+      <article class="doc-article">
+        <h1>Reports</h1>
+        <p class="lead">Reports turn the day-to-day record of your sales into a clear picture of how your shop is doing. Pick a date range, read the numbers, and — if you want — download them to a spreadsheet. No accounting knowledge needed.</p>
+
+        <div class="glance">
+          <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m9 12 2 2 4-4"/></svg><div><b>Who uses it</b><span>Owners and managers checking how the business is going.</span></div></div>
+          <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg><div><b>How long it takes</b><span>A glance — or a few minutes if you want to export.</span></div></div>
+          <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9v11h14V9"/></svg><div><b>Where to find it</b><span>Click <strong>Reports</strong> in the sidebar.</span></div></div>
+        </div>
+
+        <h2 id="overview">Overview</h2>
+        <p>The <strong>Reports</strong> menu in the sidebar holds a small, focused set of reports — the ones a busy shop actually uses. Each one looks at the same underlying records (your sales, customers and stock), but answers a different question:</p>
+        <ul>
+          <li><strong>Sales summary</strong> — how much you sold over a chosen period, broken down into totals.</li>
+          <li><strong>Sales by product</strong> — which items sold the most (and the least).</li>
+          <li><strong>Aged receivables</strong> — which customers owe you money, and how overdue it is. (<em>Receivables</em> just means money customers owe you for credit sales.)</li>
+          <li><strong>Loyalty points</strong> — points earned, spent and expired, and what your unspent points would cost you.</li>
+          <li><strong>Sync log</strong> — a record of sales made while offline and whether they've safely uploaded to the server.</li>
+        </ul>
+        <p>Every report works the same way: choose a date range at the top, read the table or chart, and click <strong>Export</strong> if you want the figures in a spreadsheet.</p>
+
+        <figure class="shot">
+          <div class="shot__frame">
+            <div class="shot__bar"><i></i><i></i><i></i></div>
+            <img src="/assets/documentation/images/reports-sales.png" alt="The Sales summary report with totals and a date-range selector" />
+          </div>
+          <figcaption>The Sales summary: pick a date range at the top, and the totals update below.</figcaption>
+        </figure>
+
+        <h2 id="why">Why it's useful</h2>
+        <ul>
+          <li><strong>You see the whole shop at a glance.</strong> Yesterday's takings, this month's total, your busiest day — all without adding anything up yourself.</li>
+          <li><strong>You spot what's working.</strong> The best-sellers list tells you what to keep in stock; the slow movers tell you what to discount or drop.</li>
+          <li><strong>You chase the money you're owed.</strong> Aged receivables shows exactly who's behind on payment so nothing slips through the cracks.</li>
+          <li><strong>You can hand clean figures to your accountant.</strong> Export any report to CSV or Excel and email it on — no copying numbers by hand.</li>
+        </ul>
+
+        <h2 id="steps">How to read a report, step by step</h2>
+        <ol class="steps">
+          <li>
+            <span class="step-title">Open the Reports menu</span>
+            <p>Click <strong>Reports</strong> in the left sidebar, then pick the report you want — <strong>Sales summary</strong>, <strong>Sales by product</strong>, <strong>Aged receivables</strong> or <strong>Sync log</strong>.</p>
+          </li>
+          <li>
+            <span class="step-title">Choose your date range</span>
+            <p>At the top of the report there's a date-range selector. Use the quick buttons (such as <strong>7d</strong>, <strong>30d</strong> or <strong>YTD</strong> for year-to-date), or pick a <strong>custom range</strong> with the start and end dates. The report refreshes to cover only that period.</p>
+          </li>
+          <li>
+            <span class="step-title">Read the numbers</span>
+            <p>The report shows its figures as a table — and, where it helps, a simple chart. Totals are formatted in your shop's currency, so they read exactly as they would on a receipt.</p>
+          </li>
+          <li>
+            <span class="step-title">Export it (optional)</span>
+            <p>Click <strong>Export</strong> to download the report. Choose <strong>CSV</strong> (a plain spreadsheet file that opens anywhere) or <strong>Excel</strong> if you want a tidy, ready-formatted file. The download covers exactly the date range and view you're looking at.</p>
+          </li>
+        </ol>
+
+        <div class="callout callout--success">
+          <span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8 12 2.5 2.5L16 9"/></svg></span>
+          <div class="callout__body">
+            <div class="callout__title">That's the whole rhythm</div>
+            <p>Pick a range, read the totals, export if you need to. Every report below follows that same pattern.</p>
+            <p>If you run more than one shop, reports also have a <strong>store</strong> filter — and it only ever offers the <a href="/documentation/users-roles.html#store-access">stores you're assigned to</a>. Whatever you read on screen, download as a file, or send as a <a href="/documentation/scheduled-reports.html">scheduled email</a> stays inside that boundary.</p>
+          </div>
+        </div>
+
+        <h2 id="reports">The reports in detail</h2>
+
+        <h3 id="sales-summary">Sales summary</h3>
+        <p>This is the report most owners open first. It adds up everything you sold over the chosen period into a handful of plain totals — gross sales, returns, discounts, the net you actually kept, and the tax collected on top. It's the answer to "how did we do this week?"</p>
+        <p>A small chart shows the day-by-day trend, so you can see your busy and quiet days at a glance.</p>
+
+        <h3 id="sales-by-product">Sales by product</h3>
+        <p>This report lists your products with how many of each sold and how much money each brought in over the period. Sort it to find your <strong>best sellers</strong> (what to never run out of) and your <strong>slow movers</strong> (what to discount or stop stocking).</p>
+
+        <div class="doc-tablewrap">
+          <table>
+            <thead>
+              <tr><th>Column</th><th>What it means</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Product</td><td>The item's name and code.</td></tr>
+              <tr><td>Quantity sold</td><td>How many units left the shop in this period.</td></tr>
+              <tr><td>Revenue</td><td>The money those sales brought in.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <figure class="shot">
+          <div class="shot__frame">
+            <div class="shot__bar"><i></i><i></i><i></i></div>
+            <img src="/assets/documentation/images/reports-by-product.png" alt="The Sales by product report ranking items by quantity and revenue" />
+          </div>
+          <figcaption>Sales by product ranks your items so the best and worst sellers stand out.</figcaption>
+        </figure>
+
+        <h3 id="aged-receivables">Aged receivables</h3>
+        <p>When a customer buys on credit, they owe you money — that owed money is called a <strong>receivable</strong>. This report lists every customer with an outstanding balance and groups what they owe by how old it is: still current, 1–30 days overdue, 31–60 days, and so on. The further to the right a figure sits, the longer it's been unpaid — and the sooner you'll want to chase it.</p>
+        <p>To take a payment against a balance, head to <a href="/documentation/customer-payments.html">Customer payments</a>.</p>
+
+        <h3 id="loyalty-points">Loyalty points</h3>
+        <p>If you run a rewards programme (see <a href="/documentation/loyalty.html">Loyalty points</a>), this report shows how it's going over any period: points <strong>earned</strong>, points <strong>redeemed</strong>, and points that <strong>expired</strong> unused — with a row per customer underneath so you can see who's collecting and who's spending.</p>
+        <p>The headline figure is your <strong>outstanding liability</strong>: what every unspent point in circulation would cost you if all of it were redeemed tomorrow. It's the number to watch before you make the programme more generous.</p>
+
+        <h3 id="sync-log">Sync log</h3>
+        <p>If the internet drops, you can keep selling — those sales are saved on the till and uploaded once you're back online (see <a href="/documentation/offline.html">Selling offline</a>). The <strong>Sync log</strong> is the record of that uploading. Each row shows a sale that was made offline and whether it <strong>synced successfully</strong>, hit a <strong>conflict</strong>, or <strong>failed</strong>. It's your reassurance that nothing made offline got lost.</p>
+        <p>Most of the time every row reads "success" and you never need to look. The tabs at the top let you filter to just the rows that need attention — and a failed row can be <strong>retried</strong> (the stored sale is re-sent to the server, without any risk of duplicating it) or <strong>dismissed</strong> if it can never succeed. See <a href="/documentation/offline.html#failed">When a sale won't sync</a>.</p>
+
+        <h2 id="profit">Profit, cost and margin</h2>
+        <p>Reports that show profit or margin — sales by product, sales by category, cost of goods on your dashboard and day summary — work from the <strong>cost each item was carrying at the moment it sold</strong>. That cost is captured on the sale line as it happens and never changes afterwards, which is what you want: last month's margin shouldn't move because this month's delivery arrived dearer.</p>
+        <p>The cost comes from the most specific source available — the batch the item was picked from, otherwise the average cost of your stock at that store, otherwise the cost price on the product itself. For a kit, it's the cost of the components inside it.</p>
+
+        <div class="callout callout--info">
+          <span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg></span>
+          <div class="callout__body">
+            <div class="callout__title">Older sales showing 100% margin?</div>
+            <p>Sales rung up before cost tracking was added were saved without a cost, so they read as pure profit. There's a one-off tool to fix them: <strong>Settings → System Health → Rebuild historical sale costs</strong>. It walks your stock history and works out what each item actually cost when it sold. <strong>Preview</strong> first — it shows how many lines it can cost and how much cost it would record, and writes nothing until you confirm. Costs already recorded are never overwritten.</p>
+          </div>
+        </div>
+
+        <h2 id="export">Exporting to CSV or Excel</h2>
+        <p>Every report can be downloaded so you can keep a copy, share it, or work with it in a spreadsheet:</p>
+        <ul>
+          <li><strong>CSV</strong> — a simple text spreadsheet that opens in Excel, Google Sheets, Numbers, or anything else. Best for feeding figures into another tool.</li>
+          <li><strong>Excel (XLSX)</strong> — a tidy, ready-formatted spreadsheet with headers in place. Best for sending to an accountant or filing away.</li>
+        </ul>
+        <p>The export always matches what's on screen — same date range, same view — so there are no surprises in the file.</p>
+
+        <h2 id="large-exports">Large exports</h2>
+        <p>CSV and Excel exports now stream records in batches, so large product, customer, supplier, inventory, purchase and report downloads use less server memory. Filters, ordering, decimal formatting, permissions and accessible-store boundaries still match the screen. Keep the request open until the download begins, and investigate any downloaded HTML/error page rather than treating it as a spreadsheet.</p>
+
+        <h2 id="tips">Tips &amp; best practices</h2>
+        <div class="callout callout--tip">
+          <span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.2 1 2.5h6c0-1.3.3-1.8 1-2.5A6 6 0 0 0 12 3z"/></svg></span>
+          <div class="callout__body">
+            <ul>
+              <li><strong>Set the date range first.</strong> The whole report follows it — a wrong range is the usual reason a total looks "off".</li>
+              <li><strong>Check the Sales summary every morning.</strong> Comparing yesterday to the day before takes seconds and keeps you in touch with the business.</li>
+              <li><strong>Use Aged receivables to plan your follow-ups.</strong> The oldest balances are the ones least likely to be paid — chase those first.</li>
+              <li><strong>Export monthly for your accountant.</strong> A consistent monthly Excel export makes their job (and your bookkeeping) far easier.</li>
+            </ul>
+          </div>
+        </div>
+
+        <h2 id="warnings">Notes &amp; warnings</h2>
+        <div class="callout callout--warning">
+          <span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 2.5 20h19z"/><path d="M12 10v4M12 17h.01"/></svg></span>
+          <div class="callout__body">
+            <p><strong>Reports reflect the sales that have been recorded.</strong> A sale made offline only shows up once it has synced — so if a figure looks low, glance at the <a href="#sync-log">Sync log</a> to confirm everything has uploaded.</p>
+            <p><strong>What you can see may depend on your role.</strong> Some staff accounts are limited to their own sales rather than the whole shop's totals. If a report looks emptier than expected, your permissions may be narrowing it.</p>
+          </div>
+        </div>
+
+        <hr />
+        <p style="color:var(--text-tertiary);font-size:14px">Related: <a href="/documentation/customer-payments.html">Customer payments</a> · <a href="/documentation/offline.html">Selling offline</a> · <a href="/documentation/sales-history.html">Sales history</a> · <a href="/documentation/taxes.html">Taxes</a></p>
+
+        <nav class="doc-pager" id="docs-pager"></nav>
+      </article>
+    </main>
+
+    <aside class="doc-toc scroll-y"><nav id="docs-toc"></nav></aside>
+  </div>
+
+  <script src="/documentation/assets/nav.js?v=22"></script>
+  <script src="/documentation/assets/docs.js?v=20"></script>
+</body>
+</html>

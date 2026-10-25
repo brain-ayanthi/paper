@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Stock overview · POS User Guide</title>
+  <meta name="description" content="See how much of each product you have on hand at each store, get warned when items run low, and read the full history of every stock change." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+  <link rel="stylesheet" href="/documentation/assets/docs.css?v=20" />
+  <script>
+    (function () { try { var t = localStorage.getItem("docs-theme"); if (!t) t = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"; document.documentElement.setAttribute("data-theme", t); } catch (e) {} })();
+  </script>
+</head>
+<body data-nav="inventory">
+  <div class="doc-progress"><div class="doc-progress__bar" id="docs-progress-bar"></div></div>
+
+  <header class="doc-topbar">
+    <button class="doc-iconbtn doc-menubtn" id="docs-menu-btn" aria-label="Open menu"></button>
+    <a class="doc-brand" href="/documentation/index.html">
+      <span class="doc-brand__mark"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M3 9h18M7 21h10"/></svg></span>
+      <span class="doc-brand__name">POS <span style="color:var(--text-tertiary);font-weight:500">User Guide</span></span>
+      <span class="doc-brand__tag">Docs</span>
+    </a>
+    <div class="doc-topbar__spacer"></div>
+    <button class="doc-searchbtn" data-open-search aria-label="Search">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <span class="label">Search the guide…</span>
+      <kbd>Ctrl K</kbd>
+    </button>
+    <button class="doc-iconbtn" id="docs-theme-btn" aria-label="Toggle dark mode">
+      <svg class="theme-moon" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg>
+      <svg class="theme-sun" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4 12H2M22 12h-2M5 5 4 4M20 20l-1-1M5 19l-1 1M20 4l-1 1"/></svg>
+    </button>
+  </header>
+
+  <div class="doc-search" id="docs-search" role="dialog" aria-label="Search">
+    <div class="doc-search__backdrop"></div>
+    <div class="doc-search__panel">
+      <div class="doc-search__input">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="docs-search-input" type="text" placeholder="Search for a feature…" autocomplete="off" />
+      </div>
+      <div class="doc-search__results" id="docs-search-results"></div>
+    </div>
+  </div>
+
+  <div class="doc-scrim" id="docs-scrim"></div>
+
+  <div class="doc-layout">
+    <aside class="doc-sidebar scroll-y"><nav id="docs-sidebar-nav"></nav></aside>
+
+    <main class="doc-main">
+      <nav class="doc-breadcrumb" id="docs-breadcrumbs"></nav>
+
+      <article class="doc-article">
+        <h1>Stock overview</h1>
+        <p class="lead">Inventory is the part of POS that answers one simple question at any moment: <strong>how much of each product do I have, and where?</strong> It keeps a live count for every product at every store, warns you when something is running low, and records the reason behind every increase and decrease.</p>
+
+        <div class="glance">
+          <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m9 12 2 2 4-4"/></svg><div><b>Who uses it</b><span>Owners, managers and stock staff.</span></div></div>
+          <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg><div><b>How often</b><span>Check daily; act on low-stock weekly.</span></div></div>
+          <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9v11h14V9"/></svg><div><b>Where to find it</b><span>Open <strong>Inventory</strong> in the sidebar.</span></div></div>
+        </div>
+
+        <h2 id="overview">Overview</h2>
+        <p>Inventory is mostly automatic. You almost never type stock numbers in by hand — they go up when you receive a purchase, and down when you sell. POS adds it all up for you so the counts you see are always current. The <strong>Inventory</strong> menu gives you three views that answer different questions:</p>
+        <ul>
+          <li><strong>Available Stock</strong> — the current quantity (how many you have right now) of each product, at the store you're looking at.</li>
+          <li><strong>Low stock</strong> — a short list of items that have dropped to or below their <strong>reorder level</strong> (the point at which you should buy more).</li>
+          <li><strong>Stock Activity</strong> — the running history (the "ledger") of every change, with the reason for each one.</li>
+        </ul>
+        <p>The other menu items handle specific jobs: <a href="/documentation/batches.html">Batches &amp; expiry</a>, <a href="/documentation/adjustments.html">Stock adjustments</a>, <a href="/documentation/stock-takes.html">Stock reconciliation</a>, <a href="/documentation/transfers.html">Stock transfers</a>, and Adjustment reasons.</p>
+
+        <figure class="shot">
+          <div class="shot__frame">
+            <div class="shot__bar"><i></i><i></i><i></i></div>
+            <img src="/assets/documentation/images/inventory-levels.png" alt="The Available Stock screen listing products with their current quantities" />
+          </div>
+          <figcaption>Available Stock: every product with its current quantity at the active store.</figcaption>
+        </figure>
+
+        <h2 id="batch-breakdown">See batch prices inside Available Stock</h2>
+        <p>When <a href="/documentation/batches.html#batch-pricing">Batch-wise pricing</a> is active, expand a batch-tracked product in <strong>Available Stock</strong> to see each positive-stock lot separately. The breakdown shows its batch number, manufacture and expiry dates, on-hand quantity, cost, selling price and MRP for the active store.</p>
+        <figure class="shot">
+          <div class="shot__frame">
+            <div class="shot__bar"><i></i><i></i><i></i></div>
+            <img src="/assets/documentation/images/inventory-batch-breakdown.png" alt="Available Stock row expanded to show batch number, dates, quantity, cost, selling price and MRP" />
+          </div>
+          <figcaption>Expand a tracked product to reconcile its total against the individual batches that make it up.</figcaption>
+        </figure>
+        <p>CSV and Excel exports follow the same view: each positive batch becomes its own row with batch cost, selling price and MRP, while products without batch tracking keep their normal stock row. Filters, permissions and the active store still apply to every exported row.</p>
+
+        <h2 id="why">Why it's useful</h2>
+        <ul>
+          <li><strong>You always know what you have.</strong> No more walking the shelves to guess — the count on screen reflects every sale and delivery.</li>
+          <li><strong>It tells you when to reorder.</strong> The low-stock list catches items before they run out, so you don't lose a sale.</li>
+          <li><strong>It explains every change.</strong> If a number ever looks wrong, the activity history shows exactly what happened and who did it.</li>
+          <li><strong>It's per store.</strong> Each location keeps its own counts, so a busy branch and a quiet one never get mixed up.</li>
+        </ul>
+
+        <h2 id="steps">Checking your stock, step by step</h2>
+        <ol class="steps">
+          <li>
+            <span class="step-title">Open Available Stock</span>
+            <p>In the sidebar, open <strong>Inventory → Available Stock</strong>. You'll see every product you're allowed to view, with its current quantity for the store shown in the top bar. Use the search box and the category/brand filters to narrow the list.</p>
+          </li>
+          <li>
+            <span class="step-title">Read the numbers</span>
+            <p>Each row shows the on-hand quantity and the resolved <strong>reorder level</strong>. Rows sitting at or below their reorder level are flagged so they stand out.</p>
+          </li>
+          <li>
+            <span class="step-title">Set a reorder level (optional)</span>
+            <p>You can edit the reorder level directly on this screen for a single product at this store. This is the only number you change here — actual stock counts are never typed in directly (that's what adjustments and stock takes are for).</p>
+          </li>
+          <li>
+            <span class="step-title">Check Low stock</span>
+            <p>Open <strong>Inventory → Low stock</strong> to see only the items that have reached their reorder point, sorted with the most urgent (out of stock) first. This is your shopping list for the next purchase.</p>
+          </li>
+          <li>
+            <span class="step-title">Use the Location column to walk the shop</span>
+            <p>Both screens show each product's <a href="/documentation/shelf-locations.html">shelf location</a> — aisle, rack, bin — for the store you're looking at, and it comes out in the export. Sort or filter by it and a re-order check becomes a single lap of the aisles instead of a treasure hunt.</p>
+          </li>
+          <li>
+            <span class="step-title">Trace a change in Stock Activity</span>
+            <p>If a quantity looks off, open <strong>Inventory → Stock Activity</strong>. Filter by product, date or type to see every movement: each row shows the change amount, the quantity afterwards, the type (sale, purchase, adjustment, transfer, return), who did it, and a link back to the document that caused it.</p>
+          </li>
+        </ol>
+
+        <div class="callout callout--success">
+          <span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8 12 2.5 2.5L16 9"/></svg></span>
+          <div class="callout__body">
+            <div class="callout__title">Stock looks after itself</div>
+            <p>For most shops, selling and receiving stock keeps the counts accurate on their own. You only step in when something needs correcting — and even then, there's a tidy tool for it.</p>
+          </div>
+        </div>
+
+        <h2 id="movements">Stock Activity (the history)</h2>
+        <p>Stock Activity is a complete, time-ordered record of every quantity change. Nothing is ever deleted from it — corrections are added as new entries rather than rubbing old ones out. That's what makes it trustworthy: whenever the on-hand number and your gut feeling disagree, the answer is in here.</p>
+
+        <figure class="shot">
+          <div class="shot__frame">
+            <div class="shot__bar"><i></i><i></i><i></i></div>
+            <img src="/assets/documentation/images/inventory-movements.png" alt="The Stock Activity screen showing a history of stock movements with type and reference" />
+          </div>
+          <figcaption>Stock Activity: every increase and decrease, newest first, with the reason and a link back to its source.</figcaption>
+        </figure>
+
+        <div class="doc-tablewrap">
+          <table>
+            <thead><tr><th>Type</th><th>What caused it</th><th>Direction</th></tr></thead>
+            <tbody>
+              <tr><td>Sale</td><td>An item was rung up at the counter</td><td>Decrease</td></tr>
+              <tr><td>Return</td><td>A customer brought something back</td><td>Increase</td></tr>
+              <tr><td>Purchase</td><td>A delivery was received from a supplier</td><td>Increase</td></tr>
+              <tr><td>Purchase return</td><td>Goods were returned to a supplier</td><td>Decrease</td></tr>
+              <tr><td>Adjustment</td><td>A manual correction (damage, found stock, count)</td><td>Either</td></tr>
+              <tr><td>Stock take</td><td>A completed physical count corrected the variance</td><td>Either</td></tr>
+              <tr><td>Transfer</td><td>Stock moved to or from another store</td><td>Either</td></tr>
+              <tr><td>Opening</td><td>The starting count when you first set up a product</td><td>Increase</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p id="source-links">The <strong>Reference</strong> is a direct link when the source document is still available and you have permission to open it. Follow it to the exact sale, purchase, return, transfer, adjustment or stock take that created the movement. Older/manual records without a resolvable source remain readable text rather than pointing to a guessed document.</p>
+
+        <h2 id="tips">Tips &amp; best practices</h2>
+        <div class="callout callout--tip">
+          <span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.2 1 2.5h6c0-1.3.3-1.8 1-2.5A6 6 0 0 0 12 3z"/></svg></span>
+          <div class="callout__body">
+            <ul>
+              <li><strong>Set sensible reorder levels.</strong> Pick a number that gives you time to restock before you run out, based on how fast each item sells.</li>
+              <li><strong>Check Low stock before each supplier order.</strong> It's the fastest way to build a purchase without missing anything.</li>
+              <li><strong>Mind the store you're viewing.</strong> Stock is per store — if a count surprises you, confirm you're looking at the right location in the top bar.</li>
+              <li><strong>Use Stock Activity to settle disputes.</strong> Before assuming a number is wrong, read its history — the explanation is almost always there.</li>
+            </ul>
+          </div>
+        </div>
+
+        <h2 id="warnings">Notes &amp; warnings</h2>
+        <div class="callout callout--warning">
+          <span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 2.5 20h19z"/><path d="M12 10v4M12 17h.01"/></svg></span>
+          <div class="callout__body">
+            <p><strong>You can't type the on-hand quantity in directly</strong> on the Available Stock screen. To change a count you make a <a href="/documentation/adjustments.html">stock adjustment</a> or run a <a href="/documentation/stock-takes.html">stock reconciliation</a> — that way every change is recorded with a reason.</p>
+            <p><strong>The reorder level is a reminder, not a block.</strong> Dropping below it warns you to reorder; it never stops you selling.</p>
+          </div>
+        </div>
+
+        <hr />
+        <p style="color:var(--text-tertiary);font-size:14px">Related: <a href="/documentation/adjustments.html">Stock adjustments</a> · <a href="/documentation/stock-takes.html">Stock reconciliation</a> · <a href="/documentation/transfers.html">Stock transfers</a> · <a href="/documentation/batches.html">Batches &amp; expiry</a> · <a href="/documentation/shelf-locations.html">Shelf locations</a></p>
+
+        <nav class="doc-pager" id="docs-pager"></nav>
+      </article>
+    </main>
+
+    <aside class="doc-toc scroll-y"><nav id="docs-toc"></nav></aside>
+  </div>
+
+  <script src="/documentation/assets/nav.js?v=22"></script>
+  <script src="/documentation/assets/docs.js?v=20"></script>
+</body>
+</html>

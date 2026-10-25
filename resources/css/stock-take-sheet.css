@@ -1,0 +1,145 @@
+/* ============================================================
+   Stock take count sheet — print-first A4 page.
+   Inlined into resources/views/admin/inventory/stock-takes/sheet.blade.php,
+   mirroring the product label sheet's standalone, self-styled approach
+   (no admin bundle, no dark mode — this is paper).
+   ============================================================ */
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #f3f4f6;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  color: #111;
+}
+
+/* On-screen toolbar — hidden when printing. */
+.cs-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  background: #fff;
+  border-bottom: 1px solid #e5e7eb;
+}
+.cs-toolbar-title {
+  font-weight: 600;
+  font-size: 14px;
+  margin-inline-end: auto;
+}
+.cs-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background: #fff;
+  color: #111;
+  font-size: 13px;
+  font-family: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+.cs-btn:hover { background: #f9fafb; }
+.cs-btn-primary {
+  background: #111;
+  border-color: #111;
+  color: #fff;
+}
+.cs-btn-primary:hover { background: #000; }
+
+.cs-page {
+  width: 210mm;
+  min-height: 297mm;
+  margin: 16px auto;
+  padding: 14mm 12mm;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+
+/* Sheet header — who is counting what, and where to write the date. */
+.cs-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  padding-bottom: 10px;
+  margin-bottom: 14px;
+  border-bottom: 2px solid #111;
+}
+.cs-title { font-size: 18px; font-weight: 700; margin: 0; }
+.cs-sub { font-size: 12px; color: #4b5563; margin-top: 3px; }
+.cs-signoff { font-size: 11px; color: #4b5563; text-align: right; line-height: 2.1; }
+.cs-signoff span { display: inline-block; min-width: 46mm; border-bottom: 1px solid #9ca3af; }
+
+/* One block per shelf location — the unit of work for a counter. */
+.cs-group { margin-bottom: 12px; break-inside: avoid; }
+.cs-group-head {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 5px 8px;
+  background: #f3f4f6;
+  border-inline-start: 3px solid #111;
+  font-weight: 700;
+  font-size: 13px;
+}
+.cs-group-count { font-weight: 400; font-size: 11px; color: #6b7280; }
+
+.cs-table { width: 100%; border-collapse: collapse; }
+.cs-table th {
+  text-align: start;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #6b7280;
+  padding: 5px 8px;
+  border-bottom: 1px solid #d1d5db;
+}
+.cs-table td {
+  padding: 6px 8px;
+  border-bottom: 1px solid #e5e7eb;
+  font-size: 12px;
+  vertical-align: top;
+}
+.cs-table .num { text-align: end; font-variant-numeric: tabular-nums; }
+.cs-sku { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 10.5px; color: #6b7280; }
+
+/* The box the counter writes in. Deliberately generous — a cramped box
+   gets written over the line and then misread at data entry. */
+.cs-write {
+  width: 26mm;
+  height: 8mm;
+  border: 1px solid #9ca3af;
+  border-radius: 3px;
+}
+
+.cs-foot {
+  margin-top: 14px;
+  padding-top: 8px;
+  border-top: 1px solid #d1d5db;
+  font-size: 10px;
+  color: #6b7280;
+  display: flex;
+  justify-content: space-between;
+}
+
+@media print {
+  html, body { background: #fff; }
+  .cs-toolbar { display: none; }
+  .cs-page {
+    width: auto;
+    min-height: 0;
+    margin: 0;
+    padding: 0;
+    box-shadow: none;
+  }
+  @page { size: A4 portrait; margin: 12mm; }
+}

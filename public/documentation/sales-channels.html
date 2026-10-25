@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Shopify &amp; WooCommerce · POS User Guide</title>
+  <meta name="description" content="Connect Shopify and WooCommerce to Hyper POS, synchronize products, customers and stock, map POS stores, configure webhooks, and troubleshoot channel health." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+  <link rel="stylesheet" href="/documentation/assets/docs.css?v=20" />
+  <script>
+    (function () { try { var t = localStorage.getItem("docs-theme"); if (!t) t = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"; document.documentElement.setAttribute("data-theme", t); } catch (e) {} })();
+  </script>
+</head>
+<body data-nav="sales-channels">
+  <div class="doc-progress"><div class="doc-progress__bar" id="docs-progress-bar"></div></div>
+  <header class="doc-topbar">
+    <button class="doc-iconbtn doc-menubtn" id="docs-menu-btn" aria-label="Open menu"></button>
+    <a class="doc-brand" href="/documentation/index.html">
+      <span class="doc-brand__mark"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M3 9h18M7 21h10"/></svg></span>
+      <span class="doc-brand__name">POS <span style="color:var(--text-tertiary);font-weight:500">User Guide</span></span>
+      <span class="doc-brand__tag">Docs</span>
+    </a>
+    <div class="doc-topbar__spacer"></div>
+    <button class="doc-searchbtn" data-open-search aria-label="Search">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <span class="label">Search the guide…</span><kbd>Ctrl K</kbd>
+    </button>
+    <button class="doc-iconbtn" id="docs-theme-btn" aria-label="Toggle dark mode">
+      <svg class="theme-moon" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg>
+      <svg class="theme-sun" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4 12H2M22 12h-2"/></svg>
+    </button>
+  </header>
+
+  <div class="doc-search" id="docs-search" role="dialog" aria-label="Search">
+    <div class="doc-search__backdrop"></div><div class="doc-search__panel"><div class="doc-search__input"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="docs-search-input" type="text" placeholder="Search for a feature…" autocomplete="off" /></div><div class="doc-search__results" id="docs-search-results"></div></div>
+  </div>
+  <div class="doc-scrim" id="docs-scrim"></div>
+
+  <div class="doc-layout">
+    <aside class="doc-sidebar scroll-y"><nav id="docs-sidebar-nav"></nav></aside>
+    <main class="doc-main">
+      <nav class="doc-breadcrumb" id="docs-breadcrumbs"></nav>
+      <article class="doc-article">
+        <h1>Shopify &amp; WooCommerce</h1>
+        <p class="lead">Connect one or more online stores to Hyper POS. Products, customers and available stock can move from POS to each channel, while paid online orders return to POS for reservation, store allocation and fulfilment.</p>
+
+        <div class="glance">
+          <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="m9 12 2 2 4-4"/></svg><div><b>Who uses it</b><span>Owners and commerce managers connecting and monitoring online stores.</span></div></div>
+          <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg><div><b>Before you start</b><span>Public HTTPS on both sites, a working scheduler, provider credentials and unique product SKUs.</span></div></div>
+          <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9v11h14V9"/></svg><div><b>Where to find it</b><span>Open <strong>Sales channels</strong>, or go to <code>/admin/commerce/connections</code>.</span></div></div>
+        </div>
+
+        <h2 id="overview">How the integration works</h2>
+        <p>You can keep Shopify and WooCommerce connections active at the same time, and add more than one store from either provider. Each connection has its own credentials, switches, store mappings, health, pending work and orders.</p>
+        <div class="doc-tablewrap">
+          <table>
+            <thead><tr><th>Information</th><th>Direction</th><th>What happens</th></tr></thead>
+            <tbody>
+              <tr><td>Products, variants, categories, brands and primary image</td><td>POS → channel</td><td>POS creates and updates the remote catalog. Deleting in POS archives the Shopify product or moves the WooCommerce product to Trash.</td></tr>
+              <tr><td>Available stock</td><td>POS → channel</td><td>Current available quantity is sent after sales, purchases, adjustments, transfers, reservations and returns.</td></tr>
+              <tr><td>Customers</td><td>Both directions</td><td>Eligible POS customers are exported; signed customer webhooks can create or update POS customers.</td></tr>
+              <tr><td>Paid online orders</td><td>Channel → POS</td><td>The order is imported, matched by saved mapping or SKU, and reserved across eligible POS stores.</td></tr>
+              <tr><td>Fulfilment</td><td>POS → channel</td><td>After staff fulfil a POS allocation, Shopify is fulfilled by line/location or WooCommerce is completed after all allocations finish.</td></tr>
+              <tr><td>Cancellation and refund</td><td>Channel → POS</td><td>Open reservations are released; fulfilled refunds can create the matching POS return and restock.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout callout--warning">
+          <span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3 2.5 20h19z"/><path d="M12 10v4M12 17h.01"/></svg></span>
+          <div class="callout__body"><div class="callout__title">POS owns the catalog and stock</div><p>Remote product and stock edits are not imported into POS. A later POS sync can overwrite channel-managed fields. Ordinary counter sales are not copied to Shopify or WooCommerce as orders; only their stock effect is synchronized.</p></div>
+        </div>
+
+        <figure class="shot"><div class="shot__frame"><div class="shot__bar"><i></i><i></i><i></i></div><img src="/assets/documentation/images/sales-channels-list.png" alt="Sales channels page listing connected Shopify and WooCommerce stores with health and synchronization status" /></div><figcaption>Every online store is a separate connection with its own health, settings and work counts.</figcaption></figure>
+
+        <h2 id="before">Before connecting a store</h2>
+        <ul>
+          <li>Give products and variants unique SKUs. Saved mappings are the permanent identity, but SKU is needed for safe onboarding and order matching.</li>
+          <li>Confirm Hyper POS has a correct public <code>APP_URL</code>, HTTPS certificate and public <code>/storage</code> link so providers can reach webhooks and product images.</li>
+          <li>Run the Laravel scheduler at least every minute. Commerce work is durable in the database, so Redis and a long-running queue worker are not required.</li>
+          <li>Create an active POS payment method for online orders. It records money already collected by the provider; it does not charge the shopper again.</li>
+          <li>Decide which POS stores will contribute stock and fulfil online orders, and how much safety stock each should keep offline.</li>
+        </ul>
+
+        <h2 id="shopify">Connect Shopify</h2>
+        <p>The current Hyper POS connection uses Shopify's client-credentials flow. Create a merchant-owned app in the Shopify Dev Dashboard for the organization that owns the destination store, release its configuration and install it on that store.</p>
+        <ol class="steps">
+          <li><span class="step-title">Create and configure the app</span><p>In the Shopify Dev Dashboard, create an app, add a version and select the required Admin API scopes:</p><pre><code>write_products
+write_inventory
+read_locations
+write_locations
+read_publications
+write_publications
+write_customers
+read_orders
+write_merchant_managed_fulfillment_orders</code></pre><p>If you will import customers or orders, configure the required protected customer data for customers, orders, name, address, email and phone.</p></li>
+          <li><span class="step-title">Release and install the app</span><p>Release the app version and install it on the exact Shopify store. If you change scopes later, release the change and approve the new access before retesting.</p></li>
+          <li><span class="step-title">Copy the credentials</span><p>Open the app's settings and copy its <strong>Client ID</strong> and <strong>Client secret</strong>. Keep the secret out of screenshots and support messages.</p></li>
+          <li><span class="step-title">Add the connection in POS</span><p>Open <strong>Sales channels → Add channel</strong>, choose <strong>Shopify</strong>, enter a helpful name, the permanent <code>store-name.myshopify.com</code> domain, Client ID and Client secret. Use the configured Admin API version in <code>YYYY-MM</code> format.</p></li>
+          <li><span class="step-title">Choose what to synchronize</span><p>Enable products, customers and/or online orders. If importing orders, choose the POS payment method. Enable <strong>Publish to Shopify Online Store</strong> when active POS products and POS-managed collections should be published automatically.</p></li>
+          <li><span class="step-title">Save, test and map locations</span><p>Save first, then click <strong>Test connection</strong>. A successful test obtains a fresh token, reads Shopify locations and registers signed order/customer webhooks. Map every eligible POS store to the correct Shopify location and save.</p></li>
+          <li><span class="step-title">Run the first reconciliation</span><p>Click <strong>Sync now</strong>. Keep the page open long enough to confirm work is queued, then let the scheduler drain the catalog, customer and inventory work.</p></li>
+        </ol>
+        <p>Current Shopify dashboard guidance is available in Shopify's official <a href="https://shopify.dev/docs/apps/build/dev-dashboard/create-apps-using-dev-dashboard" target="_blank" rel="noopener">Dev Dashboard app guide</a>.</p>
+
+        <figure class="shot"><div class="shot__frame"><div class="shot__bar"><i></i><i></i><i></i></div><img src="/assets/documentation/images/sales-channels-shopify.png" alt="Hyper POS Shopify connection form showing store domain, client credentials and synchronization options" /></div><figcaption>Use the permanent <code>myshopify.com</code> domain and credentials from the app installed on that store.</figcaption></figure>
+
+        <h3 id="shopify-catalog">What Shopify receives</h3>
+        <ul>
+          <li>Product title, description, active/draft state, options, variants, SKU, barcode, selling price, MRP as compare-at price and stock-tracking state.</li>
+          <li>POS brand as Shopify <strong>Vendor</strong>.</li>
+          <li>POS category breadcrumb as <strong>Product Type</strong>, plus POS-managed collections for the category path. Merchant-created collections are left alone.</li>
+          <li>The current primary POS product image. Gallery and variant images are not synchronized in this release.</li>
+          <li>Location stock in location mode, or combined stock at a shared Shopify location in aggregate mode.</li>
+        </ul>
+
+        <h2 id="woocommerce">Connect WooCommerce</h2>
+        <ol class="steps">
+          <li><span class="step-title">Prepare WooCommerce</span><p>Use a current WooCommerce store with a public HTTPS URL. Under WordPress <strong>Settings → Permalinks</strong>, choose anything except <strong>Plain</strong>. Under <strong>WooCommerce → Settings → Products → Inventory</strong>, enable stock management.</p></li>
+          <li><span class="step-title">Generate an API key</span><p>Go to <strong>WooCommerce → Settings → Advanced → REST API</strong>, add a key named <em>Hyper POS</em>, select a user allowed to manage products, customers, orders, webhooks and settings, and choose <strong>Read/Write</strong>. Generate the key and copy the Consumer key and Consumer secret before leaving the page.</p></li>
+          <li><span class="step-title">Add the connection in POS</span><p>Open <strong>Sales channels → Add channel</strong>, choose <strong>WooCommerce</strong>, enter the site root such as <code>https://shop.example.com</code>—not the <code>/wp-json/wc/v3</code> path—and add the Consumer key and secret.</p></li>
+          <li><span class="step-title">Set webhook and sync options</span><p>Leave the webhook signing secret blank to let POS create one, or enter a strong existing secret. Choose product, customer and order switches and the POS payment method for imported orders.</p></li>
+          <li><span class="step-title">Save, test and map stores</span><p>Save, then click <strong>Test connection</strong>. Configure each POS store mapping, inventory switch, order switch, priority and safety stock. WooCommerce has one core stock pool, so enabled POS store quantities are combined.</p></li>
+          <li><span class="step-title">Run the first reconciliation</span><p>Click <strong>Sync now</strong> and monitor Pending work, Failed work and Last sync while the scheduler processes it.</p></li>
+        </ol>
+        <p>See WooCommerce's official <a href="https://woocommerce.com/document/woocommerce-rest-api/" target="_blank" rel="noopener">REST API key guide</a> and <a href="https://woocommerce.com/document/configuring-woocommerce-settings/advanced/" target="_blank" rel="noopener">webhook settings guide</a> if the provider's labels move.</p>
+
+        <figure class="shot"><div class="shot__frame"><div class="shot__bar"><i></i><i></i><i></i></div><img src="/assets/documentation/images/sales-channels-woocommerce.png" alt="Hyper POS WooCommerce connection form showing site URL, API keys, webhook secret and synchronization options" /></div><figcaption>Enter the WooCommerce site root and a Read/Write REST API key belonging to a suitable WordPress user.</figcaption></figure>
+
+        <h3 id="woocommerce-webhooks">If WooCommerce webhooks are not registered automatically</h3>
+        <p>Open the saved connection in POS and copy its <strong>Webhook URL</strong> and signing secret. In WooCommerce, go to <strong>Settings → Advanced → Webhooks</strong> and create one active webhook for each topic below, using the exact same delivery URL and secret:</p>
+        <ul><li><code>order.created</code></li><li><code>order.updated</code></li><li><code>order.deleted</code></li><li><code>customer.created</code></li><li><code>customer.updated</code></li></ul>
+
+        <h2 id="mapping">Map POS stores and stock</h2>
+        <p>After testing a connection, its store-mapping table appears. For each POS store, choose the remote location or online pool and set:</p>
+        <div class="doc-tablewrap"><table><thead><tr><th>Field</th><th>Meaning</th></tr></thead><tbody>
+          <tr><td>Mode</td><td><strong>Location</strong> sends one POS store to one Shopify location; <strong>Aggregate</strong> combines mappings that share a location; <strong>Disabled</strong> sends no inventory.</td></tr>
+          <tr><td>Priority</td><td>The lowest number is considered first when a paid online order is allocated.</td></tr>
+          <tr><td>Safety stock</td><td>Quantity withheld from online availability.</td></tr>
+          <tr><td>Inventory</td><td>Allows this POS store to contribute availability.</td></tr>
+          <tr><td>Orders</td><td>Allows this POS store to reserve and fulfil channel orders.</td></tr>
+          <tr><td>Active</td><td>Master switch for this mapping.</td></tr>
+        </tbody></table></div>
+        <p>Online availability is calculated as <code>on hand − reserved − safety stock</code>, never below zero. The quantity sent is absolute—not an incremental adjustment.</p>
+
+        <figure class="shot"><div class="shot__frame"><div class="shot__bar"><i></i><i></i><i></i></div><img src="/assets/documentation/images/sales-channels-store-mappings.png" alt="Sales-channel store mapping table with remote locations, inventory modes, priorities and safety stock" /></div><figcaption>Map each POS store deliberately; priority controls allocation order and safety stock protects shop-floor availability.</figcaption></figure>
+
+        <h2 id="health">Sync now, health and retries</h2>
+        <ul>
+          <li><strong>Test connection</strong> checks credentials, refreshes remote locations and attempts webhook registration.</li>
+          <li><strong>Sync now</strong> queues a full current reconciliation. It does not pull remote products or remote stock into POS.</li>
+          <li><strong>Pending work</strong> is safe database-backed work waiting for its due time or the scheduler.</li>
+          <li><strong>Failed work</strong> needs its displayed cause fixed—credentials, permissions, mapping, public image URL or provider availability—before retrying.</li>
+          <li>A provider outage never rolls back a completed local sale or stock movement. The work remains queued and retries with increasing delay.</li>
+        </ul>
+        <div class="callout callout--tip"><span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.2 1 2.5h6c0-1.3.3-1.8 1-2.5A6 6 0 0 0 12 3z"/></svg></span><div class="callout__body"><p>After correcting a remotely deleted product or stale mapping, click <strong>Sync now</strong>. The manual run force-checks current POS products so missing remote records can be recreated and remapped.</p></div></div>
+
+        <h2 id="troubleshooting">Troubleshooting checklist</h2>
+        <div class="doc-tablewrap"><table><thead><tr><th>Problem</th><th>Check</th></tr></thead><tbody>
+          <tr><td>Shopify authentication or missing-scope error</td><td>Confirm the app belongs to and is installed on the exact store, the released version includes all required scopes, new scopes were approved, and saved credentials were retested.</td></tr>
+          <tr><td>Protected customer data error</td><td>Configure customers/orders plus the required name, address, email and phone fields in the Shopify app, then release and retest.</td></tr>
+          <tr><td>WooCommerce cannot connect</td><td>Check HTTPS, site-root URL, non-Plain permalinks, <code>/wp-json/wc/v3</code> access, Read/Write key, associated user permissions and security/firewall plugins.</td></tr>
+          <tr><td>Products appear but stock is zero</td><td>Check active store mappings, Inventory switch, correct remote location, safety stock, POS on-hand/reserved quantities and pending/failed inventory work.</td></tr>
+          <tr><td>Product image is missing</td><td>Open the POS image URL in a signed-out browser. Confirm <code>APP_URL</code>, HTTPS and the storage link are public.</td></tr>
+          <tr><td>Orders do not arrive</td><td>Confirm Import online orders is enabled, the order is paid, webhook is active, URL/secret are exact, provider delivery succeeded and the scheduler is running.</td></tr>
+          <tr><td>Pending count does not fall</td><td>Check cron heartbeat and whether the work is due. Do not delete pending rows merely to clear the number.</td></tr>
+        </tbody></table></div>
+
+        <h2 id="security">Credential and recovery safety</h2>
+        <ul>
+          <li>Never place Client secrets, Consumer secrets, tokens or webhook secrets in screenshots, URLs, logs or support tickets.</li>
+          <li>Back up the installation's <code>APP_KEY</code> securely with the database. Connection credentials and sensitive payloads are encrypted with it.</li>
+          <li>Disconnecting a POS connection removes local access to that integration; it does not delete the remote store. Verify its effect before confirming.</li>
+          <li>Use one normal Laravel scheduler entry. Do not add overlapping commerce workers unless your hosting arrangement has been reviewed.</li>
+        </ul>
+
+        <hr />
+        <p style="color:var(--text-tertiary);font-size:14px">Related: <a href="/documentation/channel-orders.html">Channel orders</a> · <a href="/documentation/cron.html">Cron job setup</a> · <a href="/documentation/products.html">Products</a> · <a href="/documentation/inventory.html">Inventory</a> · <a href="/documentation/customers.html">Customers</a></p>
+        <nav class="doc-pager" id="docs-pager"></nav>
+      </article>
+    </main>
+    <aside class="doc-toc scroll-y"><nav id="docs-toc"></nav></aside>
+  </div>
+  <script src="/documentation/assets/nav.js?v=22"></script>
+  <script src="/documentation/assets/docs.js?v=20"></script>
+</body>
+</html>

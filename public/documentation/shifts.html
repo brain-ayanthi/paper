@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Shifts &amp; cash drawer · POS User Guide</title>
+  <meta name="description" content="Open a shift with a starting cash float, sell during the shift, then close it by counting the drawer. Understand X and Z reports, cash variance, and mismatch reasons." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+  <link rel="stylesheet" href="/documentation/assets/docs.css?v=20" />
+  <script>
+    (function () { try { var t = localStorage.getItem("docs-theme"); if (!t) t = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"; document.documentElement.setAttribute("data-theme", t); } catch (e) {} })();
+  </script>
+</head>
+<body data-nav="shifts">
+  <div class="doc-progress"><div class="doc-progress__bar" id="docs-progress-bar"></div></div>
+
+  <header class="doc-topbar">
+    <button class="doc-iconbtn doc-menubtn" id="docs-menu-btn" aria-label="Open menu"></button>
+    <a class="doc-brand" href="/documentation/index.html">
+      <span class="doc-brand__mark"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M3 9h18M7 21h10"/></svg></span>
+      <span class="doc-brand__name">POS <span style="color:var(--text-tertiary);font-weight:500">User Guide</span></span>
+      <span class="doc-brand__tag">Docs</span>
+    </a>
+    <div class="doc-topbar__spacer"></div>
+    <button class="doc-searchbtn" data-open-search aria-label="Search">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <span class="label">Search the guide…</span>
+      <kbd>Ctrl K</kbd>
+    </button>
+    <button class="doc-iconbtn" id="docs-theme-btn" aria-label="Toggle dark mode">
+      <svg class="theme-moon" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg>
+      <svg class="theme-sun" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4 12H2M22 12h-2M5 5 4 4M20 20l-1-1M5 19l-1 1M20 4l-1 1"/></svg>
+    </button>
+  </header>
+
+  <div class="doc-search" id="docs-search" role="dialog" aria-label="Search">
+    <div class="doc-search__backdrop"></div>
+    <div class="doc-search__panel">
+      <div class="doc-search__input">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="docs-search-input" type="text" placeholder="Search for a feature…" autocomplete="off" />
+      </div>
+      <div class="doc-search__results" id="docs-search-results"></div>
+    </div>
+  </div>
+
+  <div class="doc-scrim" id="docs-scrim"></div>
+
+  <div class="doc-layout">
+    <aside class="doc-sidebar scroll-y"><nav id="docs-sidebar-nav"></nav></aside>
+
+    <main class="doc-main">
+      <nav class="doc-breadcrumb" id="docs-breadcrumbs"></nav>
+
+      <article class="doc-article">
+        <h1>Shifts &amp; cash drawer</h1>
+        <p class="lead">A <strong>shift</strong> is one cashier's session at the till, from when they count the drawer at the start to when they count it again at the end. It's the simple discipline that keeps your cash honest: open with a count, sell, close with a count, and see if the drawer matches.</p>
+
+        <div class="glance">
+          <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m9 12 2 2 4-4"/></svg><div><b>Who uses it</b><span>Cashiers opening and closing the till; managers reviewing the day.</span></div></div>
+          <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9v11h14V9"/></svg><div><b>Where to find it</b><span>Opens from the <strong>POS screen</strong>; history under <strong>Shifts → Shift History</strong>.</span></div></div>
+          <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg><div><b>Good to know</b><span>If shifts are required, you must open one before you can sell.</span></div></div>
+        </div>
+
+        <h2 id="overview">Overview</h2>
+        <p>Every cash drawer goes through the same rhythm. At the start of the day (or your turn), you <strong>open a shift</strong> and count the cash already in the till — the <strong>opening float</strong>. You then sell all session. At the end, you <strong>close the shift</strong> by counting the drawer again. The system compares what <em>should</em> be there against what you actually counted, and flags any difference.</p>
+        <p>This is standard retail practice, and it answers the most important end-of-day question: <em>does the cash add up?</em></p>
+
+        <figure class="shot">
+          <div class="shot__frame">
+            <div class="shot__bar"><i></i><i></i><i></i></div>
+            <img src="/assets/documentation/images/shift-open.png" alt="The open-shift screen showing the terminal and a counted opening cash field" />
+          </div>
+          <figcaption>Opening a shift — count the cash already in the drawer and enter it as your starting float.</figcaption>
+        </figure>
+
+        <h2 id="why">Why shifts matter</h2>
+        <ul>
+          <li><strong>Accountability for cash.</strong> Each shift is tied to one cashier, so if the drawer is short, you know whose session it happened in.</li>
+          <li><strong>A clean end-of-day total.</strong> The closing report shows sales, payment types and taxes for that session in one place.</li>
+          <li><strong>Early warning.</strong> A mid-shift snapshot lets a cashier check the drawer before problems pile up.</li>
+          <li><strong>An honest paper trail.</strong> Every open, close and mismatch is recorded — useful for owners running more than one branch.</li>
+        </ul>
+
+        <h2 id="open">Opening a shift</h2>
+        <p>If your store requires shifts, the <a href="/documentation/cashier.html">POS screen</a> won't let you sell until one is open — it shows the open-shift form first.</p>
+        <ol class="steps">
+          <li>
+            <span class="step-title">Count the drawer</span>
+            <p>Physically count the cash already in the till before you start. This is your <strong>opening float</strong> — the change you'll need to give early customers.</p>
+          </li>
+          <li>
+            <span class="step-title">Enter the opening cash</span>
+            <p>Type the counted amount into the opening-cash field. A <strong>denomination helper</strong> can add it up for you: enter how many of each note and coin you have, and it totals them.</p>
+          </li>
+          <li>
+            <span class="step-title">Start the shift</span>
+            <p>Click <strong>Start shift</strong>. You're taken to the POS screen, ready to sell. Every sale you make is now tied to this shift.</p>
+          </li>
+        </ol>
+
+        <div class="callout callout--success">
+          <span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8 12 2.5 2.5L16 9"/></svg></span>
+          <div class="callout__body">
+            <div class="callout__title">Carry yesterday's float forward</div>
+            <p>If you leave a steady amount of change in the drawer overnight, a shortcut fills the opening cash from the previous shift's closing count — so you don't recount from scratch.</p>
+          </div>
+        </div>
+
+        <h2 id="close">Closing a shift</h2>
+        <p>At the end of your session, you close the shift by counting the drawer one last time.</p>
+        <ol class="steps">
+          <li>
+            <span class="step-title">Start the close</span>
+            <p>Choose <strong>Close shift</strong>. A summary appears showing the sales and payments taken so far this session.</p>
+          </li>
+          <li>
+            <span class="step-title">Count and enter the closing cash</span>
+            <p>Count all the cash in the drawer and enter it. The denomination helper is here too. As you type, the screen shows the <strong>variance</strong> live (explained below).</p>
+          </li>
+          <li>
+            <span class="step-title">Explain any mismatch</span>
+            <p>If the count is off by more than your store's allowed tolerance, you'll be asked to pick a <a href="#variance">mismatch reason</a> and add a note.</p>
+          </li>
+          <li>
+            <span class="step-title">Close &amp; print the Z report</span>
+            <p>Confirm to close. The shift is finalized and its <a href="#reports">Z report</a> — the end-of-shift summary — is produced for you to print or file.</p>
+          </li>
+        </ol>
+
+        <figure class="shot">
+          <div class="shot__frame">
+            <div class="shot__bar"><i></i><i></i><i></i></div>
+            <img src="/assets/documentation/images/shift-close.png" alt="The close-shift screen with the counted closing cash, expected cash, and a live variance figure" />
+          </div>
+          <figcaption>Closing a shift — enter your counted cash and the variance updates live.</figcaption>
+        </figure>
+
+        <h2 id="reports">X report vs Z report</h2>
+        <p>Both reports show the same kind of summary — sales, payment types, taxes and the cash position — but they're used at different moments:</p>
+        <div class="doc-tablewrap">
+          <table>
+            <thead>
+              <tr><th>Report</th><th>When</th><th>What it does</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>X report</strong> <span class="badge badge--info">Interim</span></td><td>Any time <em>during</em> an open shift</td><td>A read-only snapshot of how the shift is going so far. It does <strong>not</strong> close the shift, and you can run it as many times as you like — handy for a mid-day check or a handover between cashiers.</td></tr>
+              <tr><td><strong>Z report</strong> <span class="badge badge--success">Final</span></td><td>Produced <em>when you close</em> the shift</td><td>The official end-of-shift document. It locks in the totals and the final cash count, and is the one you keep for your records.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>A simple way to remember it: <strong>X is a peek, Z is the close.</strong></p>
+
+        <h2 id="variance">Cash variance (over or short)</h2>
+        <p>When you close, the system works out how much cash <em>should</em> be in the drawer — your opening float, plus cash sales, minus cash refunds, plus or minus any cash added or removed during the shift. It then compares that <strong>expected</strong> amount to what you actually <strong>counted</strong>. The difference is the <strong>variance</strong>:</p>
+        <div class="doc-tablewrap">
+          <table>
+            <thead>
+              <tr><th>Result</th><th>Meaning</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Counted = Expected</strong></td><td>The drawer balances perfectly. Nothing to explain.</td></tr>
+              <tr><td><strong>Counted &gt; Expected</strong></td><td><span class="badge badge--warning">Over</span> — there's more cash than there should be (often a miscounted change given to a customer).</td></tr>
+              <tr><td><strong>Counted &lt; Expected</strong></td><td><span class="badge badge--danger">Short</span> — there's less cash than there should be.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Small differences are normal and expected. Your store sets a <strong>tolerance</strong> (for example, a few units either way). If the variance is within tolerance, the shift closes as <span class="badge badge--success">Closed</span>. If it's outside tolerance, you must choose a <strong>mismatch reason</strong> — such as a miscount, a change dispute, or an unrecorded cash movement — and the shift closes as <span class="badge badge--warning">Closed with variance</span>, with a note for the record. Managers can review the standard mismatch reasons under <strong>Shifts → Cash Mismatch Reasons</strong>.</p>
+
+        <h2 id="cash-in-out">Putting cash in and taking cash out</h2>
+        <p>Cash moves in and out of a drawer for reasons that aren't sales: the manager tops up the float, someone is sent out for stationery, the day's takings go to the bank or the safe. Record each of those and your expected cash stays honest — miss them and you'll close short (or over) for no good reason.</p>
+        <p>Every shift has a <strong>Cash drawer</strong> panel with three things you can record:</p>
+        <div class="doc-tablewrap">
+          <table>
+            <thead><tr><th>Movement</th><th>When you use it</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Pay-in</strong> (cash in)</td><td>Cash is being added — a float top-up, a manager refill from the safe.</td></tr>
+              <tr><td><strong>Pay-out</strong> (cash out)</td><td>Cash is being removed — petty spending, a bank deposit, moving takings to the safe.</td></tr>
+              <tr><td><strong>No-sale drawer open</strong></td><td>The drawer was opened without a sale — usually to give a customer change. No money moves; it's logged for the record.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 id="cash-at-the-till">Doing it without leaving the cashier screen</h3>
+        <p>You don't have to go to the back office. On the <a href="/documentation/cashier.html">POS screen</a>, open the <strong>overflow menu</strong> (the ⋮ button) and choose <strong>Cash in / out</strong>. The same movement is recorded against your open shift, and you're back at the cart in seconds. It's the same panel, just where the cash actually is.</p>
+
+        <h3 id="payout-category">Saying what a pay-out is for</h3>
+        <p>When you take cash out, POS asks <strong>"What is this for?"</strong>. Your answer decides whether the money is simply gone from the drawer, or gone from the business:</p>
+        <div class="doc-tablewrap">
+          <table>
+            <thead><tr><th>Choice</th><th>What happens</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Expense (petty cash)</strong></td><td>The drawer goes down <em>and</em> an <a href="/documentation/expenses.html">expense record is created for you</a> — so the spend shows in Expenses and on your profit &amp; loss, not just in the till. Pick an expense category and add a bill reference if you have one.</td></tr>
+              <tr><td><strong>Bank deposit</strong></td><td>The drawer goes down. The money hasn't been spent — it's moved — so no expense is created.</td></tr>
+              <tr><td><strong>Moved to safe</strong></td><td>Same: the drawer goes down, nothing is spent.</td></tr>
+              <tr><td><strong>Other</strong></td><td>The drawer goes down and nothing else is recorded. Use the reason field to explain.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>A pay-out can never be more than the drawer holds — POS shows the cash available and tells you the maximum you can take. If you're emptying the drawer, <strong>Take all</strong> fills the amount for you.</p>
+        <p>It works in the other direction too: if you record a <strong>cash expense in the back office</strong> while you have a shift open, POS creates the matching pay-out for you, so the drawer and the books agree without anyone typing it twice. See <a href="/documentation/expenses.html#drawer">Cash expenses and the drawer</a>.</p>
+
+        <div class="callout callout--tip">
+          <span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.2 1 2.5h6c0-1.3.3-1.8 1-2.5A6 6 0 0 0 12 3z"/></svg></span>
+          <div class="callout__body">
+            <p><strong>Petty cash, done properly.</strong> Choosing <em>Expense</em> on a pay-out means the money someone spent on bin bags is a real expense in your books — categorised, on the P&amp;L, and visible in reports — instead of an unexplained shortage at closing time.</p>
+          </div>
+        </div>
+
+        <h3 id="pay-supplier">Paying a supplier from the till</h3>
+        <p>Sometimes a supplier's delivery driver waits at the counter to be paid in cash. Instead of leaving the till to record it later, you can pay them straight from the open shift. On the shift's <strong>Cash drawer</strong> panel you'll find a <strong>Pay supplier</strong> tab that opens the same <a href="/documentation/supplier-payments.html">supplier payment</a> form used in the back office — pick the supplier, and settle their unpaid purchase invoices in full or in part.</p>
+        <ol class="steps">
+          <li>
+            <span class="step-title">Open the Pay supplier tab</span>
+            <p>With a shift open, go to the <strong>Cash drawer</strong> panel and choose <strong>Pay supplier</strong>. This tab only appears if your role has the supplier-payment permission, so not every cashier will see it.</p>
+          </li>
+          <li>
+            <span class="step-title">Record the payment</span>
+            <p>Pick the supplier and choose which unpaid invoices the money settles — the whole balance or a partial amount. The form is scoped to this shift's store, so you're paying from the right till.</p>
+          </li>
+          <li>
+            <span class="step-title">Confirm</span>
+            <p>Save the payment. If you paid by <strong>cash</strong>, the amount is taken out of the drawer as a <strong>pay-out</strong> automatically, so your expected cash drops by that amount. Paying by any other method (bank, cheque, UPI) records the payment but leaves the drawer untouched.</p>
+          </li>
+        </ol>
+
+        <figure class="shot">
+          <div class="shot__frame">
+            <div class="shot__bar"><i></i><i></i><i></i></div>
+            <img src="/assets/documentation/images/shift-supplier-payment.png" alt="The Pay supplier tab on the cash drawer panel with a supplier selected and unpaid invoices being settled" />
+          </div>
+          <figcaption>Paying a supplier from the till — a cash payment is recorded as a pay-out and reduces the drawer's expected cash.</figcaption>
+        </figure>
+
+        <div class="callout callout--warning">
+          <span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 2.5 20h19z"/><path d="M12 10v4M12 17h.01"/></svg></span>
+          <div class="callout__body">
+            <div class="callout__title">It moves your cash — and shows on the report</div>
+            <p>A cash supplier payment reduces the drawer's <a href="#variance">expected cash</a> and appears on the shift's <a href="#reports">X and Z report</a> as a pay-out, so your closing count should be lower by that amount. That's expected — don't treat it as a shortage. If you later <strong>void</strong> the payment, the cash is returned to the drawer as a matching pay-in and the expected figure goes back up. This is distinct from an <a href="/documentation/expenses.html">expense</a>: use this to settle a supplier's purchase invoice, and record other cash spending as an expense.</p>
+          </div>
+        </div>
+
+        <h2 id="tips">Tips &amp; best practices</h2>
+        <div class="callout callout--tip">
+          <span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.2 1 2.5h6c0-1.3.3-1.8 1-2.5A6 6 0 0 0 12 3z"/></svg></span>
+          <div class="callout__body">
+            <ul>
+              <li><strong>Count carefully, twice.</strong> Most variances are simple miscounts. Use the denomination helper to avoid mistakes.</li>
+              <li><strong>Run an X report mid-shift</strong> on a busy day to confirm the drawer is on track before it's too late to spot a problem.</li>
+              <li><strong>Be honest about the cash you take.</strong> Type the real amount a customer hands you at the counter, so the expected-cash figure stays correct.</li>
+              <li><strong>Write a clear mismatch reason.</strong> "Gave wrong change at lunch" is far more useful later than a blank note.</li>
+            </ul>
+          </div>
+        </div>
+
+        <h2 id="warnings">Notes &amp; warnings</h2>
+        <div class="callout callout--warning">
+          <span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 2.5 20h19z"/><path d="M12 10v4M12 17h.01"/></svg></span>
+          <div class="callout__body">
+            <p><strong>A closed shift can't be reopened.</strong> Closing is final. Make sure your count is right before you confirm.</p>
+            <p><strong>Voids only work while the shift is open.</strong> If you need to reverse a sale, do it before closing — once the shift is closed, its sales can no longer be voided. See <a href="/documentation/sales-history.html">Sales history</a>.</p>
+          </div>
+        </div>
+        <div class="callout callout--danger">
+          <span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2h8l6 6v8l-6 6H8l-6-6V8z"/><path d="M12 8v5M12 16h.01"/></svg></span>
+          <div class="callout__body">
+            <p><strong>Don't skip the count to save time.</strong> A guessed closing figure defeats the whole point of a shift. The few minutes it takes to count the drawer is what protects you from losses going unnoticed.</p>
+          </div>
+        </div>
+
+        <hr />
+        <p style="color:var(--text-tertiary);font-size:14px">Related: <a href="/documentation/cashier.html">The POS screen</a> · <a href="/documentation/sales-history.html">Sales history</a> · <a href="/documentation/reports.html">Reports</a></p>
+
+        <nav class="doc-pager" id="docs-pager"></nav>
+      </article>
+    </main>
+
+    <aside class="doc-toc scroll-y"><nav id="docs-toc"></nav></aside>
+  </div>
+
+  <script src="/documentation/assets/nav.js?v=22"></script>
+  <script src="/documentation/assets/docs.js?v=20"></script>
+</body>
+</html>

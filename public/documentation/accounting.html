@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Accounting · POS User Guide</title>
+  <meta name="description" content="The built-in accounting explained in plain English: the chart of accounts, business mappings that post your sales automatically, fiscal periods, opening balances, the journal/day book, and the financial statements (Trial Balance, P&L, Balance Sheet, Cash Flow)." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+  <link rel="stylesheet" href="/documentation/assets/docs.css?v=20" />
+  <script>
+    (function () { try { var t = localStorage.getItem("docs-theme"); if (!t) t = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"; document.documentElement.setAttribute("data-theme", t); } catch (e) {} })();
+  </script>
+</head>
+<body data-nav="accounting">
+  <div class="doc-progress"><div class="doc-progress__bar" id="docs-progress-bar"></div></div>
+
+  <header class="doc-topbar">
+    <button class="doc-iconbtn doc-menubtn" id="docs-menu-btn" aria-label="Open menu"></button>
+    <a class="doc-brand" href="/documentation/index.html">
+      <span class="doc-brand__mark"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M3 9h18M7 21h10"/></svg></span>
+      <span class="doc-brand__name">POS <span style="color:var(--text-tertiary);font-weight:500">User Guide</span></span>
+      <span class="doc-brand__tag">Docs</span>
+    </a>
+    <div class="doc-topbar__spacer"></div>
+    <button class="doc-searchbtn" data-open-search aria-label="Search">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <span class="label">Search the guide…</span>
+      <kbd>Ctrl K</kbd>
+    </button>
+    <button class="doc-iconbtn" id="docs-theme-btn" aria-label="Toggle dark mode">
+      <svg class="theme-moon" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg>
+      <svg class="theme-sun" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4 12H2M22 12h-2M5 5 4 4M20 20l-1-1M5 19l-1 1M20 4l-1 1"/></svg>
+    </button>
+  </header>
+
+  <div class="doc-search" id="docs-search" role="dialog" aria-label="Search">
+    <div class="doc-search__backdrop"></div>
+    <div class="doc-search__panel">
+      <div class="doc-search__input">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="docs-search-input" type="text" placeholder="Search for a feature…" autocomplete="off" />
+      </div>
+      <div class="doc-search__results" id="docs-search-results"></div>
+    </div>
+  </div>
+
+  <div class="doc-scrim" id="docs-scrim"></div>
+
+  <div class="doc-layout">
+    <aside class="doc-sidebar scroll-y"><nav id="docs-sidebar-nav"></nav></aside>
+
+    <main class="doc-main">
+      <nav class="doc-breadcrumb" id="docs-breadcrumbs"></nav>
+
+      <article class="doc-article">
+        <h1>Accounting</h1>
+        <p class="lead">Your POS keeps a proper set of books for you — quietly, in the background. Every sale, refund, purchase and payment is turned into the correct accounting entry automatically, so you can read a Profit &amp; Loss or a Balance Sheet without ever touching a ledger. This page explains, in plain English, what each part of the <strong>Accounting</strong> menu is for.</p>
+
+        <div class="glance">
+          <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m9 12 2 2 4-4"/></svg><div><b>Who uses it</b><span>The owner, a manager, or your accountant/bookkeeper.</span></div></div>
+          <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg><div><b>How much setup</b><span>Almost none — it works out of the box. Enter opening balances once and you're done.</span></div></div>
+          <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9v11h14V9"/></svg><div><b>Where to find it</b><span>Under <strong>Accounting</strong> in the sidebar; the statements live under <strong>Reports</strong>.</span></div></div>
+        </div>
+
+        <h2 id="overview">Overview</h2>
+        <p>Traditionally, someone had to sit down after every sale and hand-write it into an accounts book — "cash went up, sales income went up, tax collected went up." For a busy shop that's impossible. So the POS does it for you. The moment you complete a sale, take a payment, receive stock or record an expense, the system writes the matching bookkeeping entry behind the scenes.</p>
+        <p>You mostly just <em>read the results</em>. The <strong>Accounting</strong> menu holds five things, and the finished reports (the statements) sit under <strong>Reports</strong>:</p>
+        <ul>
+          <li><strong>Chart of accounts</strong> — the master list of "buckets" your money is sorted into.</li>
+          <li><strong>Business mappings</strong> — the rules that say which bucket each automatic entry uses.</li>
+          <li><strong>Fiscal periods</strong> — your accounting calendar (months and years) that you can lock when finished.</li>
+          <li><strong>Opening balances</strong> — the starting figures you enter once when you begin.</li>
+          <li><strong>Journal (day book)</strong> — the full diary of every entry, plus a place to post manual ones.</li>
+          <li><strong>Financial statements</strong> — Trial Balance, Profit &amp; Loss, Balance Sheet and Cash Flow, built automatically.</li>
+        </ul>
+
+        <div class="callout callout--success">
+          <span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8 12 2.5 2.5L16 9"/></svg></span>
+          <div class="callout__body">
+            <div class="callout__title">You don't need to be an accountant.</div>
+            <p>The defaults are set up correctly for a normal retail shop. If you never open this menu, your books are still being kept. Come here to <em>read</em> your financial reports, enter your day-one balances, or make a correction your accountant asks for.</p>
+          </div>
+        </div>
+
+        <figure class="shot">
+          <div class="shot__frame">
+            <div class="shot__bar"><i></i><i></i><i></i></div>
+            <img src="/assets/documentation/images/accounting-overview.png" alt="The Accounting menu showing the chart of accounts, journal and financial reports" />
+          </div>
+          <figcaption>Your sales, purchases and payments post to the books automatically — ready to read as reports.</figcaption>
+        </figure>
+
+        <h2 id="why">Why it's useful</h2>
+        <ul>
+          <li><strong>No manual bookkeeping.</strong> Sales, refunds, purchases, payments and stock changes all post themselves.</li>
+          <li><strong>Real financial reports, instantly.</strong> See your profit, what you own and owe, and where cash went — any time, with no data entry.</li>
+          <li><strong>Your accountant will thank you.</strong> Hand them a Trial Balance, P&amp;L and Balance Sheet that already balance.</li>
+          <li><strong>Your history is protected.</strong> Lock a month or close a year and past figures can't be quietly changed.</li>
+        </ul>
+
+        <h2 id="chart-of-accounts">Chart of accounts</h2>
+        <p>The <strong>chart of accounts</strong> is simply the master list of "buckets" you sort your money into — like labelled folders in a filing cabinet. Every rupee (or dollar, or pound) that moves gets filed into one of these buckets.</p>
+        <p>Every account belongs to one of five types, and that's all the theory you need:</p>
+        <div class="doc-tablewrap">
+          <table>
+            <thead><tr><th>Type</th><th>Plain meaning</th><th>Examples</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Assets</strong></td><td>What you <em>own</em></td><td>Cash in hand, bank, stock, equipment</td></tr>
+              <tr><td><strong>Liabilities</strong></td><td>What you <em>owe</em></td><td>Supplier dues, loans, tax payable</td></tr>
+              <tr><td><strong>Equity</strong></td><td>The owner's share</td><td>Owner's capital, retained profit</td></tr>
+              <tr><td><strong>Income</strong></td><td>Money coming <em>in</em></td><td>Sales, interest earned</td></tr>
+              <tr><td><strong>Expenses</strong></td><td>Money going <em>out</em></td><td>Rent, salaries, electricity</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <figure class="shot">
+          <div class="shot__frame">
+            <div class="shot__bar"><i></i><i></i><i></i></div>
+            <img src="/assets/documentation/images/accounting-chart-of-accounts.png" alt="The Chart of accounts screen listing accounts grouped by type" />
+          </div>
+          <figcaption>The chart of accounts — every account sorted into one of the five types.</figcaption>
+        </figure>
+
+        <p>The list comes ready-made with a full standard set of accounts, so you rarely need to touch it. You <em>can</em> add your own accounts, organise them into groups, deactivate ones you don't use, or rename them — and every other screen (reports, journal, opening balances) updates to match, because they all read from this one list.</p>
+
+        <h2 id="business-mappings">Business mappings</h2>
+        <p><strong>Business mappings</strong> answer one question: <em>"when something happens in the shop, which account bucket should it post to?"</em> They are the auto-pilot settings that let the POS keep your books without you lifting a finger.</p>
+        <p>You set the rule once and the system repeats it forever. For example:</p>
+        <div class="doc-tablewrap">
+          <table>
+            <thead><tr><th>When this happens…</th><th>…post it to this bucket</th></tr></thead>
+            <tbody>
+              <tr><td>A sale is made</td><td>Sales revenue</td></tr>
+              <tr><td>A sale is returned</td><td>Sales returns</td></tr>
+              <tr><td>Tax charged to a customer</td><td>Tax collected (output)</td></tr>
+              <tr><td>You receive stock</td><td>Inventory</td></tr>
+              <tr><td>A customer buys on credit</td><td>Accounts receivable</td></tr>
+              <tr><td>The cash drawer counts short</td><td>Cash shortage</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout callout--info">
+          <span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg></span>
+          <div class="callout__body">
+            <div class="callout__title">Leave these alone unless asked.</div>
+            <p>As the screen itself says: <em>"The defaults suit most stores — change one only if your bookkeeper asks."</em> For almost everyone, mappings are correct out of the box and never need touching.</p>
+          </div>
+        </div>
+
+        <h2 id="fiscal-periods">Fiscal periods</h2>
+        <p><strong>Fiscal periods</strong> are your accounting calendar. They chop time into fixed blocks so you can measure how you did in each one and then "seal" it once it's finished.</p>
+        <ul>
+          <li>A <strong>fiscal year</strong> is your business's accounting year (12 months). It doesn't have to be January–December — in India it's usually 1 April → 31 March.</li>
+          <li>A <strong>fiscal period</strong> is usually each <strong>month</strong> inside that year.</li>
+        </ul>
+        <p>Every entry automatically lands in the period that matches its date, so "July's Profit &amp; Loss" just means "everything filed in July." The important extra power is locking:</p>
+        <div class="doc-tablewrap">
+          <table>
+            <thead><tr><th>Action</th><th>What it does</th><th>Why</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Lock a period</strong></td><td>Freezes a month so no new entries can be dated in it</td><td>Once you've reported July's numbers, they shouldn't change</td></tr>
+              <tr><td><strong>Unlock a period</strong></td><td>Temporarily reopens it</td><td>Only to fix a genuine mistake, then lock again</td></tr>
+              <tr><td><strong>Close a year</strong></td><td>Permanently seals the year and rolls its profit into equity (Retained Earnings)</td><td>Ends the year cleanly and starts the next one fresh</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>If you ever try to record something dated inside a locked period, the POS stops you with <em>"That date falls in a locked accounting period."</em> — protecting your finished reports and tax filings.</p>
+
+        <h2 id="opening-balances">Opening balances</h2>
+        <p>Your business didn't start the day you installed the POS. You already had cash in the drawer, money in the bank, stock on the shelves, customers who owe you and suppliers you owe. <strong>Opening balances</strong> are where you type those starting amounts in, once, so day one reflects reality instead of zero.</p>
+        <p>Each row on the page is one account. You type a positive amount and the system files it on the correct side for you — that's what the small <strong>Dr</strong> (debit) or <strong>Cr</strong> (credit) tag next to each row means. Assets and expenses are debit-side (<strong>Dr</strong>); liabilities, equity and income are credit-side (<strong>Cr</strong>). Any difference is absorbed into an "Opening Balance Equity" account automatically, and the total will read <strong>Balanced</strong> when you've entered a complete set.</p>
+        <div class="callout callout--warning">
+          <span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 2.5 20h19z"/><path d="M12 10v4M12 17h.01"/></svg></span>
+          <div class="callout__body">
+            <div class="callout__title">Enter opening balances first — before your first sale.</div>
+            <p>This is a one-time setup screen. The moment any real transaction is recorded (a sale, purchase, payment, etc.), the page <strong>locks itself</strong> — the boxes are disabled and the save button disappears — so your starting point can't be changed underneath figures that already build on it. If you need to correct a balance after that, post an adjusting entry in the <strong>Journal</strong> instead, exactly as the on-screen notice suggests.</p>
+          </div>
+        </div>
+
+        <h2 id="journal">The journal (day book)</h2>
+        <p>The <strong>Journal</strong> is the complete diary of your books — every single accounting entry the system has made, newest first. Each entry shows its date, a description (like "Sale #1043" or "Payment to ABC Suppliers"), and the debit/credit lines that make it up. It's where your accountant looks to see exactly how anything was recorded.</p>
+        <p>You can also post a <strong>manual journal entry</strong> here for the rare things the POS can't know about on its own — a bank charge, depreciation, an owner's contribution, or a correction. And any entry can be <strong>reversed</strong> (the system posts an equal-and-opposite entry) so you never delete history — you cancel it out cleanly, the way real bookkeeping works.</p>
+
+        <h3 id="posting-safety">Automatic posting safety</h3>
+        <p>Automatic entries from sales, returns, voids, purchases, purchase returns, expenses, stock adjustments and shift variances carry their source document identity. If the same posting is requested again, Hyper POS recognizes the existing source entry instead of doubling the ledger.</p>
+        <p>If a required business-account mapping is missing or posting otherwise fails, the failure is recorded for investigation rather than creating a half-balanced journal. Correct the mapping and use the supported repost/recovery workflow; repeated recovery remains protected against duplicates.</p>
+        <p>Version 1.1.1 also keeps more complex money movements separate and balanced:</p>
+        <ul>
+          <li><strong>Customer overpayments</strong> clear only the real receivable; the surplus is posted to customer advances/store credit until the customer spends it.</li>
+          <li><strong>Store-credit sales</strong> reduce that advance balance, while cash, card or other tenders post only their own share of a split payment.</li>
+          <li><strong>Supplier overpayments</strong> clear the payable first and record the surplus as a supplier advance.</li>
+          <li><strong>Cash drawer movements</strong> post once and avoid duplicating money already accounted for by their linked sale, expense or payment.</li>
+          <li><strong>Delayed recovery</strong> uses the original transaction-time payments and balances instead of pulling later settlements into an older sale.</li>
+        </ul>
+
+        <h2 id="statements">Financial statements</h2>
+        <p>These are the finished reports, built automatically by adding up everything in your books. You'll find them under <strong>Reports</strong>, and every one can be exported to CSV/Excel.</p>
+        <div class="doc-tablewrap">
+          <table>
+            <thead><tr><th>Statement</th><th>Answers the question…</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Trial Balance</strong></td><td>"Do my books balance?" A list of every account's total, with debits equalling credits.</td></tr>
+              <tr><td><strong>General Ledger</strong></td><td>"Show me every movement in one account." The full history for a single bucket.</td></tr>
+              <tr><td><strong>Profit &amp; Loss</strong></td><td>"Did I make money over this period?" Income minus expenses.</td></tr>
+              <tr><td><strong>Balance Sheet</strong></td><td>"What do I own and owe right now?" Assets, liabilities and equity at a point in time.</td></tr>
+              <tr><td><strong>Cash Flow</strong></td><td>"Where did my cash actually go?" Money in and out over a period.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="steps">Getting started, step by step</h2>
+        <ol class="steps">
+          <li>
+            <span class="step-title">Check your chart of accounts (optional)</span>
+            <p>Open <strong>Accounting → Chart of accounts</strong>. The standard set is already there. Add or rename accounts only if you have a specific reason — most shops leave it as-is.</p>
+          </li>
+          <li>
+            <span class="step-title">Enter your opening balances — before selling</span>
+            <p>Go to <strong>Accounting → Opening balances</strong> and type your day-one figures (cash, bank, stock, who owes you, who you owe). Do this <em>first</em>, because the page locks once real transactions begin.</p>
+          </li>
+          <li>
+            <span class="step-title">Just run your shop</span>
+            <p>Sell, refund, buy stock, take payments and record expenses as normal. Every one posts to the books automatically — there's nothing extra to do.</p>
+          </li>
+          <li>
+            <span class="step-title">Read your reports whenever you like</span>
+            <p>Under <strong>Reports</strong>, open the Profit &amp; Loss, Balance Sheet, Trial Balance or Cash Flow. Pick a date range and export if you need to send it on.</p>
+          </li>
+          <li>
+            <span class="step-title">Lock periods as they finish</span>
+            <p>At the end of each month (once you've reviewed it), lock the period in <strong>Fiscal periods</strong>. At year-end, close the year to roll profit into equity and start fresh.</p>
+          </li>
+        </ol>
+
+        <h2 id="tips">Tips &amp; best practices</h2>
+        <div class="callout callout--tip">
+          <span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.2 1 2.5h6c0-1.3.3-1.8 1-2.5A6 6 0 0 0 12 3z"/></svg></span>
+          <div class="callout__body">
+            <ul>
+              <li><strong>Opening balances go in on day one.</strong> It's the single most important accounting step — and the only one with a deadline.</li>
+              <li><strong>Trust the defaults.</strong> Don't change business mappings or add accounts unless your accountant specifically asks.</li>
+              <li><strong>Lock each month after you review it.</strong> It keeps your reported history honest and stops accidental edits.</li>
+              <li><strong>Correct with a reversal, never a delete.</strong> Post an adjusting or reversing journal entry so the trail stays intact.</li>
+              <li><strong>Share reports straight from Reports.</strong> The P&amp;L, Balance Sheet and Trial Balance export to Excel for your accountant.</li>
+            </ul>
+          </div>
+        </div>
+
+        <h2 id="warnings">Notes &amp; warnings</h2>
+        <div class="callout callout--warning">
+          <span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 2.5 20h19z"/><path d="M12 10v4M12 17h.01"/></svg></span>
+          <div class="callout__body">
+            <p><strong>Opening balances lock permanently once real transactions exist.</strong> Get them in before your first sale. Afterwards, corrections must be done as journal entries.</p>
+            <p><strong>Locking a period blocks new entries dated inside it.</strong> If you need to post a genuine correction into a locked month, unlock it, post, then lock it again — and never unlock a month that belongs to a closed year.</p>
+          </div>
+        </div>
+
+        <div class="callout callout--danger">
+          <span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2h8l6 6v8l-6 6H8l-6-6V8z"/><path d="M12 8v5M12 16h.01"/></svg></span>
+          <div class="callout__body">
+            <p><strong>This is basic business accounting, not a replacement for professional advice.</strong> The POS keeps accurate books and produces standard statements, but it doesn't file your taxes or know your local rules. For year-end accounts, tax returns and compliance, work with a qualified accountant.</p>
+          </div>
+        </div>
+
+        <hr />
+        <p style="color:var(--text-tertiary);font-size:14px">Related: <a href="/documentation/reports.html">Reports</a> · <a href="/documentation/taxes.html">Taxes</a> · <a href="/documentation/shifts.html">Shifts &amp; cash drawer</a> · <a href="/documentation/glossary.html">Glossary</a></p>
+
+        <nav class="doc-pager" id="docs-pager"></nav>
+      </article>
+    </main>
+
+    <aside class="doc-toc scroll-y"><nav id="docs-toc"></nav></aside>
+  </div>
+
+  <script src="/documentation/assets/nav.js?v=22"></script>
+  <script src="/documentation/assets/docs.js?v=20"></script>
+</body>
+</html>

@@ -1,0 +1,130 @@
+<?php
+
+namespace App\Actions\Shifts;
+
+use App\Exceptions\ShiftAlreadyOpen;
+use App\Exceptions\TerminalShiftOpen;
+use App\Models\Shift;
+use App\Models\Store;
+use App\Models\User;
+use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\DB;
+
+/**
+ * Open a shift for the given cashier on the given store.
+ *
+ * A user can own only one open shift across the installation, and a
+ * terminal can belong to only one open shift. The user-row lock below is
+ * the race-proof backstop for simultaneous requests targeting different
+ * stores or terminals.
+ *
+ * Hooks:
+ *   - action `shift.before_open` → ($data, $user, $store)
+ *   - action `shift.after_open`  → ($shift)
+ */
+class OpenShift
+{
+    /**
+     * @param array<string, mixed> $data {
+     *   opening_cash: numeric-string|float,
+     *   notes?: ?string,
+     *   terminal_id?: ?int,
+     *   opening_denominations?: array<string, int>|null,
+     * }
+     */
+    public function __invoke(array $data, User $user, Store $store): Shift
+    {
+        do_action('shift.before_open', $data, $user, $store);
+
+        $terminalId = isset($data['terminal_id']) && $data['terminal_id'] !== ''
+            ? (int) $data['terminal_id']
+            : null;
+
+        return DB::transaction(function () use ($data, $user, $store, $terminalId) {
+            // Serialize every open attempt for this user. Locking only an
+            // existing shift row is insufficient when two requests both see
+            // no row and then insert against different terminals.
+            User::query()->whereKey($user->id)->lockForUpdate()->firstOrFail();
+
+            // One user = one open shift, even across stores. A person cannot
+            // operate two cash counters simultaneously.
+            $existing = Shift::query()
+                ->where('user_id', $user->id)
+                ->where('status', Shift::STATUS_OPEN)
+                ->lockForUpdate()
+                ->first();
+
+            if ($existing) {
+                throw new ShiftAlreadyOpen($existing);
+            }
+
+            // One open shift per terminal (Slice B). A second cashier
+            // can't run a parallel drawer on the same physical till —
+            // they take over via handover (close + reopen).
+            if ($terminalId) {
+                $terminalShift = Shift::query()
+                    ->where('terminal_id', $terminalId)
+                    ->where('status', Shift::STATUS_OPEN)
+                    ->lockForUpdate()
+                    ->first();
+
+                if ($terminalShift) {
+                    throw new TerminalShiftOpen($terminalShift);
+                }
+            }
+
+            $shift = new Shift();
+            $shift->fill([
+                'store_id'              => (int) $store->id,
+                'terminal_id'           => $terminalId,
+                'user_id'               => (int) $user->id,
+                'opened_at'             => now(),
+                'opening_cash'          => $this->fmt((string) ($data['opening_cash'] ?? '0')),
+                'opening_denominations' => $data['opening_denominations'] ?? null,
+                'notes'                 => $data['notes'] ?? null,
+            ]);
+            $shift->forceFill([
+                'status' => Shift::STATUS_OPEN,
+                // Mirrors terminal_id WHILE open (NULLed on close). The UNIQUE
+                // index on it is the race-proof backstop for one-open-per-terminal
+                // the app-level check above can't guarantee (can't lock a
+                // not-yet-existing row).
+                'active_terminal_id' => $terminalId,
+            ]);
+
+            try {
+                $shift->save();
+            } catch (QueryException $e) {
+                // The unique index fired: another request opened this terminal's
+                // shift between our check and our insert. Surface the same
+                // friendly error the app-level check would have.
+                if ($terminalId && $this->isDuplicateKey($e)) {
+                    $winner = Shift::query()
+                        ->where('active_terminal_id', $terminalId)
+                        ->where('status', Shift::STATUS_OPEN)
+                        ->first();
+                    throw new TerminalShiftOpen($winner ?? $shift);
+                }
+                throw $e;
+            }
+
+            do_action('shift.after_open', $shift);
+
+            return $shift->fresh();
+        });
+    }
+
+    private function fmt(string $v): string
+    {
+        return \App\Support\Money::normalize($v);
+    }
+
+    /** True when the query error is a unique/integrity violation (SQLSTATE 23xxx
+     *  — MySQL 1062, SQLite 19). */
+    private function isDuplicateKey(QueryException $e): bool
+    {
+        return ($e->getCode() === '23000')
+            || str_starts_with((string) $e->getCode(), '23')
+            || str_contains(strtolower($e->getMessage()), 'unique');
+    }
+}

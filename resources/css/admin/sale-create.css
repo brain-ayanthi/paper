@@ -1,0 +1,12 @@
+/* ============================================================
+   Back-office sale form (/admin/sales/create).
+
+   Reuses the purchase editor's `.pur-*` line-table styles; only the
+   differences live here.
+   ============================================================ */
+
+/* Quantity holds more than the purchase editor's whole-unit counts — a
+   weighed line can read `1.355` — and the number spinner eats ~20px of
+   the box on top of that. Without a floor the auto-laid-out column
+   collapses to about 60px and clips the value. */
+.sale-lines .pur-line-qty input { min-inline-size: 92px; }

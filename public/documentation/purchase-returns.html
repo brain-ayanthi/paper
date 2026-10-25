@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Purchase returns · POS User Guide</title>
+  <meta name="description" content="Send goods back to a supplier when they're wrong, damaged or expired. A purchase return reduces your stock and reduces what you owe (a debit note)." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+  <link rel="stylesheet" href="/documentation/assets/docs.css?v=20" />
+  <script>
+    (function () { try { var t = localStorage.getItem("docs-theme"); if (!t) t = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"; document.documentElement.setAttribute("data-theme", t); } catch (e) {} })();
+  </script>
+</head>
+<body data-nav="purchase-returns">
+  <div class="doc-progress"><div class="doc-progress__bar" id="docs-progress-bar"></div></div>
+
+  <header class="doc-topbar">
+    <button class="doc-iconbtn doc-menubtn" id="docs-menu-btn" aria-label="Open menu"></button>
+    <a class="doc-brand" href="/documentation/index.html">
+      <span class="doc-brand__mark"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M3 9h18M7 21h10"/></svg></span>
+      <span class="doc-brand__name">POS <span style="color:var(--text-tertiary);font-weight:500">User Guide</span></span>
+      <span class="doc-brand__tag">Docs</span>
+    </a>
+    <div class="doc-topbar__spacer"></div>
+    <button class="doc-searchbtn" data-open-search aria-label="Search">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <span class="label">Search the guide…</span>
+      <kbd>Ctrl K</kbd>
+    </button>
+    <button class="doc-iconbtn" id="docs-theme-btn" aria-label="Toggle dark mode">
+      <svg class="theme-moon" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg>
+      <svg class="theme-sun" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4 12H2M22 12h-2M5 5 4 4M20 20l-1-1M5 19l-1 1M20 4l-1 1"/></svg>
+    </button>
+  </header>
+
+  <div class="doc-search" id="docs-search" role="dialog" aria-label="Search">
+    <div class="doc-search__backdrop"></div>
+    <div class="doc-search__panel">
+      <div class="doc-search__input">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="docs-search-input" type="text" placeholder="Search for a feature…" autocomplete="off" />
+      </div>
+      <div class="doc-search__results" id="docs-search-results"></div>
+    </div>
+  </div>
+
+  <div class="doc-scrim" id="docs-scrim"></div>
+
+  <div class="doc-layout">
+    <aside class="doc-sidebar scroll-y"><nav id="docs-sidebar-nav"></nav></aside>
+
+    <main class="doc-main">
+      <nav class="doc-breadcrumb" id="docs-breadcrumbs"></nav>
+
+      <article class="doc-article">
+        <h1>Purchase returns</h1>
+        <p class="lead">A purchase return is how you send goods back to a supplier — because they sent the wrong item, the goods were damaged, or stock has expired. It takes those items out of your stock and reduces the amount you owe the supplier.</p>
+
+        <div class="glance">
+          <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m9 12 2 2 4-4"/></svg><div><b>Who uses it</b><span>Owners and staff handling stock disputes.</span></div></div>
+          <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg><div><b>How long it takes</b><span>A minute or two per return.</span></div></div>
+          <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9v11h14V9"/></svg><div><b>Where to find it</b><span>Open <strong>Purchase &amp; Suppliers → Purchase returns</strong>, or start one from a purchase.</span></div></div>
+        </div>
+
+        <h2 id="overview">Overview</h2>
+        <p>A purchase return is the mirror image of receiving a purchase. Where receiving <em>adds</em> stock and <em>increases</em> what you owe, a return <em>removes</em> the goods from stock and <em>reduces</em> what you owe. Because it lowers your bill, this kind of document is often called a <strong>debit note</strong> — you're effectively telling the supplier "you owe me less now."</p>
+        <p>You usually start a return from the original purchase, so the app knows exactly which items and prices to reverse.</p>
+
+        <figure class="shot">
+          <div class="shot__frame">
+            <div class="shot__bar"><i></i><i></i><i></i></div>
+            <img src="/assets/documentation/images/purchase-return.png" alt="The purchase return form showing the lines being sent back and a reason" />
+          </div>
+          <figcaption>A purchase return: choose the lines to send back, the quantity, and the reason.</figcaption>
+        </figure>
+
+        <h2 id="why">Why it's useful</h2>
+        <ul>
+          <li><strong>Your stock stays correct.</strong> Items you've sent back leave your stock automatically, so you never count goods you no longer hold.</li>
+          <li><strong>Your supplier balance stays correct.</strong> The value of the returned goods comes off what you owe — no manual adjustment needed.</li>
+          <li><strong>You keep a record.</strong> Every return is saved with its reason, so disputes and credit notes are easy to trace later.</li>
+          <li><strong>It handles the awkward cases.</strong> Wrong, damaged or expired stock all have a clean, paper-trailed way out.</li>
+        </ul>
+
+        <h2 id="steps">How to return goods, step by step</h2>
+        <ol class="steps">
+          <li>
+            <span class="step-title">Open the original purchase</span>
+            <p>Go to <a href="/documentation/purchases.html">Purchases</a> and open the purchase the goods came in on. (You can also open the supplier and find it there.)</p>
+          </li>
+          <li>
+            <span class="step-title">Start a return</span>
+            <p>Choose <strong>Create return</strong>. The lines from that purchase appear, ready for you to pick from.</p>
+          </li>
+          <li>
+            <span class="step-title">Choose what's going back</span>
+            <p>Tick the lines you're returning and set the <strong>quantity</strong> for each. You don't have to return a whole line — return only the faulty units if you like.</p>
+          </li>
+          <li>
+            <span class="step-title">Give a reason</span>
+            <p>Pick a reason — wrong product, damaged, expired, and so on. A reason is required, because it's what makes the return easy to understand later.</p>
+          </li>
+          <li>
+            <span class="step-title">Choose how the value comes back</span>
+            <p>Decide whether the supplier reduces your balance (a credit — the most common choice) or actually pays you cash back. Pick whichever matches your arrangement.</p>
+          </li>
+          <li>
+            <span class="step-title">Confirm</span>
+            <p>Save the return. The goods leave your stock, your supplier balance drops by the returned value, and the return is recorded with its own number.</p>
+          </li>
+        </ol>
+
+        <div class="callout callout--success">
+          <span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8 12 2.5 2.5L16 9"/></svg></span>
+          <div class="callout__body">
+            <div class="callout__title">Returning a whole delivery</div>
+            <p>If a complete delivery was wrong, there's a shortcut to return every line at full quantity in one go, rather than ticking each line by hand.</p>
+          </div>
+        </div>
+
+        <h2 id="tips">Tips &amp; best practices</h2>
+        <div class="callout callout--tip">
+          <span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.2 1 2.5h6c0-1.3.3-1.8 1-2.5A6 6 0 0 0 12 3z"/></svg></span>
+          <div class="callout__body">
+            <ul>
+              <li><strong>Always pick the matching purchase.</strong> Starting the return from the original purchase keeps the quantities and costs accurate.</li>
+              <li><strong>Choose the right value option.</strong> If the supplier simply knocks it off your next bill, that's a credit; only pick cash back if they actually hand money over.</li>
+              <li><strong>Use clear reasons.</strong> "Expired" or "Damaged in transit" makes future reconciliation and supplier conversations much easier.</li>
+            </ul>
+          </div>
+        </div>
+
+        <h2 id="warnings">Notes &amp; warnings</h2>
+        <div class="callout callout--warning">
+          <span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 2.5 20h19z"/><path d="M12 10v4M12 17h.01"/></svg></span>
+          <div class="callout__body">
+            <p><strong>A return reduces your stock.</strong> Only return units you're physically sending back, so the count on the shelf matches the count in the system.</p>
+            <p><strong>A return is the right tool for undoing a received purchase.</strong> If you booked in goods you shouldn't have, return them rather than trying to delete the purchase.</p>
+          </div>
+        </div>
+
+        <hr />
+        <p style="color:var(--text-tertiary);font-size:14px">Related: <a href="/documentation/purchases.html">Purchases</a> · <a href="/documentation/suppliers.html">Suppliers</a> · <a href="/documentation/supplier-payments.html">Supplier payments</a></p>
+
+        <nav class="doc-pager" id="docs-pager"></nav>
+      </article>
+    </main>
+
+    <aside class="doc-toc scroll-y"><nav id="docs-toc"></nav></aside>
+  </div>
+
+  <script src="/documentation/assets/nav.js?v=22"></script>
+  <script src="/documentation/assets/docs.js?v=20"></script>
+</body>
+</html>

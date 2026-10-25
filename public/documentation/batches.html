@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Batches &amp; expiry · POS User Guide</title>
+  <meta name="description" content="Track stock in batches with manufacture and expiry dates, sell the soonest-to-expire stock first, pick a batch at checkout, and block the sale of expired stock." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+  <link rel="stylesheet" href="/documentation/assets/docs.css?v=20" />
+  <script>
+    (function () { try { var t = localStorage.getItem("docs-theme"); if (!t) t = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"; document.documentElement.setAttribute("data-theme", t); } catch (e) {} })();
+  </script>
+</head>
+<body data-nav="batches">
+  <div class="doc-progress"><div class="doc-progress__bar" id="docs-progress-bar"></div></div>
+
+  <header class="doc-topbar">
+    <button class="doc-iconbtn doc-menubtn" id="docs-menu-btn" aria-label="Open menu"></button>
+    <a class="doc-brand" href="/documentation/index.html">
+      <span class="doc-brand__mark"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M3 9h18M7 21h10"/></svg></span>
+      <span class="doc-brand__name">POS <span style="color:var(--text-tertiary);font-weight:500">User Guide</span></span>
+      <span class="doc-brand__tag">Docs</span>
+    </a>
+    <div class="doc-topbar__spacer"></div>
+    <button class="doc-searchbtn" data-open-search aria-label="Search">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <span class="label">Search the guide…</span>
+      <kbd>Ctrl K</kbd>
+    </button>
+    <button class="doc-iconbtn" id="docs-theme-btn" aria-label="Toggle dark mode">
+      <svg class="theme-moon" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg>
+      <svg class="theme-sun" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4 12H2M22 12h-2M5 5 4 4M20 20l-1-1M5 19l-1 1M20 4l-1 1"/></svg>
+    </button>
+  </header>
+
+  <div class="doc-search" id="docs-search" role="dialog" aria-label="Search">
+    <div class="doc-search__backdrop"></div>
+    <div class="doc-search__panel">
+      <div class="doc-search__input">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="docs-search-input" type="text" placeholder="Search for a feature…" autocomplete="off" />
+      </div>
+      <div class="doc-search__results" id="docs-search-results"></div>
+    </div>
+  </div>
+
+  <div class="doc-scrim" id="docs-scrim"></div>
+
+  <div class="doc-layout">
+    <aside class="doc-sidebar scroll-y"><nav id="docs-sidebar-nav"></nav></aside>
+
+    <main class="doc-main">
+      <nav class="doc-breadcrumb" id="docs-breadcrumbs"></nav>
+
+      <article class="doc-article">
+        <h1>Batches &amp; expiry</h1>
+        <p class="lead">Some products — medicines, food, cosmetics — come in batches that expire. POS can track stock <strong>by batch</strong>, with a manufacture date and an expiry date for each one, so you always sell the oldest stock first and never accidentally sell something that's out of date.</p>
+
+        <div class="glance">
+          <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m9 12 2 2 4-4"/></svg><div><b>Best for</b><span>Pharmacies, supermarkets, food shops.</span></div></div>
+          <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg><div><b>Turn on per product</b><span>Via the product's Inventory tab.</span></div></div>
+          <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9v11h14V9"/></svg><div><b>Where to find it</b><span>Open <strong>Inventory → Batches &amp; expiry</strong>.</span></div></div>
+        </div>
+
+        <h2 id="overview">Overview</h2>
+        <p>A <strong>batch</strong> (sometimes called a lot) is a quantity of the same product that was made together and shares an expiry date. When a product has batch tracking turned on, POS doesn't just count "20 boxes" — it knows you have, say, 12 from one batch that expires in March and 8 from another that expires in August.</p>
+        <p>You switch batch tracking on per product (it's a toggle on the product's <a href="/documentation/products.html">Inventory tab</a>, and it's on automatically for pharmacy products). After that, every delivery you receive asks for the batch number and dates, and the system takes care of the rest.</p>
+
+        <figure class="shot">
+          <div class="shot__frame">
+            <div class="shot__bar"><i></i><i></i><i></i></div>
+            <img src="/assets/documentation/images/batches-list.png" alt="The Batches and expiry screen with Live, Soon and Expired tabs" />
+          </div>
+          <figcaption>The Batches &amp; expiry list, with tabs that group stock by how close it is to its expiry date.</figcaption>
+        </figure>
+
+        <h2 id="tabs">The Live, Soon and Expired tabs</h2>
+        <p>The Batches &amp; expiry screen sorts your batches into tabs so you can act on the urgent ones first:</p>
+        <div class="doc-tablewrap">
+          <table>
+            <thead><tr><th>Tab</th><th>What's in it</th></tr></thead>
+            <tbody>
+              <tr><td><span class="badge">Live</span></td><td>Batches with plenty of time left before they expire.</td></tr>
+              <tr><td><span class="badge">Soon</span></td><td>Batches expiring within your warning window — sell or move these first.</td></tr>
+              <tr><td><span class="badge">Expired</span></td><td>Batches that are past their expiry date and should be pulled from sale.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Each row also shows the product's <a href="/documentation/shelf-locations.html">shelf location</a> at that store, which turns an expiry check into a walk list: filter to <span class="badge">Soon</span>, sort by location, and pull the short-dated stock in one lap of the shop rather than criss-crossing the aisles.</p>
+        <p>You can export the list to CSV or Excel from this screen for stocktakes or supplier returns — the location comes out in the export too.</p>
+
+        <h2 id="why">Why it's useful</h2>
+        <ul>
+          <li><strong>Nothing goes to waste unnoticed.</strong> The Soon tab flags stock before it expires, giving you time to sell, discount or move it.</li>
+          <li><strong>The right stock sells first.</strong> Checkout always suggests the soonest-to-expire batch, so older stock clears before newer stock.</li>
+          <li><strong>You stay compliant.</strong> For pharmacies and food shops, selling expired stock can be illegal — POS can block it for you.</li>
+          <li><strong>Every batch keeps its own price and cost.</strong> If the same product arrives at a different price next month, that's recorded against the new batch.</li>
+        </ul>
+
+        <h2 id="batch-pricing">Give each batch its own selling price and MRP</h2>
+        <p>Open <strong>Settings → Pricing</strong> and choose <strong>Batch-wise pricing</strong> when the same product can arrive at different costs or retail prices. Each batch then keeps its own <strong>cost</strong>, <strong>selling price</strong> and <strong>MRP</strong>. Selecting another batch at the till changes the line price and recalculates discount, tax and totals from that batch's selling price.</p>
+        <figure class="shot">
+          <div class="shot__frame">
+            <div class="shot__bar"><i></i><i></i><i></i></div>
+            <img src="/assets/documentation/images/settings-batch-pricing.png" alt="Pricing settings with Batch-wise pricing selected and its initialization guidance" />
+          </div>
+          <figcaption>Product-based pricing remains the default; switch modes only when you want prices to vary by batch.</figcaption>
+        </figure>
+        <ul>
+          <li><strong>Existing installations are not repriced by the update.</strong> Product-based pricing stays active until an authorized user changes it.</li>
+          <li><strong>The first switch is safe for existing stock.</strong> Missing batch values are initialized from the current effective product, variant or store price and supported cost fallback; valid batch values are preserved.</li>
+          <li><strong>Switching back does not erase history.</strong> Product-based pricing becomes authoritative again, while saved batch prices remain available if batch-wise pricing is enabled later.</li>
+          <li><strong>MRP cannot be below selling price.</strong> Purchases and stock adjustments validate the values before creating or updating stock.</li>
+        </ul>
+
+        <h2 id="fefo">The right batch is picked for you</h2>
+        <p>You never have to work out which box to sell from. POS follows <strong>FEFO</strong> — "first expiry, first out" — so the batch with the <em>soonest</em> expiry date goes out first, even if it arrived later than another. For stock with no expiry date, it falls back to the oldest batch you received. Either way: freshest shelves, least waste, nothing for the cashier to remember.</p>
+        <p>Better still, the choice is made <strong>automatically</strong>. Scan a batch-tracked product and it drops straight into the cart with the earliest eligible batch that can cover the requested quantity already attached — it never silently combines batches or oversells a smaller lot. The batch is shown on the cart line, and a <strong>change</strong> control sits next to it if you need a different one.</p>
+        <p>This applies everywhere a sale can happen: the till, a <a href="/documentation/sales-history.html#new-sale">back-office sale</a>, a <a href="/documentation/kiosk.html">kiosk order</a> paid at the counter, and sales that were rung up <a href="/documentation/offline.html">offline</a> and synced later. Whatever the route, batch counts and your overall stock figure always agree.</p>
+
+        <h2 id="steps">Selling a batched product at the counter</h2>
+        <ol class="steps">
+          <li>
+            <span class="step-title">Add the product as usual</span>
+            <p>Scan or tap the product on the <a href="/documentation/cashier.html">POS screen</a>. It goes into the cart immediately, with the soonest-to-expire batch already chosen and shown on the line.</p>
+          </li>
+          <li>
+            <span class="step-title">Change the batch only if you need to</span>
+            <p>Click <strong>change</strong> on that cart line to open the batch picker — for example when the customer asks for a specific lot, or you're deliberately clearing one. Choosing another batch swaps it in place and keeps the quantity you'd already entered.</p>
+          </li>
+          <li>
+            <span class="step-title">If nothing can be sold, you're told why</span>
+            <p>When every batch is empty or expired, the picker opens and explains the problem instead of silently adding the line.</p>
+          </li>
+          <li>
+            <span class="step-title">Finish the sale</span>
+            <p>Take payment as normal. POS reduces the count of the exact batch you sold, so the next sale sees the right remaining quantities.</p>
+          </li>
+        </ol>
+        <p>Prefer the old behaviour, where the cashier confirms every batch by hand? Turn <strong>Pick the batch automatically at checkout</strong> off under <strong>Settings → Cashier (POS)</strong> and the picker opens on every scan again.</p>
+
+        <h2 id="block">Blocking the sale of expired stock</h2>
+        <p>In Settings you can turn on an option that <strong>stops expired batches being sold</strong>. With it on, the checkout batch picker dims and disables any expired batch, so a cashier can't pick it by accident. If a genuine exception is needed, a manager with the special "sell expired" permission can override on a case-by-case basis — and that override is recorded. See <a href="/documentation/settings.html">Settings</a> to switch this on.</p>
+
+        <div class="callout callout--success">
+          <span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8 12 2.5 2.5L16 9"/></svg></span>
+          <div class="callout__body">
+            <div class="callout__title">It all happens at receiving</div>
+            <p>Once batch tracking is on, the only thing you do differently is enter a batch number and expiry date when a delivery arrives. Everything after that — picking, warnings, blocking — is automatic.</p>
+          </div>
+        </div>
+
+        <h3 id="deleting">Deleting a batch</h3>
+        <p>Sometimes a batch is no longer needed — one you created by mistake, or one that's fully sold or expired and cleared off the shelf. From the <strong>Batches &amp; expiry</strong> list you can tidy it away using the <strong>Archive</strong> action on that batch's row.</p>
+        <p>Archiving is safe and reversible. The batch is simply hidden from this list and from the checkout batch pickers — its full history stays intact on every sale, purchase and ledger entry that ever used it. Archived batches move to an <strong>Archived</strong> tab, where you can <strong>Restore</strong> them at any time; receiving the same batch number again also brings it straight back.</p>
+
+        <div class="callout callout--warning">
+          <span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 2.5 20h19z"/><path d="M12 10v4M12 17h.01"/></svg></span>
+          <div class="callout__body">
+            <p><strong>You can only archive an empty batch.</strong> The <strong>Archive</strong> action appears only once a batch's quantity has reached zero — archiving a batch that still holds stock would strand that stock with no batch behind it. If a batch still has units left, adjust them out first (that leaves a proper record), then archive the now-empty batch.</p>
+          </div>
+        </div>
+
+        <h2 id="tips">Tips &amp; best practices</h2>
+        <div class="callout callout--tip">
+          <span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.2 1 2.5h6c0-1.3.3-1.8 1-2.5A6 6 0 0 0 12 3z"/></svg></span>
+          <div class="callout__body">
+            <ul>
+              <li><strong>Enter expiry dates carefully when receiving.</strong> The dates you type are what drives the Soon/Expired tabs and the block — a wrong date undermines all of it.</li>
+              <li><strong>Check the Soon tab weekly.</strong> Catching items a few weeks early gives you room to discount and sell through.</li>
+              <li><strong>Trust the suggested batch.</strong> Unless a customer asks otherwise, taking the highlighted batch keeps your stock rotating correctly.</li>
+              <li><strong>Turn on the expired-sale block</strong> if you handle medicines or food — it removes the risk of human error entirely.</li>
+            </ul>
+          </div>
+        </div>
+
+        <h2 id="warnings">Notes &amp; warnings</h2>
+        <div class="callout callout--warning">
+          <span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 2.5 20h19z"/><path d="M12 10v4M12 17h.01"/></svg></span>
+          <div class="callout__body">
+            <p><strong>Turn batch tracking on before you receive stock.</strong> Stock received while tracking was off won't be split into batches — only deliveries taken in with tracking on get batch and expiry information.</p>
+            <p><strong>An expired batch still counts as stock</strong> until you remove it. Pull it physically and adjust it out so your counts match the shelf.</p>
+          </div>
+        </div>
+
+        <hr />
+        <p style="color:var(--text-tertiary);font-size:14px">Related: <a href="/documentation/products.html">Products</a> · <a href="/documentation/settings.html">Settings</a> · <a href="/documentation/inventory.html">Stock overview</a> · <a href="/documentation/adjustments.html">Stock adjustments</a> · <a href="/documentation/shelf-locations.html">Shelf locations</a></p>
+
+        <nav class="doc-pager" id="docs-pager"></nav>
+      </article>
+    </main>
+
+    <aside class="doc-toc scroll-y"><nav id="docs-toc"></nav></aside>
+  </div>
+
+  <script src="/documentation/assets/nav.js?v=22"></script>
+  <script src="/documentation/assets/docs.js?v=20"></script>
+</body>
+</html>

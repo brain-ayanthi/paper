@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Self-ordering kiosk · POS User Guide</title>
+  <meta name="description" content="Turn a spare tablet or touch monitor into a customer-operated ordering station. Shoppers browse, scan and build their own basket, then either pay at the kiosk or take a pickup number to the counter." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+  <link rel="stylesheet" href="/documentation/assets/docs.css?v=20" />
+  <script>
+    (function () { try { var t = localStorage.getItem("docs-theme"); if (!t) t = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"; document.documentElement.setAttribute("data-theme", t); } catch (e) {} })();
+  </script>
+</head>
+<body data-nav="kiosk">
+  <div class="doc-progress"><div class="doc-progress__bar" id="docs-progress-bar"></div></div>
+
+  <header class="doc-topbar">
+    <button class="doc-iconbtn doc-menubtn" id="docs-menu-btn" aria-label="Open menu"></button>
+    <a class="doc-brand" href="/documentation/index.html">
+      <span class="doc-brand__mark"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M3 9h18M7 21h10"/></svg></span>
+      <span class="doc-brand__name">POS <span style="color:var(--text-tertiary);font-weight:500">User Guide</span></span>
+      <span class="doc-brand__tag">Docs</span>
+    </a>
+    <div class="doc-topbar__spacer"></div>
+    <button class="doc-searchbtn" data-open-search aria-label="Search">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <span class="label">Search the guide…</span>
+      <kbd>Ctrl K</kbd>
+    </button>
+    <button class="doc-iconbtn" id="docs-theme-btn" aria-label="Toggle dark mode">
+      <svg class="theme-moon" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg>
+      <svg class="theme-sun" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4 12H2M22 12h-2M5 5 4 4M20 20l-1-1M5 19l-1 1M20 4l-1 1"/></svg>
+    </button>
+  </header>
+
+  <div class="doc-search" id="docs-search" role="dialog" aria-label="Search">
+    <div class="doc-search__backdrop"></div>
+    <div class="doc-search__panel">
+      <div class="doc-search__input">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="docs-search-input" type="text" placeholder="Search for a feature…" autocomplete="off" />
+      </div>
+      <div class="doc-search__results" id="docs-search-results"></div>
+    </div>
+  </div>
+
+  <div class="doc-scrim" id="docs-scrim"></div>
+
+  <div class="doc-layout">
+    <aside class="doc-sidebar scroll-y"><nav id="docs-sidebar-nav"></nav></aside>
+
+    <main class="doc-main">
+      <nav class="doc-breadcrumb" id="docs-breadcrumbs"></nav>
+
+      <article class="doc-article">
+        <h1>Self-ordering kiosk</h1>
+        <p class="lead">A spare tablet or touch monitor, stood on the shop floor, that lets customers serve themselves. They browse or scan their own items, build a basket, and then either <strong>pay right at the kiosk</strong> or take a <strong>pickup number to the counter</strong>. No cashier drives the screen — it's the queue-buster for busy hours.</p>
+
+        <div class="glance">
+          <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m9 12 2 2 4-4"/></svg><div><b>Who sets it up</b><span>A manager, once per station. Customers use it unassisted after that.</span></div></div>
+          <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg><div><b>What you need</b><span>A touchscreen tablet or monitor. A barcode scanner is optional.</span></div></div>
+          <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5a9 9 0 0 1 14 0M8.5 16a4.5 4.5 0 0 1 7 0"/><path d="M12 19.5h.01M3 3l18 18"/></svg><div><b>Internet needed?</b><span>Not for "pay at the counter" orders — those queue up and sync. Paying <em>at</em> the kiosk needs internet.</span></div></div>
+        </div>
+
+        <h2 id="overview">Overview</h2>
+        <p>The <strong>self-ordering kiosk</strong> is your <a href="/documentation/cashier.html">POS screen</a> with the cashier taken out and the customer put in. The shopper walks up to a locked-down screen showing a welcome message, taps to start, then adds items by tapping through the category grid, searching, or scanning barcodes themselves. When they're done they tap <strong>Checkout</strong>, and what happens next depends on how you configured the station.</p>
+        <p>Everything the kiosk sells goes through the exact same pricing, tax, stock and bookkeeping as a sale rung up by a cashier. It isn't a separate system — it's another way into the same till.</p>
+
+        <div class="callout callout--info">
+          <span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg></span>
+          <div class="callout__body">
+            <div class="callout__title">A kiosk is not a customer display.</div>
+            <p>The <a href="/documentation/customer-display.html">customer display</a> is a screen the shopper only <em>watches</em> while your cashier rings up the sale. A kiosk is a screen the shopper <em>uses</em>. They're separate features, and a station is one or the other.</p>
+          </div>
+        </div>
+
+        <figure class="shot">
+          <div class="shot__frame">
+            <div class="shot__bar"><i></i><i></i><i></i></div>
+            <img src="/assets/documentation/images/kiosk-attract.png" alt="The kiosk welcome screen showing the store name and a Touch anywhere to start button" />
+          </div>
+          <figcaption>Between customers the kiosk shows a welcome screen — your logo, your message, and any promo images you upload.</figcaption>
+        </figure>
+
+        <h2 id="why">Why it's useful</h2>
+        <ul>
+          <li><strong>Shorter queues.</strong> Two or three kiosks absorb the rush while your cashier handles the customers who need help.</li>
+          <li><strong>Fewer staff on the till.</strong> A single member of staff can supervise several kiosks and take counter payments.</li>
+          <li><strong>Nothing new to learn.</strong> Kiosk orders land in your normal sales, stock and reports — no separate books to reconcile.</li>
+          <li><strong>Keeps working when the internet drops.</strong> Pay-at-counter orders are saved on the device and reach the staff queue as soon as you're back online.</li>
+          <li><strong>Customers take their time.</strong> Browsing at their own pace tends to grow the basket.</li>
+        </ul>
+
+        <h2 id="modes">The two ways a kiosk can work</h2>
+        <p>Every kiosk is set to one of three behaviours. This is the single most important choice you'll make when setting one up.</p>
+        <div class="doc-tablewrap">
+          <table>
+            <thead><tr><th>Setting</th><th>What the customer does</th><th>Where the money is taken</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Order and pay at the kiosk</strong></td><td>Builds a basket, then scans a payment QR code with their phone and pays.</td><td>At the kiosk, before they leave it. The sale is finished on the spot.</td></tr>
+              <tr><td><strong>Order here, pay at the counter</strong></td><td>Builds a basket and gets a pickup number.</td><td>At your counter, by any method you normally take — cash, card, split.</td></tr>
+              <tr><td><strong>Let the customer choose</strong></td><td>At checkout the kiosk asks "How would you like to pay?" and offers both.</td><td>Whichever the customer picked.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>The kiosk never takes cash. There's no note or coin acceptor — payment at the machine is always cashless, by the customer's own phone.</p>
+
+        <h2 id="shopper">What the shopper sees</h2>
+        <p>The kiosk walks itself through a short loop, and always finds its way home. If a customer wanders off mid-basket, an inactivity timer clears the cart and returns to the welcome screen, so the next person never inherits someone else's items.</p>
+
+        <figure class="shot">
+          <div class="shot__frame">
+            <div class="shot__bar"><i></i><i></i><i></i></div>
+            <img src="/assets/documentation/images/kiosk-browse.png" alt="The kiosk browse screen with category chips, a search box and a grid of product tiles with photos and prices" />
+          </div>
+          <figcaption>Browsing: big product tiles, category chips across the top, and a search box that also accepts a barcode scan. The running total sits in the bar at the bottom.</figcaption>
+        </figure>
+
+        <ol class="steps">
+          <li>
+            <span class="step-title">Welcome</span>
+            <p>Your logo, a short message and — if you've uploaded them — promo images on a loop. Any touch starts an order.</p>
+          </li>
+          <li>
+            <span class="step-title">Browse &amp; add</span>
+            <p>Tap a category, search by name, or scan a barcode. Tapping a tile adds one. Products sold by weight ask for the weight; products with options (sizes, colours) open a chooser; combo products show what's inside before they're added.</p>
+          </li>
+          <li>
+            <span class="step-title">Review the basket</span>
+            <p>Change quantities, remove lines, and see the subtotal, tax and total. Every line spells out exactly what was chosen — the <strong>options picked</strong> for a product with variants (size, colour and so on), and the <strong>items inside a combo</strong> listed underneath it — so the customer can check their order properly before paying. Depending on your settings they may also leave a note, or give their name and phone.</p>
+          </li>
+          <li>
+            <span class="step-title">Pay, or place the order</span>
+            <p>Either a payment QR appears for them to scan with their phone, or the order is sent straight to your staff queue.</p>
+          </li>
+          <li>
+            <span class="step-title">Pickup number</span>
+            <p>Every order ends on a big <strong>pickup number</strong> — <code>K001</code>, <code>K002</code>, and so on. If they paid at the kiosk, a receipt QR is shown alongside it. After a few seconds the kiosk resets and is ready for the next customer.</p>
+          </li>
+        </ol>
+
+        <figure class="shot">
+          <div class="shot__frame">
+            <div class="shot__bar"><i></i><i></i><i></i></div>
+            <img src="/assets/documentation/images/kiosk-cart.png" alt="The kiosk basket screen listing two items with quantity steppers, an optional note field, the order total, and Pay now and Order and pay at counter buttons" />
+          </div>
+          <figcaption>The basket, on a kiosk set to let the customer choose: <strong>Pay now</strong> takes payment at the machine, <strong>Order &amp; pay at counter</strong> sends it to your staff queue.</figcaption>
+        </figure>
+
+        <div class="callout callout--info">
+          <span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg></span>
+          <div class="callout__body">
+            <p><strong>The pickup number is how staff find the order.</strong> It's printed on the kiosk screen at the end, shown in your staff queue, and searchable from <a href="/documentation/sales-history.html">Sales history</a> — so a customer who wanders to the till instead of the collection point can still be found.</p>
+          </div>
+        </div>
+
+        <h2 id="setup">Setting a kiosk up</h2>
+        <ol class="steps">
+          <li>
+            <span class="step-title">Add the station as a terminal</span>
+            <p>Go to <strong>Settings → Hardware</strong> and add a terminal for the kiosk, exactly as you would for a till. Give it a name you'll recognise, like <em>Kiosk 1</em>. See <a href="/documentation/stores.html">Stores &amp; terminals</a>.</p>
+          </li>
+          <li>
+            <span class="step-title">Turn it into a kiosk</span>
+            <p>Open that terminal and tick <strong>"Use this station as a self-ordering kiosk"</strong>, then tick <strong>Enable the kiosk</strong>. The kiosk options appear below.</p>
+          </li>
+          <li>
+            <span class="step-title">Choose what the customer can do</span>
+            <p>Pick <strong>pay at the kiosk</strong>, <strong>pay at the counter</strong>, or <strong>let the customer choose</strong>. If you allow paying at the kiosk, tick which of your <a href="/documentation/payments.html">payment gateways</a> it may charge through.</p>
+          </li>
+          <li>
+            <span class="step-title">Tune the details</span>
+            <p>Set your welcome and thank-you wording, how long before an abandoned basket is cleared, which categories the kiosk may sell, whether to ask for customer details, and — importantly — turn on <strong>"Require a supervisor to exit kiosk mode"</strong>.</p>
+          </li>
+          <li>
+            <span class="step-title">Open the kiosk on the device — one tap</span>
+            <p>Sign in on the kiosk device, go to <strong>Settings → Hardware</strong>, and press the <strong>Open kiosk</strong> button on that terminal's row. That single tap does both jobs at once: it binds this device to the terminal (so the kiosk picks up all the settings you just chose) and launches kiosk mode in a fresh tab. The same <strong>Open kiosk</strong> button also sits inside the terminal's own settings screen if you're already there. Put the browser into fullscreen (<kbd>F11</kbd>) and hand the screen over.</p>
+          </li>
+        </ol>
+
+        <figure class="shot">
+          <div class="shot__frame">
+            <div class="shot__bar"><i></i><i></i><i></i></div>
+            <img src="/assets/documentation/images/kiosk-launch.png" alt="The Open kiosk button on a terminal row under Settings, Hardware, which binds the device and launches kiosk mode in a single tap" />
+          </div>
+          <figcaption>The one-tap <strong>Open kiosk</strong> button on a kiosk-enabled terminal under <strong>Settings → Hardware</strong>. It binds this device to the terminal and opens the kiosk in one go — no separate "select terminal" step.</figcaption>
+        </figure>
+
+        <h2 id="settings">Every kiosk setting, explained</h2>
+        <div class="doc-tablewrap">
+          <table>
+            <thead><tr><th>Setting</th><th>What it does</th></tr></thead>
+            <tbody>
+              <tr><td><strong>What can the customer do?</strong></td><td>Pay at the kiosk, pay at the counter, or let them choose. See <a href="#modes">the two ways a kiosk can work</a>.</td></tr>
+              <tr><td><strong>Welcome / thank-you message</strong></td><td>Your own wording on the first and last screens. Leave blank to use the built-in, translated text.</td></tr>
+              <tr><td><strong>Reset after inactivity</strong></td><td>Seconds of no touching before the basket is discarded and the kiosk returns to the welcome screen (20–300). 60 is a sensible default.</td></tr>
+              <tr><td><strong>Show only these categories</strong></td><td>Tick the categories the kiosk may sell. Leave everything unticked to offer the whole catalog.</td></tr>
+              <tr><td><strong>Ask for customer details?</strong></td><td>Don't ask, ask optionally, or require a name/phone before ordering. Useful when you need to call people when their order is ready.</td></tr>
+              <tr><td><strong>Let the customer add a note</strong></td><td>Shows a free-text note box on the basket — "no plastic bag", and so on.</td></tr>
+              <tr><td><strong>Gateways for "Pay now"</strong></td><td>Which online payment gateways the QR may use. Tick nothing and the customer picks from all of them; tick exactly one and the chooser step is skipped.</td></tr>
+              <tr><td><strong>UPI "scan and pay" method</strong></td><td>Shows a plain UPI QR for the total. Read the <a href="#upi">warning below</a> before you switch this on.</td></tr>
+              <tr><td><strong>Pickup-code prefix</strong></td><td>Up to 4 letters/digits. Two kiosks in one store can issue <code>A001</code> and <code>B001</code> — the numbering itself is shared store-wide.</td></tr>
+              <tr><td><strong>Thank-you screen (seconds)</strong></td><td>How long the pickup number and receipt QR stay up before the kiosk resets (5–120).</td></tr>
+              <tr><td><strong>Play a sound when a product is added</strong></td><td>A short confirmation tone on each tap. Turn it off in quiet showrooms.</td></tr>
+              <tr><td><strong>Idle slideshow</strong></td><td>Promo images looped on the welcome screen, with the seconds each one is shown.</td></tr>
+              <tr><td><strong>Require a supervisor to exit kiosk mode</strong></td><td>Locks the kiosk. Leaving it needs a manager's email and password. <strong>Always turn this on.</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="counter">Handling kiosk orders at the counter</h2>
+        <p>Orders that are set to be paid at the counter appear under <strong>Sales → Kiosk orders</strong>. The page has two tabs:</p>
+        <ul>
+          <li><strong>Awaiting payment</strong> — orders placed at a kiosk that nobody has paid for yet.</li>
+          <li><strong>Awaiting collection</strong> — orders already paid <em>at</em> the kiosk, whose goods are still behind your counter.</li>
+        </ul>
+        <p>Press <strong>Take payment</strong> on a pending order and a full payment panel opens <em>on the same page</em> — you never navigate away, so you can clear the queue order after order. The panel now shows the <strong>complete order</strong> — every item the shopper chose, each with its quantity and price — not just a total, so you can check the basket against what's actually in front of you. From there you can drop a line or change a quantity if the customer changed their mind, then take the money by <strong>any</strong> method: cash with change, a card, a split across several tenders, or a QR the customer scans. Confirming turns it into an ordinary completed sale with stock, tax and receipt all handled.</p>
+        <p><strong>Reject</strong> cancels an abandoned order and puts its stock back. When a paid order is handed over, press <strong>Handed over</strong> to clear it from the collection tab — that moves no money, since the sale is already settled.</p>
+
+        <figure class="shot">
+          <div class="shot__frame">
+            <div class="shot__bar"><i></i><i></i><i></i></div>
+            <img src="/assets/documentation/images/kiosk-orders-queue.png" alt="The staff kiosk orders queue listing pending orders by pickup number with a Take payment button" />
+          </div>
+          <figcaption>The staff queue at <strong>Sales → Kiosk orders</strong>, listed by pickup number. Everything is exportable to CSV or Excel.</figcaption>
+        </figure>
+
+        <div class="callout callout--tip">
+          <span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.2 1 2.5h6c0-1.3.3-1.8 1-2.5A6 6 0 0 0 12 3z"/></svg></span>
+          <div class="callout__body">
+            <p>Placing an order <strong>holds the stock</strong> for it, so two customers can't order the last one of something. Rejecting an order releases that stock again — clear out abandoned orders at the end of the day.</p>
+          </div>
+        </div>
+
+        <h2 id="upi">Paying with a UPI QR — read this first</h2>
+        <p>If you use UPI, you can show a plain <strong>UPI QR code</strong> for the basket total instead of a payment gateway. It is convenient, and it is <em>not</em> a verified payment.</p>
+        <div class="callout callout--danger">
+          <span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 2.5 20h19z"/><path d="M12 10v4M12 17h.01"/></svg></span>
+          <div class="callout__body">
+            <div class="callout__title">A UPI QR tells the system nothing.</div>
+            <p>Nothing calls back to say the money arrived. So when the customer taps <em>"I've sent the payment"</em>, the kiosk does <strong>not</strong> complete the sale — it places an ordinary pay-at-counter order, marks it <em>"claimed, not verified"</em>, and shows the customer a pickup number. The goods stay behind your counter.</p>
+            <p>Your staff queue shows the <strong>expected amount</strong>, the <strong>time claimed</strong> and a short <strong>reference</strong> that appears in your UPI statement. Check your own UPI app for that transfer before you settle the order and hand anything over — the system deliberately asks you to confirm you've seen it.</p>
+            <p>If you want payment that's genuinely verified before the customer walks away, tick a <strong>payment gateway</strong> instead. Several gateways handle UPI and confirm it automatically.</p>
+          </div>
+        </div>
+
+        <h2 id="offline">When the internet drops</h2>
+        <p>Like the cashier screen, the kiosk keeps a copy of your product catalog on the device, so browsing and building a basket carry on as normal without a connection.</p>
+        <ul>
+          <li><strong>Pay-at-counter orders keep working.</strong> The order is saved on the device, the customer is told it's been saved, and it appears in your staff queue the moment the connection returns. It can't be placed twice, no matter how the sync goes.</li>
+          <li><strong>Paying at the kiosk does not.</strong> Payment gateways need the internet. A kiosk set to "pay at the kiosk" can't take money while offline.</li>
+        </ul>
+        <p>See <a href="/documentation/offline.html">Selling offline</a> for how the queue and sync log work.</p>
+
+        <h2 id="lockdown">Locking the kiosk down</h2>
+        <p>A kiosk sits unattended in front of the public, so treat it that way:</p>
+        <ul>
+          <li>There's no menu, no back office and no way to reach your admin screens from the kiosk.</li>
+          <li>It never shows your costs, margins, other customers, or any staff-only information.</li>
+          <li>To leave kiosk mode, staff either press the small close button in the corner or <strong>press and hold the store logo for three seconds</strong> — the hold works even when the device is locked into a fullscreen browser with no buttons of its own.</li>
+          <li>With <strong>"Require a supervisor to exit kiosk mode"</strong> turned on, either route then demands a manager's email and password.</li>
+        </ul>
+
+        <h2 id="tips">Tips &amp; best practices</h2>
+        <div class="callout callout--tip">
+          <span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.2 1 2.5h6c0-1.3.3-1.8 1-2.5A6 6 0 0 0 12 3z"/></svg></span>
+          <div class="callout__body">
+            <ul>
+              <li><strong>Add photos to your products.</strong> A grid of names is hard to shop; a grid of pictures sells itself.</li>
+              <li><strong>Start with pay-at-counter.</strong> It needs no gateway, works offline, and lets you learn how customers use the kiosk before you take money on it.</li>
+              <li><strong>Limit the categories.</strong> A kiosk offering 4,000 products is a worse experience than one offering the 200 people actually browse for.</li>
+              <li><strong>Use a distinct pickup prefix per kiosk.</strong> <code>A001</code> and <code>B001</code> make it obvious which machine an order came from.</li>
+              <li><strong>Turn the supervisor exit on before the kiosk faces the public.</strong> Without it, one tap on the close button drops a curious customer onto your cashier screen.</li>
+              <li><strong>Give it a stand and a wipe-clean screen.</strong> The kiosk is furniture as much as software.</li>
+            </ul>
+          </div>
+        </div>
+
+        <h2 id="warnings">Notes &amp; warnings</h2>
+        <div class="callout callout--warning">
+          <span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 2.5 20h19z"/><path d="M12 10v4M12 17h.01"/></svg></span>
+          <div class="callout__body">
+            <p><strong>Products with no price never appear on a kiosk.</strong> If a shopper can't be told what something costs, they can't buy it unattended. Those items still sell normally at the till.</p>
+            <p><strong>Prices are always worked out on the server.</strong> The kiosk only sends which products and how many — never the amounts. Tampering with the screen can't change what you charge.</p>
+            <p><strong>Expiry rules still apply.</strong> Batch-tracked items are picked earliest-expiry-first automatically, and expired batches are blocked exactly as they are for a cashier. The customer never picks a batch.</p>
+            <p><strong>The kiosk opens no cash drawer and belongs to no shift.</strong> If your store requires shifts to be open before selling, the staff account the kiosk is signed in as needs an open shift too.</p>
+          </div>
+        </div>
+
+        <hr />
+        <p style="color:var(--text-tertiary);font-size:14px">Related: <a href="/documentation/cashier.html">The POS screen</a> · <a href="/documentation/customer-display.html">Customer display</a> · <a href="/documentation/payments.html">Taking payments</a> · <a href="/documentation/offline.html">Selling offline</a> · <a href="/documentation/stores.html">Stores &amp; terminals</a></p>
+
+        <nav class="doc-pager" id="docs-pager"></nav>
+      </article>
+    </main>
+
+    <aside class="doc-toc scroll-y"><nav id="docs-toc"></nav></aside>
+  </div>
+
+  <script src="/documentation/assets/nav.js?v=22"></script>
+  <script src="/documentation/assets/docs.js?v=20"></script>
+</body>
+</html>

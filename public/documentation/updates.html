@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Updates &amp; license · POS User Guide</title>
+  <meta name="description" content="How the system tells you when a new version is available, how to install an update safely, and how to activate your license — online or offline." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+  <link rel="stylesheet" href="/documentation/assets/docs.css?v=20" />
+  <script>
+    (function () { try { var t = localStorage.getItem("docs-theme"); if (!t) t = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"; document.documentElement.setAttribute("data-theme", t); } catch (e) {} })();
+  </script>
+</head>
+<body data-nav="updates">
+  <div class="doc-progress"><div class="doc-progress__bar" id="docs-progress-bar"></div></div>
+
+  <header class="doc-topbar">
+    <button class="doc-iconbtn doc-menubtn" id="docs-menu-btn" aria-label="Open menu"></button>
+    <a class="doc-brand" href="/documentation/index.html">
+      <span class="doc-brand__mark"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M3 9h18M7 21h10"/></svg></span>
+      <span class="doc-brand__name">POS <span style="color:var(--text-tertiary);font-weight:500">User Guide</span></span>
+      <span class="doc-brand__tag">Docs</span>
+    </a>
+    <div class="doc-topbar__spacer"></div>
+    <button class="doc-searchbtn" data-open-search aria-label="Search">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <span class="label">Search the guide…</span>
+      <kbd>Ctrl K</kbd>
+    </button>
+    <button class="doc-iconbtn" id="docs-theme-btn" aria-label="Toggle dark mode">
+      <svg class="theme-moon" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg>
+      <svg class="theme-sun" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4 12H2M22 12h-2M5 5 4 4M20 20l-1-1M5 19l-1 1M20 4l-1 1"/></svg>
+    </button>
+  </header>
+
+  <div class="doc-search" id="docs-search" role="dialog" aria-label="Search">
+    <div class="doc-search__backdrop"></div>
+    <div class="doc-search__panel">
+      <div class="doc-search__input">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="docs-search-input" type="text" placeholder="Search for a feature…" autocomplete="off" />
+      </div>
+      <div class="doc-search__results" id="docs-search-results"></div>
+    </div>
+  </div>
+
+  <div class="doc-scrim" id="docs-scrim"></div>
+
+  <div class="doc-layout">
+    <aside class="doc-sidebar scroll-y"><nav id="docs-sidebar-nav"></nav></aside>
+
+    <main class="doc-main">
+      <nav class="doc-breadcrumb" id="docs-breadcrumbs"></nav>
+
+      <article class="doc-article">
+        <h1>Updates &amp; license</h1>
+        <p class="lead">From time to time we release a new version of the app with fixes and improvements. The system checks for these for you and lets you install them safely, with an automatic backup so an update can always be undone. This page also covers your <strong>license</strong> — the purchase code that activates your copy.</p>
+
+        <div class="glance">
+          <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m9 12 2 2 4-4"/></svg><div><b>Who uses it</b><span>The shop owner or administrator.</span></div></div>
+          <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg><div><b>How long it takes</b><span>Most updates install in a minute or two.</span></div></div>
+          <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9v11h14V9"/></svg><div><b>Where to find it</b><span>Open <strong>Settings → Updates</strong>.</span></div></div>
+        </div>
+
+        <h2 id="overview">Overview</h2>
+        <p>The app is yours — it runs on your own server with no monthly fees. Even so, we keep improving it, and you can choose to install those improvements when they're ready. The system quietly checks once a day whether a newer version exists. When one does, a small notice appears in the admin area: "An update is available."</p>
+        <p>Installing is a guided, one-click process. Crucially, the system takes a <strong>safety backup before it touches anything</strong>, so if an update ever runs into trouble it can roll your shop straight back to how it was — you're never left stranded on a broken version.</p>
+        <p>Separately, your copy is activated with a <strong>license</strong> — the purchase code you got when you bought the app. You enter it once during setup. The system re-checks it occasionally to confirm it's valid, but a failed check <em>never</em> locks you out of your own data.</p>
+
+        <figure class="shot">
+          <div class="shot__frame">
+            <div class="shot__bar"><i></i><i></i><i></i></div>
+            <img src="/assets/documentation/images/updates-check.png" alt="The Updates page showing the current version and an available update with release notes" />
+          </div>
+          <figcaption>The Updates page: your current version, the latest available version, and what's new in it.</figcaption>
+        </figure>
+
+        <h2 id="why">Why it's useful</h2>
+        <ul>
+          <li><strong>You stay current effortlessly.</strong> The system watches for new versions so you don't have to check a website.</li>
+          <li><strong>Updates are safe.</strong> A full backup is taken first, and the system can roll back automatically if anything goes wrong.</li>
+          <li><strong>You're in control.</strong> Nothing installs without you clicking — you can read what's changed and update when it suits you.</li>
+          <li><strong>Activation is one-and-done.</strong> Enter your purchase code once and you're set; there are no recurring fees.</li>
+          <li><strong>Your data is never held hostage.</strong> If a license check can't reach our server, the app keeps working as normal.</li>
+        </ul>
+
+        <h2 id="steps">How to install an update, step by step</h2>
+        <ol class="steps">
+          <li>
+            <span class="step-title">Open the Updates page</span>
+            <p>Go to <strong>Settings → Updates</strong>. It shows your current version and, if there's a newer one, a panel headed <strong>Update available</strong> with a short list of what's new.</p>
+          </li>
+          <li>
+            <span class="step-title">Read what's changed</span>
+            <p>Skim the highlights so you know what you're getting. You can click through to the full release notes if you'd like more detail.</p>
+          </li>
+          <li>
+            <span class="step-title">Click "Install update"</span>
+            <p>When you're ready, press <strong>Install update</strong>. The system first runs a few quick checks (enough disk space, your server meets the requirements) before going ahead.</p>
+          </li>
+          <li>
+            <span class="step-title">Let it take a safety backup</span>
+            <p>Before changing a single file, the system makes a complete backup of your shop. This is automatic and is what makes the whole process reversible.</p>
+          </li>
+          <li>
+            <span class="step-title">Watch the progress</span>
+            <p>A progress screen shows each step — backup, download, apply, finish — with a tick as each completes. The shop is briefly in "please wait" mode for other users. <strong>Don't close the tab</strong> until it's done.</p>
+          </li>
+          <li>
+            <span class="step-title">Done</span>
+            <p>When it finishes, you'll see "Update complete" and the new version number. That's it — you're up to date.</p>
+          </li>
+        </ol>
+
+        <div class="callout callout--success">
+          <span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8 12 2.5 2.5L16 9"/></svg></span>
+          <div class="callout__body">
+            <div class="callout__title">Updates can always be undone</div>
+            <p>Because a full backup is taken before anything changes, a failed update rolls your shop back to the previous version on its own. You can update with confidence.</p>
+          </div>
+        </div>
+
+        <h2 id="license">Your license &amp; activation</h2>
+        <p>Your <strong>license</strong> is what activates this copy of the app. You enter your purchase code (the one you received when you bought the app) once, and the system confirms it's valid. After that, there's nothing more to do — there are no subscriptions or recurring charges.</p>
+
+        <figure class="shot">
+          <div class="shot__frame">
+            <div class="shot__bar"><i></i><i></i><i></i></div>
+            <img src="/assets/documentation/images/license-activate.png" alt="The license activation screen with a field for the purchase code and an offline activation option" />
+          </div>
+          <figcaption>Activating your license: paste your purchase code, or use the offline option if your server can't reach the internet.</figcaption>
+        </figure>
+
+        <h3 id="online-activation">Online activation</h3>
+        <p>This is the normal way and the simplest. You paste your purchase code into the activation field and click <strong>Activate</strong>. The system checks it with us over the internet and, once confirmed, your copy is activated. This usually happens during first-time setup, but you can review your license any time from <strong>Settings → License</strong>.</p>
+
+        <h3 id="offline-activation">Offline activation</h3>
+        <p>If your server sits behind a firewall or has no internet access, you can still activate. Choose <strong>Activate offline</strong>: the screen gives you a way to obtain a small signed "activation file" from a self-service page, which you then paste back in. The app confirms it on its own, with no live connection needed.</p>
+
+        <h3 id="rechecks">Periodic re-checks</h3>
+        <p>Every so often (roughly once a month) the system quietly re-confirms your license in the background. This is just a routine check. Importantly, <strong>if a re-check can't reach our server, nothing stops</strong> — your shop keeps running exactly as before. At most you'll see a gentle banner suggesting you check your internet connection. We never lock your data behind a network call.</p>
+
+        <h2 id="archive-safety">Update package safety</h2>
+        <p>Before extraction, Hyper POS validates update archives and rejects unsafe entries such as path traversal, absolute paths or links that could write outside the intended installation area. If preflight rejects a package, obtain a fresh official package—do not manually bypass the safety check.</p>
+
+        <h2 id="tips">Tips &amp; best practices</h2>
+        <div class="callout callout--tip">
+          <span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.2 1 2.5h6c0-1.3.3-1.8 1-2.5A6 6 0 0 0 12 3z"/></svg></span>
+          <div class="callout__body">
+            <ul>
+              <li><strong>Update when the shop is quiet.</strong> An update pauses the app for a moment, so pick a closing-time or a lull rather than mid-rush.</li>
+              <li><strong>Read the highlights first.</strong> A quick glance tells you what's fixed or improved — and warns you of anything notable.</li>
+              <li><strong>Keep your own backups too.</strong> The update makes one automatically, but your regular downloaded backups are still your best safety net. See <a href="/documentation/backup.html">Backup &amp; restore</a>.</li>
+              <li><strong>Store your purchase code somewhere safe.</strong> You'll want it if you ever move to a new server and need to activate again.</li>
+            </ul>
+          </div>
+        </div>
+
+        <h2 id="warnings">Notes &amp; warnings</h2>
+        <div class="callout callout--warning">
+          <span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 2.5 20h19z"/><path d="M12 10v4M12 17h.01"/></svg></span>
+          <div class="callout__body">
+            <p><strong>Don't close the tab during an update.</strong> Let the progress screen run to the end. Closing it partway won't lose your data — the safety backup protects you — but it can leave the update half-finished and needing a retry.</p>
+            <p><strong>A license re-check warning is not an emergency.</strong> If you see a banner saying the license couldn't be verified, it usually just means your server briefly couldn't reach the internet. The app keeps working; check the connection when convenient.</p>
+          </div>
+        </div>
+        <div class="callout callout--danger">
+          <span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2h8l6 6v8l-6 6H8l-6-6V8z"/><path d="M12 8v5M12 16h.01"/></svg></span>
+          <div class="callout__body">
+            <p><strong>Always have a recent downloaded backup before a major upgrade.</strong> The automatic safety backup covers most cases, but for a big jump between versions, a copy you've saved off the server is your ultimate fallback. See <a href="/documentation/backup.html">Backup &amp; restore</a>.</p>
+          </div>
+        </div>
+
+        <hr />
+        <p style="color:var(--text-tertiary);font-size:14px">Related: <a href="/documentation/backup.html">Backup &amp; restore</a> · <a href="/documentation/settings.html">General settings</a></p>
+
+        <nav class="doc-pager" id="docs-pager"></nav>
+      </article>
+    </main>
+
+    <aside class="doc-toc scroll-y"><nav id="docs-toc"></nav></aside>
+  </div>
+
+  <script src="/documentation/assets/nav.js?v=22"></script>
+  <script src="/documentation/assets/docs.js?v=20"></script>
+</body>
+</html>

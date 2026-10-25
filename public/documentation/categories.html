@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Categories &amp; brands · POS User Guide</title>
+  <meta name="description" content="Group your products into categories and brands so they're easy to find and your reports tell you what's really selling. Reorder categories and build a simple tree." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+  <link rel="stylesheet" href="/documentation/assets/docs.css?v=20" />
+  <script>
+    (function () { try { var t = localStorage.getItem("docs-theme"); if (!t) t = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"; document.documentElement.setAttribute("data-theme", t); } catch (e) {} })();
+  </script>
+</head>
+<body data-nav="categories">
+  <div class="doc-progress"><div class="doc-progress__bar" id="docs-progress-bar"></div></div>
+
+  <header class="doc-topbar">
+    <button class="doc-iconbtn doc-menubtn" id="docs-menu-btn" aria-label="Open menu"></button>
+    <a class="doc-brand" href="/documentation/index.html">
+      <span class="doc-brand__mark"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M3 9h18M7 21h10"/></svg></span>
+      <span class="doc-brand__name">POS <span style="color:var(--text-tertiary);font-weight:500">User Guide</span></span>
+      <span class="doc-brand__tag">Docs</span>
+    </a>
+    <div class="doc-topbar__spacer"></div>
+    <button class="doc-searchbtn" data-open-search aria-label="Search">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <span class="label">Search the guide…</span>
+      <kbd>Ctrl K</kbd>
+    </button>
+    <button class="doc-iconbtn" id="docs-theme-btn" aria-label="Toggle dark mode">
+      <svg class="theme-moon" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg>
+      <svg class="theme-sun" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4 12H2M22 12h-2M5 5 4 4M20 20l-1-1M5 19l-1 1M20 4l-1 1"/></svg>
+    </button>
+  </header>
+
+  <div class="doc-search" id="docs-search" role="dialog" aria-label="Search">
+    <div class="doc-search__backdrop"></div>
+    <div class="doc-search__panel">
+      <div class="doc-search__input">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="docs-search-input" type="text" placeholder="Search for a feature…" autocomplete="off" />
+      </div>
+      <div class="doc-search__results" id="docs-search-results"></div>
+    </div>
+  </div>
+
+  <div class="doc-scrim" id="docs-scrim"></div>
+
+  <div class="doc-layout">
+    <aside class="doc-sidebar scroll-y"><nav id="docs-sidebar-nav"></nav></aside>
+
+    <main class="doc-main">
+      <nav class="doc-breadcrumb" id="docs-breadcrumbs"></nav>
+
+      <article class="doc-article">
+        <h1>Categories &amp; brands</h1>
+        <p class="lead">Categories and brands are the two simple ways to group your products. A <strong>category</strong> says what kind of thing it is (Drinks, Snacks, Painkillers). A <strong>brand</strong> says who makes it (Coca-Cola, Cadbury, Bayer). Good grouping makes products faster to find and your reports far more useful.</p>
+
+        <div class="glance">
+          <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m9 12 2 2 4-4"/></svg><div><b>Who uses it</b><span>Owners and managers tidying up the catalog.</span></div></div>
+          <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg><div><b>How long it takes</b><span>A few minutes to set up your main groups.</span></div></div>
+          <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9v11h14V9"/></svg><div><b>Where to find it</b><span><strong>Categories</strong> and <strong>Brands</strong> under Products in the sidebar.</span></div></div>
+        </div>
+
+        <h2 id="overview">Overview</h2>
+        <p>A <strong>category</strong> is a folder for similar products. Categories can sit inside each other to form a simple tree — for example <em>Beverages → Soft drinks → Cola</em> — so a big catalog stays organised. A <strong>brand</strong> is a flat label for the maker of a product; there's no tree, just a plain list. A product can belong to one category and one brand at the same time.</p>
+        <p>You manage them on two screens that work much like the product list: a table you can search, with an <strong>Add</strong> button, a row to click for editing, and an active/inactive switch on each row.</p>
+
+        <figure class="shot">
+          <div class="shot__frame">
+            <div class="shot__bar"><i></i><i></i><i></i></div>
+            <img src="/assets/documentation/images/categories-list.png" alt="The categories screen showing a tree of categories you can reorder" />
+          </div>
+          <figcaption>The categories screen — a tree you can expand, reorder and re-parent by dragging.</figcaption>
+        </figure>
+
+        <h2 id="why">Why it's useful</h2>
+        <ul>
+          <li><strong>Reports that mean something.</strong> Grouping lets you see sales <em>by category</em> and <em>by brand</em> — so you know whether it's the drinks or the snacks paying the rent.</li>
+          <li><strong>Faster to find items.</strong> Filtering the product list by a category or brand narrows thousands of items down to the handful you're after.</li>
+          <li><strong>A tidier till.</strong> Categories can group the product tiles on the touch screen, so staff find things quickly when there's no barcode.</li>
+          <li><strong>Less clutter as you grow.</strong> A small tree of categories keeps a big catalog manageable.</li>
+        </ul>
+
+        <h2 id="steps">Setting up categories, step by step</h2>
+        <ol class="steps">
+          <li>
+            <span class="step-title">Open Categories</span>
+            <p>Under <strong>Products</strong> in the sidebar, click <strong>Categories</strong>. You'll see your existing categories as a tree.</p>
+          </li>
+          <li>
+            <span class="step-title">Add a top-level category</span>
+            <p>Click <strong>Add category</strong>, type a name (for example <em>Beverages</em>) and save. A short web-friendly version of the name — its <strong>slug</strong> — is created for you; you can edit it if you like.</p>
+          </li>
+          <li>
+            <span class="step-title">Add sub-categories underneath</span>
+            <p>Add more categories and set their <strong>parent</strong> to an existing one to nest them — for example <em>Soft drinks</em> inside <em>Beverages</em>. You can go a few levels deep; keep it shallow so it stays easy to navigate.</p>
+          </li>
+          <li>
+            <span class="step-title">Reorder by dragging</span>
+            <p>Drag a category up or down to change the order it appears in. Drag it onto another category to move it inside that one. The new order is saved as you go.</p>
+          </li>
+          <li>
+            <span class="step-title">Assign products</span>
+            <p>Open a product (see <a href="/documentation/products.html">Products</a>) and pick its category. From then on the product is counted under that category everywhere — lists, filters and reports.</p>
+          </li>
+        </ol>
+
+        <h2 id="brands">Brands</h2>
+        <p>Brands are simpler. There's no tree — just a flat list of makers. Open <strong>Brands</strong> under Products, click <strong>Add brand</strong>, give it a name (and optionally a logo), and save. Then choose the brand on each product. Use brands when knowing the <em>manufacturer</em> matters for your reporting — common in pharmacies and electronics shops.</p>
+
+        <div class="callout callout--success">
+          <span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8 12 2.5 2.5L16 9"/></svg></span>
+          <div class="callout__body">
+            <div class="callout__title">Category or brand?</div>
+            <p>Ask "<em>what is it?</em>" for the <strong>category</strong> (Snacks, Antibiotics) and "<em>who made it?</em>" for the <strong>brand</strong> (Lay's, Pfizer). A product usually has both.</p>
+          </div>
+        </div>
+
+        <h2 id="import-export">Importing &amp; exporting in bulk</h2>
+        <p>If you're setting up a large catalog, you don't have to add categories one at a time. Use the <strong>Export</strong> button on the categories screen to download your whole list as a CSV or Excel spreadsheet, and the <strong>Import</strong> button to upload one. <strong>Brands</strong> have the very same buttons on their own screen.</p>
+
+        <h3 id="importing-categories">Importing categories</h3>
+        <p>Import walks you through it in a few short steps:</p>
+        <div class="doc-tablewrap">
+          <table>
+            <thead><tr><th>Step</th><th>What happens</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Upload</strong></td><td>Pick your CSV or Excel file. You can download a ready-made template first — it has the right columns (<strong>Name</strong>, <strong>Parent</strong>, <strong>Description</strong>, <strong>Color</strong>, <strong>Tax rule</strong>, <strong>Active</strong>) with a couple of example rows to copy.</td></tr>
+              <tr><td><strong>Match columns</strong></td><td>The system lines your spreadsheet's columns up with its own fields automatically, and shows you a preview of the first rows. Adjust any column that didn't match, or set it to be skipped.</td></tr>
+              <tr><td><strong>Import</strong></td><td>The file is read and each row saved. You get a summary counting how many categories were <strong>created</strong>, <strong>updated</strong> and <strong>skipped</strong>, with any rows that couldn't be imported listed underneath, each with its row number and the reason.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <figure class="shot">
+          <div class="shot__frame">
+            <div class="shot__bar"><i></i><i></i><i></i></div>
+            <img src="/assets/documentation/images/categories-import.png" alt="The category import wizard matching spreadsheet columns to category fields with a preview of the rows" />
+          </div>
+          <figcaption>The import wizard — match your columns, preview the rows, then import.</figcaption>
+        </figure>
+
+        <p>Categories are matched by their <strong>name</strong>, so importing the same file again updates your existing categories rather than creating duplicates — handy for a bulk tidy-up. A category's <strong>parent</strong> and its <strong>tax rule</strong> are matched by name too: just type the parent category's name and the tax rule's name in those columns. If a name you reference doesn't exist, that row is skipped and flagged so nothing is silently lost. The <strong>Color</strong> column must be one of the app's preset colours.</p>
+
+        <div class="callout callout--info">
+          <span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 16v-4M12 8h.01"/></svg></span>
+          <div class="callout__body">
+            <div class="callout__title">Parents can appear later in the file</div>
+            <p>You don't have to order your spreadsheet so that parents come before their children. Every category is created first, and the <strong>parent</strong> links are joined up in a second pass afterwards — so a child row can safely name a parent that's further down the same file. (A category can't be its own parent, and you can't create a loop; those rows are flagged.)</p>
+          </div>
+        </div>
+
+        <h3 id="importing-brands">Importing brands</h3>
+        <p><strong>Brands</strong> (see <a href="/documentation/categories.html#brands">Brands</a> above) have their own import that works exactly the same way — upload, match columns, import — matching existing brands by <strong>name</strong>. Because a spreadsheet can't hold a picture, brand <strong>logos</strong> are handled in two steps: put each logo's <em>filename</em> in the logo column of your file, then afterwards use the <strong>bulk logo upload</strong> screen to drop in the folder of image files. Each file is matched to the brand that named it — the same two-step approach used for product images.</p>
+
+        <h3 id="brand-logo-urls">Fetching brand logos from URLs</h3>
+        <p>The <strong>Brands → Bulk logos</strong> screen also has a <strong>Fetch from URLs</strong> tab. Paste rows copied from a spreadsheet—brand name and public image URL—or import the URL column with your brand sheet. Preview matches before fetching; brand names match case-insensitively but ambiguous names are never guessed.</p>
+        <ul>
+          <li>Use public HTTPS JPG, PNG or WebP images. Private-network, local, redirected-to-private, non-image and oversized responses are rejected.</li>
+          <li>One bad URL is reported without stopping valid rows in the same run.</li>
+          <li>Fetches run in manageable browser batches and can resume the remaining rows.</li>
+          <li>Replacing a managed logo removes the previous managed file without touching another brand.</li>
+        </ul>
+        <figure class="shot"><div class="shot__frame"><div class="shot__bar"><i></i><i></i><i></i></div><img src="/assets/documentation/images/brands-logo-urls.png" alt="Bulk brand logos URL tab showing matched brand names, image URLs and preview results" /></div><figcaption>Paste brand names and public image URLs, preview the matches, then fetch only the valid rows.</figcaption></figure>
+
+        <h2 id="tips">Tips &amp; best practices</h2>
+        <div class="callout callout--tip">
+          <span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.2 1 2.5h6c0-1.3.3-1.8 1-2.5A6 6 0 0 0 12 3z"/></svg></span>
+          <div class="callout__body">
+            <ul>
+              <li><strong>Keep the tree shallow.</strong> Two or three levels is plenty. Deep trees are slow to click through and hard to remember.</li>
+              <li><strong>Set up categories first.</strong> Decide your main groups before adding lots of products, so each product has a home from the start.</li>
+              <li><strong>Don't over-split.</strong> A category with only one product in it rarely earns its place.</li>
+              <li><strong>Use brands for reporting, not decoration.</strong> Only add brands you'll actually want to filter or report on.</li>
+            </ul>
+          </div>
+        </div>
+
+        <h2 id="warnings">Notes &amp; warnings</h2>
+        <div class="callout callout--warning">
+          <span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 2.5 20h19z"/><path d="M12 10v4M12 17h.01"/></svg></span>
+          <div class="callout__body">
+            <p><strong>Filtering by a category includes everything underneath it.</strong> Filter the product list by <em>Beverages</em> and you'll see drinks in all its sub-categories too. There's a "direct children only" option if you want just that one level.</p>
+            <p><strong>Moving a category moves its products' grouping.</strong> Re-parenting <em>Soft drinks</em> changes where those products roll up in your reports — useful, but worth knowing before you drag.</p>
+          </div>
+        </div>
+
+        <hr />
+        <p style="color:var(--text-tertiary);font-size:14px">Related: <a href="/documentation/products.html">Products</a> · <a href="/documentation/units.html">Units of measure</a> · <a href="/documentation/reports.html">Reports</a></p>
+
+        <nav class="doc-pager" id="docs-pager"></nav>
+      </article>
+    </main>
+
+    <aside class="doc-toc scroll-y"><nav id="docs-toc"></nav></aside>
+  </div>
+
+  <script src="/documentation/assets/nav.js?v=22"></script>
+  <script src="/documentation/assets/docs.js?v=20"></script>
+</body>
+</html>

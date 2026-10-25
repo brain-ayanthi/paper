@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Stores &amp; terminals · POS User Guide</title>
+  <meta name="description" content="One business can run several stores (locations), each with its own terminals (tills). Learn how to add a store, add a terminal, and how staff pick where they're working." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+  <link rel="stylesheet" href="/documentation/assets/docs.css?v=20" />
+  <script>
+    (function () { try { var t = localStorage.getItem("docs-theme"); if (!t) t = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"; document.documentElement.setAttribute("data-theme", t); } catch (e) {} })();
+  </script>
+</head>
+<body data-nav="stores">
+  <div class="doc-progress"><div class="doc-progress__bar" id="docs-progress-bar"></div></div>
+
+  <header class="doc-topbar">
+    <button class="doc-iconbtn doc-menubtn" id="docs-menu-btn" aria-label="Open menu"></button>
+    <a class="doc-brand" href="/documentation/index.html">
+      <span class="doc-brand__mark"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M3 9h18M7 21h10"/></svg></span>
+      <span class="doc-brand__name">POS <span style="color:var(--text-tertiary);font-weight:500">User Guide</span></span>
+      <span class="doc-brand__tag">Docs</span>
+    </a>
+    <div class="doc-topbar__spacer"></div>
+    <button class="doc-searchbtn" data-open-search aria-label="Search">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <span class="label">Search the guide…</span>
+      <kbd>Ctrl K</kbd>
+    </button>
+    <button class="doc-iconbtn" id="docs-theme-btn" aria-label="Toggle dark mode">
+      <svg class="theme-moon" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg>
+      <svg class="theme-sun" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4 12H2M22 12h-2M5 5 4 4M20 20l-1-1M5 19l-1 1M20 4l-1 1"/></svg>
+    </button>
+  </header>
+
+  <div class="doc-search" id="docs-search" role="dialog" aria-label="Search">
+    <div class="doc-search__backdrop"></div>
+    <div class="doc-search__panel">
+      <div class="doc-search__input">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="docs-search-input" type="text" placeholder="Search for a feature…" autocomplete="off" />
+      </div>
+      <div class="doc-search__results" id="docs-search-results"></div>
+    </div>
+  </div>
+
+  <div class="doc-scrim" id="docs-scrim"></div>
+
+  <div class="doc-layout">
+    <aside class="doc-sidebar scroll-y"><nav id="docs-sidebar-nav"></nav></aside>
+
+    <main class="doc-main">
+      <nav class="doc-breadcrumb" id="docs-breadcrumbs"></nav>
+
+      <article class="doc-article">
+        <h1>Stores &amp; terminals</h1>
+        <p class="lead">Your business can have one <strong>store</strong> or many. A store is a location — a shop, a branch, a warehouse. Inside each store are <strong>terminals</strong> — the individual tills or registers where staff actually ring up sales.</p>
+
+        <div class="glance">
+          <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m9 12 2 2 4-4"/></svg><div><b>Who uses it</b><span>The owner or manager setting up locations.</span></div></div>
+          <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg><div><b>How long it takes</b><span>A couple of minutes per store or terminal.</span></div></div>
+          <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9v11h14V9"/></svg><div><b>Where to find it</b><span>Click <strong>Stores</strong> or <strong>Terminals</strong> in the sidebar, under System Configuration.</span></div></div>
+        </div>
+
+        <h2 id="overview">Overview</h2>
+        <p>One install of the system serves <strong>one business</strong>. That business can have several stores — think of a chain with three branches, or a shop plus a stockroom. Your products and customers are <strong>shared</strong> across all stores, while stock levels, sales and shifts are kept <strong>per store</strong>, so each location's numbers stay separate and accurate.</p>
+        <p>A <strong>terminal</strong> is one workstation within a store — a tablet, laptop or desktop running the checkout. Terminals let receipts show which till served the customer ("Cashier 2") and let you see takings per register at the end of the day.</p>
+
+        <figure class="shot">
+          <div class="shot__frame">
+            <div class="shot__bar"><i></i><i></i><i></i></div>
+            <img src="/assets/documentation/images/stores-list.png" alt="The stores list showing each location with its city and currency" />
+          </div>
+          <figcaption>The stores list: each location your business runs.</figcaption>
+        </figure>
+
+        <h2 id="why">Why it's useful</h2>
+        <ul>
+          <li><strong>Run many branches from one place.</strong> Add as many stores as you have locations, all in a single system.</li>
+          <li><strong>Keep each location's figures clean.</strong> Stock and sales are tracked per store, so a sale in one branch doesn't muddle another's stock.</li>
+          <li><strong>Know which till did what.</strong> Terminals let you split takings and shift reports by register.</li>
+          <li><strong>Share what should be shared.</strong> Products and customers are common to all stores, so you set them up once.</li>
+        </ul>
+
+        <h2 id="steps">Adding a store, step by step</h2>
+        <ol class="steps">
+          <li>
+            <span class="step-title">Open Stores</span>
+            <p>Click <strong>Stores</strong> in the sidebar, then click <strong>Add store</strong>.</p>
+          </li>
+          <li>
+            <span class="step-title">Give it a name and code</span>
+            <p>Enter a name (like "Main Branch") and a short code (like <code>MAIN</code>). The code appears on receipts and sale numbers, so keep it short.</p>
+          </li>
+          <li>
+            <span class="step-title">Add the address</span>
+            <p>Enter the store's address. This prints on receipts for that location, so customers see the right branch.</p>
+          </li>
+          <li>
+            <span class="step-title">Choose its behaviour</span>
+            <p>Set options like whether the store uses shifts. You can also have the system create a first terminal automatically.</p>
+          </li>
+          <li>
+            <span class="step-title">Save</span>
+            <p>Click <strong>Save</strong>. The new store is ready, and you can now assign staff to it (see <a href="/documentation/users-roles.html">Users &amp; roles</a>).</p>
+          </li>
+        </ol>
+
+        <h2 id="terminals">Adding a terminal</h2>
+        <p>Terminals live inside a store. Open <strong>Terminals</strong> in the sidebar (or the <strong>Terminals</strong> tab on a store) and click <strong>Add terminal</strong>. Give it a name (like "Till 1") and a short code. A terminal belongs to one store and stays there — if you need to move one, you delete it and create a new one in the other store.</p>
+
+        <figure class="shot">
+          <div class="shot__frame">
+            <div class="shot__bar"><i></i><i></i><i></i></div>
+            <img src="/assets/documentation/images/terminals-list.png" alt="The terminals list showing tills belonging to a store" />
+          </div>
+          <figcaption>The terminals list: the individual tills within your stores.</figcaption>
+        </figure>
+
+        <h2 id="picking">How staff pick a store and terminal</h2>
+        <p>When someone logs in, the system works out which store they're working at:</p>
+        <ul>
+          <li>If they belong to <strong>one store</strong>, they go straight there.</li>
+          <li>If they belong to <strong>several stores</strong>, they pick one from a short list (or it remembers their usual choice).</li>
+          <li>They can switch stores any time using the <strong>store dropdown</strong> in the top bar.</li>
+        </ul>
+        <p>The first time someone opens the checkout on a particular device, if the store has more than one terminal, they choose which till that device is. The system remembers it, so the same workstation always opens to the same terminal.</p>
+
+        <h2 id="tips">Tips &amp; best practices</h2>
+        <div class="callout callout--tip">
+          <span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.2 1 2.5h6c0-1.3.3-1.8 1-2.5A6 6 0 0 0 12 3z"/></svg></span>
+          <div class="callout__body">
+            <ul>
+              <li><strong>Keep store codes short and clear.</strong> They show up on receipts and sale numbers, so <code>BR2</code> beats a long name.</li>
+              <li><strong>One terminal per physical till.</strong> Name them the way your staff already think of them ("Front desk", "Pharmacy counter").</li>
+              <li><strong>Move stock between stores properly.</strong> Don't just adjust numbers — use <a href="/documentation/transfers.html">Stock transfers</a> so both locations stay accurate.</li>
+              <li><strong>Set up hardware per terminal.</strong> Each till can have its own printer and drawer — see <a href="/documentation/hardware.html">Hardware &amp; printing</a>.</li>
+            </ul>
+          </div>
+        </div>
+
+        <h2 id="warnings">Notes &amp; warnings</h2>
+        <div class="callout callout--warning">
+          <span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 2.5 20h19z"/><path d="M12 10v4M12 17h.01"/></svg></span>
+          <div class="callout__body">
+            <p><strong>A terminal can't be moved to a different store.</strong> It's tied to the store it was created in. If you need it elsewhere, delete it and add a new one in that store.</p>
+            <p><strong>Deactivating a store keeps its history.</strong> No new sales can happen there, but past records stay put. Stores can only be fully removed once they have no open shifts or pending transfers.</p>
+          </div>
+        </div>
+        <div class="callout callout--danger">
+          <span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2h8l6 6v8l-6 6H8l-6-6V8z"/><path d="M12 8v5M12 16h.01"/></svg></span>
+          <div class="callout__body">
+            <p><strong>Currency, timezone and language are set once for the whole business</strong>, not per store. They live in <a href="/documentation/settings.html">General settings</a> and apply to every store alike.</p>
+          </div>
+        </div>
+
+        <hr />
+        <p style="color:var(--text-tertiary);font-size:14px">Related: <a href="/documentation/transfers.html">Stock transfers</a> · <a href="/documentation/hardware.html">Hardware &amp; printing</a> · <a href="/documentation/users-roles.html">Users &amp; roles</a> · <a href="/documentation/settings.html">General settings</a></p>
+
+        <nav class="doc-pager" id="docs-pager"></nav>
+      </article>
+    </main>
+
+    <aside class="doc-toc scroll-y"><nav id="docs-toc"></nav></aside>
+  </div>
+
+  <script src="/documentation/assets/nav.js?v=22"></script>
+  <script src="/documentation/assets/docs.js?v=20"></script>
+</body>
+</html>

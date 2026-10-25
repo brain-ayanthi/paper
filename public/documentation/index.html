@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Welcome · POS User Guide</title>
+  <meta name="description" content="The complete, plain-English guide to running your store with POS — selling, inventory, customers, reports and settings." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+  <link rel="stylesheet" href="/documentation/assets/docs.css?v=20" />
+  <script>
+    (function () { try { var t = localStorage.getItem("docs-theme"); if (!t) t = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"; document.documentElement.setAttribute("data-theme", t); } catch (e) {} })();
+  </script>
+</head>
+<body data-nav="home">
+  <!-- reading progress -->
+  <div class="doc-progress"><div class="doc-progress__bar" id="docs-progress-bar"></div></div>
+
+  <!-- topbar -->
+  <header class="doc-topbar">
+    <button class="doc-iconbtn doc-menubtn" id="docs-menu-btn" aria-label="Open menu"></button>
+    <a class="doc-brand" href="/documentation/index.html">
+      <span class="doc-brand__mark"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M3 9h18M7 21h10"/></svg></span>
+      <span class="doc-brand__name">POS <span style="color:var(--text-tertiary);font-weight:500">User Guide</span></span>
+      <span class="doc-brand__tag">Docs</span>
+    </a>
+    <div class="doc-topbar__spacer"></div>
+    <button class="doc-searchbtn" data-open-search aria-label="Search">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <span class="label">Search the guide…</span>
+      <kbd>Ctrl K</kbd>
+    </button>
+    <button class="doc-iconbtn" id="docs-theme-btn" aria-label="Toggle dark mode">
+      <svg class="theme-moon" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg>
+      <svg class="theme-sun" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4 12H2M22 12h-2M5 5 4 4M20 20l-1-1M5 19l-1 1M20 4l-1 1"/></svg>
+    </button>
+  </header>
+
+  <!-- search overlay -->
+  <div class="doc-search" id="docs-search" role="dialog" aria-label="Search">
+    <div class="doc-search__backdrop"></div>
+    <div class="doc-search__panel">
+      <div class="doc-search__input">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="docs-search-input" type="text" placeholder="Search for a feature, e.g. &ldquo;refund&rdquo; or &ldquo;barcode&rdquo;…" autocomplete="off" />
+      </div>
+      <div class="doc-search__results" id="docs-search-results"></div>
+    </div>
+  </div>
+
+  <div class="doc-scrim" id="docs-scrim"></div>
+
+  <!-- layout -->
+  <div class="doc-layout">
+    <aside class="doc-sidebar scroll-y"><nav id="docs-sidebar-nav"></nav></aside>
+
+    <main class="doc-main">
+      <nav class="doc-breadcrumb" id="docs-breadcrumbs"></nav>
+
+      <article class="doc-article" style="max-width:none">
+        <!-- HERO -->
+        <section class="doc-hero">
+          <div class="doc-hero__inner">
+            <span class="eyebrow">POS User Guide · Version 1.1.0</span>
+            <h1>Run your store with <span class="grad">confidence</span>.</h1>
+            <p>Friendly, plain-English guides for everything your Point of Sale can do — selling at the counter, managing stock and customers, reading reports and setting things up. No technical background needed.</p>
+            <button class="hero-search" data-open-search aria-label="Search the guide">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+              <span>Search the guide…</span>
+              <kbd>Ctrl K</kbd>
+            </button>
+            <div class="hero-cta">
+              <a class="btn btn--primary" href="/documentation/getting-started.html">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 16c-2 1-2 4-2 4s3 0 4-2"/><path d="M9 14c5-9 10-9 11-9s0 6-9 11"/><path d="M9 14l-3-1m5 5 1-3"/></svg>
+                Get started
+              </a>
+              <a class="btn" href="/documentation/cashier.html">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M3 9h18M7 21h10"/></svg>
+                Make your first sale
+              </a>
+            </div>
+            <div class="hero-stats">
+              <div class="hero-stat"><b>50+</b><span>step-by-step guides</span></div>
+              <div class="hero-stat"><b>11</b><span>feature areas</span></div>
+              <div class="hero-stat"><b>0</b><span>jargon required</span></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- WHAT'S NEW -->
+        <span class="eyebrow" style="margin-top:36px">New in version 1.1.1</span>
+        <h2 style="margin-top:6px">What's changed since your last update</h2>
+        <p class="lead" style="margin-bottom:18px">The headlines of this release, each linking to its full guide.</p>
+        <div class="feature-grid cols-3">
+          <a class="feature-card" href="/documentation/payments.html#store-credit">
+            <div class="feature-card__icon ic-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7h-9M14 4l-3 3 3 3M4 17h9M10 14l3 3-3 3"/></svg></div>
+            <h3>Store credit <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span></h3>
+            <p>Turn customer overpayments into reusable credit, then apply all or part of that balance at a future checkout.</p>
+          </a>
+          <a class="feature-card" href="/documentation/batches.html#batch-pricing">
+            <div class="feature-card__icon ic-cyan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 8V4h10v4"/><rect x="4" y="8" width="16" height="7" rx="1.5"/><path d="M7 15h10v5H7z"/></svg></div>
+            <h3>Batch-wise pricing <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span></h3>
+            <p>Keep a separate cost, selling price and MRP for each batch, with safe fallback prices for existing stock.</p>
+          </a>
+          <a class="feature-card" href="/documentation/inventory.html#batch-breakdown">
+            <div class="feature-card__icon ic-amber"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="6" width="19" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/><path d="M6 12h.01M18 12h.01"/></svg></div>
+            <h3>Batch-aware inventory <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span></h3>
+            <p>Carry batch prices through receiving, adjustments and transfers, then review each lot in Available Stock and exports.</p>
+          </a>
+          <a class="feature-card" href="/documentation/whatsapp.html">
+            <div class="feature-card__icon ic-rose"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h13a4 4 0 0 1 4 4v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M3 7V6a2 2 0 0 1 2-2h9M16 13h2"/></svg></div>
+            <h3>WhatsApp sharing <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span></h3>
+            <p>Share receipts, quotations, credit notes, statements and payment vouchers through Click-to-Chat or Meta Cloud API.</p>
+          </a>
+          <a class="feature-card" href="/documentation/payments.html#custom-methods">
+            <div class="feature-card__icon ic-blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8 8 0 1 0-.6 4"/><path d="M20 4v7h-7"/></svg></div>
+            <h3>Custom payment methods <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span></h3>
+            <p>Add offline tender types such as Mobile Money and require the cashier to record the customer's transaction reference.</p>
+          </a>
+          <a class="feature-card" href="/documentation/navigation.html#sidebar">
+            <div class="feature-card__icon ic-violet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5"/><path d="M4 19h16"/><path d="m8 15 3.5-4.5 3 2.5L20 7"/></svg></div>
+            <h3>Shorter navigation <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span></h3>
+            <p>Scan a cleaner sidebar while keeping every permitted destination available through grouped setup menus and Ctrl+K.</p>
+          </a>
+        </div>
+        <p style="color:var(--text-tertiary);font-size:14px;margin-top:12px">Also improved in this release: <a href="/documentation/accounting.html#posting-safety">accounting for overpayments, supplier advances and delayed posting</a>, safer batch selection and stock validation, clearer customer statements, stronger product-code and number-format validation, and safer spreadsheet exports.</p>
+
+        <!-- START HERE -->
+        <span class="eyebrow" style="margin-top:48px">Start here</span>
+        <h2 style="margin-top:6px">New to POS? Three steps to your first sale</h2>
+        <p class="lead" style="margin-bottom:18px">If you only read three pages, read these. They cover the everyday basics.</p>
+        <div class="start-grid">
+          <a class="start-card" href="/documentation/getting-started.html">
+            <span class="start-card__num">1</span>
+            <h3>Set up your store</h3>
+            <p>Log in, enter your company details and currency, and add a few products to sell.</p>
+            <span class="go">Getting started <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span>
+          </a>
+          <a class="start-card" href="/documentation/cashier.html">
+            <span class="start-card__num">2</span>
+            <h3>Ring up a sale</h3>
+            <p>Scan items into the basket, take cash or card, give change and print the receipt.</p>
+            <span class="go">The POS screen <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span>
+          </a>
+          <a class="start-card" href="/documentation/dashboard.html">
+            <span class="start-card__num">3</span>
+            <h3>See how you're doing</h3>
+            <p>Your dashboard shows today's sales and key numbers the moment you log in.</p>
+            <span class="go">Dashboard tour <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span>
+          </a>
+        </div>
+
+        <!-- EXPLORE BY AREA -->
+        <span class="eyebrow" style="margin-top:48px">Explore by area</span>
+        <h2 style="margin-top:6px">Everything POS can do</h2>
+        <p class="lead" style="margin-bottom:18px">Pick an area — each card opens a friendly, illustrated, step-by-step guide.</p>
+        <div class="feature-grid cols-3">
+          <a class="feature-card" href="/documentation/cashier.html">
+            <div class="feature-card__icon ic-orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M3 9h18M7 21h10"/></svg></div>
+            <h3>Sell at the counter <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span></h3>
+            <p>Scan items, take cash, card or QR, split payments, give change, refunds and offline selling.</p>
+          </a>
+          <a class="feature-card" href="/documentation/products.html">
+            <div class="feature-card__icon ic-blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 8 4.5v9L12 21l-8-4.5v-9z"/><path d="m4 7.5 8 4.5 8-4.5M12 12v9"/></svg></div>
+            <h3>Products &amp; catalog <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span></h3>
+            <p>Add items, prices and barcodes; organise by category, brand and unit; print labels.</p>
+          </a>
+          <a class="feature-card" href="/documentation/inventory.html">
+            <div class="feature-card__icon ic-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="4" rx="1"/><path d="M5 8v11h14V8M10 12h4"/></svg></div>
+            <h3>Inventory &amp; stock <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span></h3>
+            <p>Track stock levels, low-stock alerts, batches &amp; expiry, shelf locations, counts, adjustments and transfers.</p>
+          </a>
+          <a class="feature-card" href="/documentation/customers.html">
+            <div class="feature-card__icon ic-violet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19a5.5 5.5 0 0 1 11 0"/><path d="M16 6.5a3 3 0 0 1 0 5.8"/></svg></div>
+            <h3>Customers &amp; credit <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span></h3>
+            <p>Save customers, allow credit, track who owes you and collect payments later.</p>
+          </a>
+          <a class="feature-card" href="/documentation/loyalty.html">
+            <div class="feature-card__icon ic-rose"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3.5 2.6 5.4 5.9.8-4.3 4.1 1.1 5.9-5.3-2.9-5.3 2.9 1.1-5.9-4.3-4.1 5.9-.8z"/></svg></div>
+            <h3>Loyalty points <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span></h3>
+            <p>Reward your regulars: points earn themselves on every sale and spend as money off at the till.</p>
+          </a>
+          <a class="feature-card" href="/documentation/purchases.html">
+            <div class="feature-card__icon ic-amber"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.6"/><circle cx="18" cy="20" r="1.6"/><path d="M2.5 3h2l2.2 12.4a1.5 1.5 0 0 0 1.5 1.2h8.6a1.5 1.5 0 0 0 1.5-1.2L21 7H6"/></svg></div>
+            <h3>Purchasing &amp; suppliers <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span></h3>
+            <p>Buy stock, receive it into inventory, handle returns and pay your suppliers.</p>
+          </a>
+          <a class="feature-card" href="/documentation/reports.html">
+            <div class="feature-card__icon ic-cyan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 1 0 9 9h-9z"/><path d="M12 3v9h9A9 9 0 0 0 12 3z"/></svg></div>
+            <h3>Reports &amp; tax <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span></h3>
+            <p>Sales summaries, best-sellers, money owed to you, and tax set-up — all exportable.</p>
+          </a>
+          <a class="feature-card" href="/documentation/shifts.html">
+            <div class="feature-card__icon ic-rose"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></div>
+            <h3>Shifts &amp; cash <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span></h3>
+            <p>Open and close shifts, count the drawer, and reconcile cash with X &amp; Z reports.</p>
+          </a>
+          <a class="feature-card" href="/documentation/accounting.html">
+            <div class="feature-card__icon ic-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h11a2 2 0 0 1 2 2v14H7a2 2 0 0 0-2 2z"/><path d="M5 4v16M18 18H7"/></svg></div>
+            <h3>Accounting <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span></h3>
+            <p>Books kept automatically: chart of accounts, opening balances, journal, and P&amp;L / Balance Sheet reports.</p>
+          </a>
+          <a class="feature-card" href="/documentation/settings.html">
+            <div class="feature-card__icon ic-pink"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg></div>
+            <h3>Settings &amp; admin <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span></h3>
+            <p>Company details, staff &amp; roles, stores, hardware, languages, backups and updates.</p>
+          </a>
+          <a class="feature-card" href="/documentation/offline.html">
+            <div class="feature-card__icon ic-blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5a9 9 0 0 1 14 0M8.5 16a4.5 4.5 0 0 1 7 0"/><path d="M12 19.5h.01M3 3l18 18"/></svg></div>
+            <h3>Selling offline <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span></h3>
+            <p>Keep selling when the internet drops — sales queue safely and sync automatically.</p>
+          </a>
+          <a class="feature-card" href="/documentation/kiosk.html">
+            <div class="feature-card__icon ic-violet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="14" rx="2"/><path d="M9 21h6M12 17v4"/></svg></div>
+            <h3>Self-ordering kiosk <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span></h3>
+            <p>Let customers browse, scan and order themselves — paying at the kiosk or at your counter.</p>
+          </a>
+        </div>
+
+        <!-- HOW IT WORKS -->
+        <span class="eyebrow" style="margin-top:48px">How this guide works</span>
+        <h2 style="margin-top:6px">Every page follows the same simple shape</h2>
+        <div class="doc-tablewrap">
+          <table>
+            <thead><tr><th>Section</th><th>What it gives you</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Overview</strong></td><td>A one-paragraph, jargon-free explanation of what the feature is.</td></tr>
+              <tr><td><strong>Why it's useful</strong></td><td>The real-world problem it solves for your shop.</td></tr>
+              <tr><td><strong>Step by step</strong></td><td>Numbered instructions you can follow click-by-click.</td></tr>
+              <tr><td><strong>Tips &amp; best practices</strong></td><td>Small habits that save time and prevent mistakes.</td></tr>
+              <tr><td><strong>Notes &amp; warnings</strong></td><td>Things to watch out for before they bite you.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- HELP & SUPPORT -->
+        <span class="eyebrow" style="margin-top:48px">Help &amp; support</span>
+        <h2 style="margin-top:6px">Stuck on something?</h2>
+        <p class="lead" style="margin-bottom:18px">Quick answers, fixes for common problems, and a dictionary of every term used in this guide.</p>
+        <div class="feature-grid cols-3">
+          <a class="feature-card support-card" href="/documentation/faq.html">
+            <div class="feature-card__icon ic-violet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 0 1 4.5 1.5c0 1.7-2.5 2-2.5 3.5M12 17h.01"/></svg></div>
+            <div><h3>FAQ</h3><p>Short answers to the questions shop owners ask most.</p></div>
+          </a>
+          <a class="feature-card support-card" href="/documentation/troubleshooting.html">
+            <div class="feature-card__icon ic-amber"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 6a4 4 0 0 0-5 5L4 16.5 7.5 20l5.5-5.5a4 4 0 0 0 5-5l-2.5 2.5-2.5-.5-.5-2.5z"/></svg></div>
+            <div><h3>Troubleshooting</h3><p>"It's not working?" — calm, step-by-step fixes.</p></div>
+          </a>
+          <a class="feature-card support-card" href="/documentation/glossary.html">
+            <div class="feature-card__icon ic-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h11a2 2 0 0 1 2 2v14H7a2 2 0 0 0-2 2z"/><path d="M5 4v16M18 18H7"/></svg></div>
+            <div><h3>Glossary</h3><p>Plain-English meaning of every term in one place.</p></div>
+          </a>
+        </div>
+
+        <span class="eyebrow" style="margin-top:40px">Popular topics</span>
+        <div class="chips" style="margin-top:8px">
+          <a class="chip" href="/documentation/returns.html">Give a refund</a>
+          <a class="chip" href="/documentation/shifts.html">Open / close a shift</a>
+          <a class="chip" href="/documentation/products.html">Add a product</a>
+          <a class="chip" href="/documentation/hardware.html">Set up a printer</a>
+          <a class="chip" href="/documentation/payments.html">Take card &amp; QR payments</a>
+          <a class="chip" href="/documentation/users-roles.html">Add a staff member</a>
+          <a class="chip" href="/documentation/backup.html">Back up my data</a>
+          <a class="chip" href="/documentation/batches.html">Track expiry dates</a>
+          <a class="chip" href="/documentation/loyalty.html">Reward regular customers</a>
+          <a class="chip" href="/documentation/sales-history.html#new-sale">Raise a sale from the office</a>
+          <a class="chip" href="/documentation/expenses.html">Record an expense</a>
+          <a class="chip" href="/documentation/scheduled-reports.html">Email a report automatically</a>
+          <a class="chip" href="/documentation/customer-display.html">Set up a customer display</a>
+          <a class="chip" href="/documentation/shelf-locations.html">Find where a product is kept</a>
+          <a class="chip" href="/documentation/shifts.html#cash-in-out">Put cash in or take cash out</a>
+          <a class="chip" href="/documentation/offline.html#failed">Fix a sale that won't sync</a>
+        </div>
+
+        <div class="callout callout--info" style="margin-top:30px">
+          <span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg></span>
+          <div class="callout__body">
+            <div class="callout__title">Tip: search is the fastest way around</div>
+            <p>Press <kbd>Ctrl</kbd> + <kbd>K</kbd> (or just <kbd>/</kbd>) anywhere in this guide to jump straight to any feature.</p>
+          </div>
+        </div>
+
+        <nav class="doc-pager" id="docs-pager"></nav>
+      </article>
+    </main>
+
+    <aside class="doc-toc scroll-y"><nav id="docs-toc"></nav></aside>
+  </div>
+
+  <script src="/documentation/assets/nav.js?v=22"></script>
+  <script src="/documentation/assets/docs.js?v=20"></script>
+</body>
+</html>

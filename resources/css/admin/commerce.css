@@ -1,0 +1,19 @@
+/* ============================================================
+   Commerce order detail
+   ============================================================ */
+
+/* Seven numeric-heavy columns need a stable reading width on tablets; the
+   shared .dt-scroll wrapper provides touch-friendly horizontal scrolling. */
+.commerce-order-table {
+  min-width: 760px;
+}
+
+.commerce-order-icon {
+  background: var(--bg-elevated);
+}
+
+/* Tailwind's default border utility is intentionally color-agnostic. Keep
+   internal order-card separators aligned with the app's subtle card border. */
+.commerce-order-divider {
+  border-color: var(--border-subtle);
+}

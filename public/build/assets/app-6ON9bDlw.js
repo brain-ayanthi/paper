@@ -1,0 +1,1 @@
+import{o as e,s as t}from"./http-DKYHx80t.js";import{n,t as r}from"./submit-loader-BtPqcIBw.js";document.addEventListener(`alpine:init`,()=>{n(t),e(t)}),window.Alpine=t,t.start(),r();

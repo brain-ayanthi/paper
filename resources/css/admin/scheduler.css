@@ -1,0 +1,187 @@
+/* ============================================================
+   Settings → Scheduler (cron job)
+   Status verdict, copy-able cron command boxes, setup steps.
+   Shares the System Health dot/badge vocabulary (see
+   system-health.css) so "healthy" reads the same in both places.
+   ============================================================ */
+
+/* ── Status verdict ─────────────────────────────────────── */
+.sched-status {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.sched-status-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--fg);
+}
+
+.sched-status-sub {
+    margin-top: 3px;
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--fg-secondary);
+}
+
+.sched-lastrun {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid var(--border);
+}
+
+.sched-lastrun-label {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    color: var(--fg-tertiary);
+}
+
+.sched-lastrun-value {
+    font-size: 13px;
+    color: var(--fg-secondary);
+}
+
+/* ── Test result strip ──────────────────────────────────── */
+.sched-test-result {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-top: 14px;
+    padding: 12px 14px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--surface-2);
+}
+
+.sched-test-result.is-pass {
+    border-color: color-mix(in srgb, var(--positive) 40%, transparent);
+    background: color-mix(in srgb, var(--positive) 10%, transparent);
+    color: var(--positive);
+}
+
+.sched-test-result.is-fail {
+    border-color: color-mix(in srgb, var(--danger) 40%, transparent);
+    background: color-mix(in srgb, var(--danger) 10%, transparent);
+    color: var(--danger);
+}
+
+.sched-test-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--fg);
+}
+
+.sched-test-sub {
+    margin-top: 3px;
+    font-size: 12.5px;
+    line-height: 1.55;
+    color: var(--fg-secondary);
+}
+
+.sched-spinner {
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    margin-top: 1px;
+    border: 2px solid var(--border);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    animation: sched-spin .8s linear infinite;
+}
+
+@keyframes sched-spin {
+    to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .sched-spinner { animation-duration: 2.4s; }
+}
+
+/* ── Copy-able command box ──────────────────────────────── */
+.sched-cmd {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    /* Logical padding so RTL mirrors correctly. */
+    padding-block: 10px;
+    padding-inline: 14px 10px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--surface-2);
+}
+
+.sched-cmd-text {
+    flex: 1;
+    min-width: 0;
+    /* Commands are long and must never be truncated — the customer has to
+       be able to read and copy every character. Scroll, don't clip. */
+    overflow-x: auto;
+    white-space: nowrap;
+    font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
+    font-size: 12.5px;
+    line-height: 1.7;
+    color: var(--fg);
+    /* Cron lines are LTR shell syntax even in an RTL admin. */
+    direction: ltr;
+    text-align: left;
+}
+
+/* ── Setup steps ────────────────────────────────────────── */
+.sched-steps {
+    margin: 0;
+    padding-inline-start: 20px;
+    list-style: decimal;
+}
+
+.sched-steps li {
+    margin-bottom: 10px;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--fg-secondary);
+}
+
+.sched-steps li:last-child { margin-bottom: 0; }
+
+.sched-steps strong { color: var(--fg); font-weight: 600; }
+
+.sched-steps code {
+    padding: 1px 6px;
+    border-radius: 5px;
+    background: var(--surface-3, var(--surface-2));
+    font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
+    font-size: 12px;
+    color: var(--fg);
+    direction: ltr;
+    display: inline-block;
+}
+
+/* ── Dependent-features list ────────────────────────────── */
+.sched-depends {
+    display: grid;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.sched-depends li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--fg-secondary);
+}
+
+/* ── Stale-scheduler banner action (Backup / Reports pages) ─ */
+.sched-banner-link {
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}

@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Settings · POS User Guide</title>
+  <meta name="description" content="The Settings hub: company profile, branding, regional & currency, receipts, cashier, scale, pricing, numbering, email, payments, backup, updates, license and legal pages." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+  <link rel="stylesheet" href="/documentation/assets/docs.css?v=20" />
+  <script>
+    (function () { try { var t = localStorage.getItem("docs-theme"); if (!t) t = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"; document.documentElement.setAttribute("data-theme", t); } catch (e) {} })();
+  </script>
+</head>
+<body data-nav="settings">
+  <div class="doc-progress"><div class="doc-progress__bar" id="docs-progress-bar"></div></div>
+
+  <header class="doc-topbar">
+    <button class="doc-iconbtn doc-menubtn" id="docs-menu-btn" aria-label="Open menu"></button>
+    <a class="doc-brand" href="/documentation/index.html">
+      <span class="doc-brand__mark"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M3 9h18M7 21h10"/></svg></span>
+      <span class="doc-brand__name">POS <span style="color:var(--text-tertiary);font-weight:500">User Guide</span></span>
+      <span class="doc-brand__tag">Docs</span>
+    </a>
+    <div class="doc-topbar__spacer"></div>
+    <button class="doc-searchbtn" data-open-search aria-label="Search">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <span class="label">Search the guide…</span>
+      <kbd>Ctrl K</kbd>
+    </button>
+    <button class="doc-iconbtn" id="docs-theme-btn" aria-label="Toggle dark mode">
+      <svg class="theme-moon" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg>
+      <svg class="theme-sun" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4 12H2M22 12h-2M5 5 4 4M20 20l-1-1M5 19l-1 1M20 4l-1 1"/></svg>
+    </button>
+  </header>
+
+  <div class="doc-search" id="docs-search" role="dialog" aria-label="Search">
+    <div class="doc-search__backdrop"></div>
+    <div class="doc-search__panel">
+      <div class="doc-search__input">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="docs-search-input" type="text" placeholder="Search for a feature…" autocomplete="off" />
+      </div>
+      <div class="doc-search__results" id="docs-search-results"></div>
+    </div>
+  </div>
+
+  <div class="doc-scrim" id="docs-scrim"></div>
+
+  <div class="doc-layout">
+    <aside class="doc-sidebar scroll-y"><nav id="docs-sidebar-nav"></nav></aside>
+
+    <main class="doc-main">
+      <nav class="doc-breadcrumb" id="docs-breadcrumbs"></nav>
+
+      <article class="doc-article">
+        <h1>Settings</h1>
+        <p class="lead">Settings is where you tell the system how your business runs — your company details, how money is shown, what prints on receipts, how the checkout behaves, and how the app talks to email and card payments. You set it up once and the whole system follows it.</p>
+
+        <div class="glance">
+          <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m9 12 2 2 4-4"/></svg><div><b>Who uses it</b><span>The owner or a manager — usually during setup, then rarely.</span></div></div>
+          <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9v11h14V9"/></svg><div><b>Where to find it</b><span>Click <strong>Settings</strong> at the bottom of the sidebar.</span></div></div>
+          <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 2.5 20h19z"/><path d="M12 10v4M12 17h.01"/></svg><div><b>Good to know</b><span>These choices apply to your whole business, not per store.</span></div></div>
+        </div>
+
+        <h2 id="overview">Overview</h2>
+        <p>The Settings page is a simple grid of cards. Each card opens one focused area where you change just those options and press <strong>Save</strong>. You don't need to understand every card — set up the few that matter to your shop and leave the rest on their sensible defaults.</p>
+
+        <figure class="shot">
+          <div class="shot__frame">
+            <div class="shot__bar"><i></i><i></i><i></i></div>
+            <img src="/assets/documentation/images/settings-overview.png" alt="The Settings page showing a grid of setting cards" />
+          </div>
+          <figcaption>The Settings hub — each card opens one area to configure.</figcaption>
+        </figure>
+
+        <div class="callout callout--info">
+          <span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg></span>
+          <div class="callout__body">
+            <div class="callout__title">Settings vs. the rest of the sidebar</div>
+            <p>A few things people expect here actually live elsewhere in the sidebar: <a href="/documentation/users-roles.html">Users &amp; Roles</a>, <a href="/documentation/stores.html">Stores &amp; Terminals</a>, <a href="/documentation/hardware.html">Hardware</a>, <a href="/documentation/languages.html">Languages</a> and <a href="/documentation/taxes.html">Tax</a> each have their own menu item. Settings covers the company-wide behaviour below.</p>
+          </div>
+        </div>
+
+        <h2 id="why">Why it's useful</h2>
+        <ul>
+          <li><strong>Set it once, everywhere follows.</strong> Your currency, time zone, receipt text and number formats are applied consistently across every screen and printout.</li>
+          <li><strong>Make the system feel like yours.</strong> Your logo, brand colour and company details appear on receipts, reports and the app header.</li>
+          <li><strong>Only show what you accept.</strong> Turn payment types on or off so cashiers see exactly the options your store uses.</li>
+          <li><strong>Stay safe and current.</strong> Schedule backups, check for updates and confirm your licence — all from one place.</li>
+        </ul>
+
+        <h2 id="whats-inside">What's inside Settings</h2>
+        <p>Here is every card on the Settings page, grouped to make them easy to find. Open the linked guide for the cards that have a full walkthrough.</p>
+
+        <h3 id="business">Your business &amp; branding</h3>
+        <div class="doc-tablewrap">
+          <table>
+            <thead><tr><th>Card</th><th>What it controls</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Company profile</strong></td><td>Your business name, legal details, address and logo — shown on receipts, reports and headers.</td></tr>
+              <tr><td><strong>Branding &amp; theme</strong></td><td>Accent colour, favicon, and the default light/dark theme for the admin area.</td></tr>
+              <tr><td><strong>Privacy &amp; terms</strong></td><td>Your public privacy policy and terms-of-service pages. (Card payment providers ask for these web addresses when you sign up.)</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 id="money">Money &amp; numbers</h3>
+        <div class="doc-tablewrap">
+          <table>
+            <thead><tr><th>Card</th><th>What it controls</th><th>Learn more</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Regional</strong></td><td>Your time zone and how dates and times are displayed across the system.</td><td>—</td></tr>
+              <tr><td><strong>Currency &amp; formatting</strong></td><td>Base currency, symbol, where the symbol sits, number of decimals, and the separators used everywhere prices show.</td><td>—</td></tr>
+              <tr><td><strong>Pricing</strong></td><td>Choose product-based or <strong>batch-wise pricing</strong>, and control cost-to-selling automation when goods are received.</td><td><a href="/documentation/batches.html#batch-pricing">Batch-wise pricing</a></td></tr>
+              <tr><td><strong>Numbering</strong></td><td>The receipt-number format for completed sales and held orders, the pattern used for <strong>auto-generated product SKUs</strong>, and the prefix for <strong>in-store barcodes</strong> you generate for items with no manufacturer barcode. Each has a live preview.</td><td><a href="/documentation/products.html#codes">Product codes</a></td></tr>
+              <tr><td><strong>Loyalty points</strong></td><td>Turn the rewards programme on, set how fast points are earned, what they're worth at the till, the limits on spending them, and when they expire.</td><td><a href="/documentation/loyalty.html">Loyalty points</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 id="selling">Selling &amp; receipts</h3>
+        <div class="doc-tablewrap">
+          <table>
+            <thead><tr><th>Card</th><th>What it controls</th><th>Learn more</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Receipt template</strong></td><td>Paper size, what to show, and the editable header / footer / return-policy text that prints on every sale receipt.</td><td><a href="/documentation/hardware.html">Hardware &amp; printing</a></td></tr>
+              <tr><td><strong>Cashier (POS)</strong></td><td>Checkout layout, tile size, default theme, and which totals show on the cashier screen.</td><td><a href="/documentation/cashier.html">The POS screen</a></td></tr>
+              <tr><td><strong>Weighing scale</strong></td><td>Decode scale-printed barcodes (with the weight or price built in) so weighed items ring up automatically.</td><td><a href="/documentation/weight-items.html">Weighed &amp; scale items</a></td></tr>
+              <tr><td><strong>Payment methods</strong></td><td>Turn manual tenders on or off and create record-only methods such as Mobile Money, with a required customer transaction reference.</td><td><a href="/documentation/payments.html#custom-methods">Custom payment methods</a></td></tr>
+              <tr><td><strong>Payment gateways</strong></td><td>Connect Stripe, Razorpay, Paystack, Flutterwave or Mercado Pago so cashiers can take card payments by QR code or payment link.</td><td><a href="/documentation/payments.html">Taking payments</a></td></tr>
+              <tr><td><strong>WhatsApp</strong></td><td>Use free Click-to-Chat or configure company/store Meta Cloud API connections, document templates, tests and delivery logs.</td><td><a href="/documentation/whatsapp.html">WhatsApp sharing</a></td></tr>
+              <tr><td><strong>Stock locations</strong></td><td>Name the shelf coordinates your shop actually uses — aisle, rack, shelf, bin — and switch off the ones you don't, so staff can look up where a product is kept.</td><td><a href="/documentation/shelf-locations.html">Shelf locations</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 id="negative-stock">Allowing negative stock</h3>
+        <p>Inside <strong>Cashier (POS)</strong> there's an option called <strong>Allow selling below available stock</strong> (overselling). Normally the till stops a cashier from selling more of a stock-tracked item than you have on hand. Turn this on and the checkout will let those sales through even when the count reaches zero or goes below it — handy for backorders or made-to-order goods you'll restock later.</p>
+        <ul>
+          <li><strong>It's off by default.</strong> Nothing changes until you deliberately switch it on.</li>
+          <li><strong>It needs a permission too.</strong> Even with the option on, only staff whose role includes <strong>Sell below available stock</strong> can oversell — everyone else is still blocked. So it's really two switches: the company option <em>and</em> the person's permission.</li>
+          <li><strong>Items that don't track stock always sell.</strong> Services and made-to-order products aren't counted, so they ring up regardless of this option.</li>
+          <li><strong>Batch / expiry items are still protected.</strong> Products tracked by batch or expiry date can never be taken below zero, even when overselling is on.</li>
+        </ul>
+        <div class="callout callout--warning">
+          <span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 2.5 20h19z"/><path d="M12 10v4M12 17h.01"/></svg></span>
+          <div class="callout__body">
+            <p><strong>Use this with care — your stock counts can go below zero.</strong> When a sale oversells, on-hand becomes a negative number until you receive more stock. That's expected for backorders, but it does mean your inventory reports can show minus figures. Leave this off unless you have a clear reason to allow it.</p>
+          </div>
+        </div>
+
+        <h3 id="system">System &amp; data</h3>
+        <div class="doc-tablewrap">
+          <table>
+            <thead><tr><th>Card</th><th>What it controls</th><th>Learn more</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Email &amp; SMTP</strong></td><td>How the system sends mail — password resets, receipts by email, and notifications. You can test the connection right here.</td><td>—</td></tr>
+              <tr><td><strong>Security</strong></td><td>Optionally allow only one signed-in device per account.</td><td><a href="#security">Below</a></td></tr>
+              <tr><td><strong>Header &amp; footer scripts</strong></td><td>Add trusted analytics, tag-manager, chat or tracking snippets with password confirmation and protected-page exclusions.</td><td><a href="#custom-scripts">Below</a></td></tr>
+              <tr><td><strong>Scheduler (cron job)</strong></td><td>Set up the single background job that automatic backups, scheduled reports, low-stock alerts and points expiry all rely on — and prove it's really running.</td><td><a href="/documentation/cron.html">Cron job setup</a></td></tr>
+              <tr><td><strong>Backup</strong></td><td>Schedule automatic backups, run one on demand, and download or delete the copies you have.</td><td><a href="/documentation/backup.html">Backup &amp; restore</a></td></tr>
+              <tr><td><strong>Updates</strong></td><td>See your current version, choose a release channel, and check for new versions.</td><td><a href="/documentation/updates.html">Updates &amp; license</a></td></tr>
+              <tr><td><strong>License</strong></td><td>Your licence status, buyer details, and support window.</td><td><a href="/documentation/updates.html">Updates &amp; license</a></td></tr>
+              <tr><td><strong>System Health</strong></td><td>A page of checks on your install — plus the one-off maintenance tools below.</td><td><a href="#system-health">Below</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 id="security">Security: one signed-in device per account</h3>
+        <p>Open <strong>Settings → Security</strong> and enable <strong>Allow only one signed-in device per account</strong> when staff accounts should never stay open on two devices. After it is enabled, a new sign-in ends every other session belonging to that same account; other users are unaffected.</p>
+        <p>This policy needs the database session driver. If the page shows a warning, set <code>SESSION_DRIVER=database</code> in the installation environment before relying on the switch. Leave the option off when one staff member legitimately uses the till and back office at the same time.</p>
+        <figure class="shot"><div class="shot__frame"><div class="shot__bar"><i></i><i></i><i></i></div><img src="/assets/documentation/images/settings-security.png" alt="Security settings page with the single active session option" /></div><figcaption>Single-session mode ends an account's older sessions when that account signs in again.</figcaption></figure>
+
+        <h3 id="custom-scripts">Trusted header &amp; footer scripts</h3>
+        <p>Super administrators can open <strong>Settings → Header &amp; footer scripts</strong> to add complete, trusted analytics, tag-manager, chat or tracking snippets without editing application files.</p>
+        <ol class="steps">
+          <li><span class="step-title">Paste complete trusted snippets</span><p>Add complete <code>&lt;script&gt;</code> tags in Header or Footer. Tracking <code>&lt;noscript&gt;</code> fallbacks are supported; external sources must use HTTPS.</p></li>
+          <li><span class="step-title">Choose the execution scope</span><p>Enable scripts for public pages. Leave <strong>Also run on authenticated admin and cashier pages</strong> off unless the trusted provider genuinely needs access to those pages.</p></li>
+          <li><span class="step-title">Confirm the security risk</span><p>Enter your current password and, when enabling, acknowledge that the code runs in visitors' browsers. Save.</p></li>
+          <li><span class="step-title">Test and keep a recovery path</span><p>Test on a harmless page first. This settings page never runs saved snippets, so a super administrator can return and disable broken code.</p></li>
+        </ol>
+        <figure class="shot"><div class="shot__frame"><div class="shot__bar"><i></i><i></i><i></i></div><img src="/assets/documentation/images/settings-custom-scripts.png" alt="Header and footer scripts settings with scope, code fields and password confirmation" /></div><figcaption>Only enable code whose source and behavior you have reviewed completely.</figcaption></figure>
+        <div class="callout callout--danger"><span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 2h8l6 6v8l-6 6H8l-6-6V8z"/><path d="M12 8v5M12 16h.01"/></svg></span><div class="callout__body"><p>Custom JavaScript can read page content and make network requests. Validation and encrypted storage cannot make untrusted code safe. Sign-in, password reset, installer, hosted payment, print, email, customer-display and kiosk surfaces are always excluded.</p></div></div>
+
+        <h3 id="system-health">System Health &amp; one-off tools</h3>
+        <p><strong>Settings → System Health</strong> runs a set of checks on your installation — folder permissions, the database, whether the <a href="/documentation/cron.html">cron job</a> is actually running — and shows each as OK, a warning, or a problem to fix. It's the first place to look if something feels off, and the first thing to screenshot if you contact support.</p>
+        <p>It also hosts a couple of one-off tools you'll use once and forget about:</p>
+        <div class="doc-tablewrap">
+          <table>
+            <thead><tr><th>Tool</th><th>What it does</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Rebuild historical sale costs</strong></td><td>Older sales recorded before cost tracking existed show as 100% profit. This walks your stock history and works out what each item actually cost when it sold. Always <strong>Preview</strong> first — it shows what it would write and changes nothing until you confirm, and it never overwrites a cost that's already there. See <a href="/documentation/reports.html#profit">Profit, cost and margin</a>.</td></tr>
+              <tr><td><strong>Clear sample data</strong></td><td>Removes the demo records from a fresh install so you can start on real data. A backup is taken first, and your company, stores, users and settings are kept.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="steps">How to change a setting</h2>
+        <ol class="steps">
+          <li>
+            <span class="step-title">Open Settings</span>
+            <p>Click <strong>Settings</strong> at the bottom of the left sidebar.</p>
+          </li>
+          <li>
+            <span class="step-title">Pick the card you need</span>
+            <p>Click the card for the area you want — for example <strong>Currency &amp; formatting</strong> or <strong>Receipt template</strong>.</p>
+          </li>
+          <li>
+            <span class="step-title">Make your changes</span>
+            <p>Edit the fields on that page. Many pages show a live preview so you can see the effect before saving.</p>
+          </li>
+          <li>
+            <span class="step-title">Save</span>
+            <p>Click <strong>Save</strong>. The change takes effect across the system right away.</p>
+          </li>
+        </ol>
+
+        <h2 id="tips">Tips &amp; best practices</h2>
+        <div class="callout callout--tip">
+          <span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.2 1 2.5h6c0-1.3.3-1.8 1-2.5A6 6 0 0 0 12 3z"/></svg></span>
+          <div class="callout__body">
+            <ul>
+              <li><strong>Do Company profile, Regional and Currency first.</strong> They shape how everything else looks — get them right before you start selling.</li>
+              <li><strong>Test your email.</strong> After filling in Email &amp; SMTP, use the built-in test so you know receipts and resets will actually send.</li>
+              <li><strong>Only switch on the payment methods you really take.</strong> A shorter list means a faster, cleaner checkout for cashiers.</li>
+              <li><strong>Turn on automatic backups.</strong> It's the cheapest insurance you'll ever buy — see <a href="/documentation/backup.html">Backup &amp; restore</a>.</li>
+            </ul>
+          </div>
+        </div>
+
+        <h2 id="warnings">Notes &amp; warnings</h2>
+        <div class="callout callout--warning">
+          <span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 2.5 20h19z"/><path d="M12 10v4M12 17h.01"/></svg></span>
+          <div class="callout__body">
+            <p><strong>Change your currency before you start trading.</strong> Switching base currency after you've recorded sales doesn't convert past figures — it only changes how new amounts are shown.</p>
+            <p><strong>These settings are company-wide.</strong> Currency, time zone and number formats are shared by every store and terminal — they aren't set per location.</p>
+          </div>
+        </div>
+
+        <hr />
+        <p style="color:var(--text-tertiary);font-size:14px">Related: <a href="/documentation/users-roles.html">Users &amp; roles</a> · <a href="/documentation/stores.html">Stores &amp; terminals</a> · <a href="/documentation/hardware.html">Hardware &amp; printing</a> · <a href="/documentation/backup.html">Backup &amp; restore</a> · <a href="/documentation/updates.html">Updates &amp; license</a></p>
+
+        <nav class="doc-pager" id="docs-pager"></nav>
+      </article>
+    </main>
+
+    <aside class="doc-toc scroll-y"><nav id="docs-toc"></nav></aside>
+  </div>
+
+  <script src="/documentation/assets/nav.js?v=22"></script>
+  <script src="/documentation/assets/docs.js?v=20"></script>
+</body>
+</html>

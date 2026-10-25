@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Troubleshooting · POS User Guide</title>
+  <meta name="description" content="Fix common problems fast: receipt printer not printing, cash drawer won't open, scanner not working, can't log in, a sale won't complete, slow or offline issues." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+  <link rel="stylesheet" href="/documentation/assets/docs.css?v=20" />
+  <script>
+    (function () { try { var t = localStorage.getItem("docs-theme"); if (!t) t = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"; document.documentElement.setAttribute("data-theme", t); } catch (e) {} })();
+  </script>
+</head>
+<body data-nav="troubleshooting">
+  <div class="doc-progress"><div class="doc-progress__bar" id="docs-progress-bar"></div></div>
+
+  <header class="doc-topbar">
+    <button class="doc-iconbtn doc-menubtn" id="docs-menu-btn" aria-label="Open menu"></button>
+    <a class="doc-brand" href="/documentation/index.html">
+      <span class="doc-brand__mark"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M3 9h18M7 21h10"/></svg></span>
+      <span class="doc-brand__name">POS <span style="color:var(--text-tertiary);font-weight:500">User Guide</span></span>
+      <span class="doc-brand__tag">Docs</span>
+    </a>
+    <div class="doc-topbar__spacer"></div>
+    <button class="doc-searchbtn" data-open-search aria-label="Search">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <span class="label">Search the guide…</span>
+      <kbd>Ctrl K</kbd>
+    </button>
+    <button class="doc-iconbtn" id="docs-theme-btn" aria-label="Toggle dark mode">
+      <svg class="theme-moon" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg>
+      <svg class="theme-sun" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4 12H2M22 12h-2M5 5 4 4M20 20l-1-1M5 19l-1 1M20 4l-1 1"/></svg>
+    </button>
+  </header>
+
+  <div class="doc-search" id="docs-search" role="dialog" aria-label="Search">
+    <div class="doc-search__backdrop"></div>
+    <div class="doc-search__panel">
+      <div class="doc-search__input">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="docs-search-input" type="text" placeholder="Search for a feature…" autocomplete="off" />
+      </div>
+      <div class="doc-search__results" id="docs-search-results"></div>
+    </div>
+  </div>
+
+  <div class="doc-scrim" id="docs-scrim"></div>
+
+  <div class="doc-layout">
+    <aside class="doc-sidebar scroll-y"><nav id="docs-sidebar-nav"></nav></aside>
+
+    <main class="doc-main">
+      <nav class="doc-breadcrumb" id="docs-breadcrumbs"></nav>
+
+      <article class="doc-article">
+        <h1>Troubleshooting</h1>
+        <p class="lead">Something not behaving? Find the symptom below, read the likely cause, and follow the fix. Most problems are small — a loose cable, a missing permission, or a screen that just needs a refresh. Work through the steps in order and stop as soon as it's working again.</p>
+
+        <div class="callout callout--info">
+          <span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg></span>
+          <div class="callout__body">
+            <div class="callout__title">Try this first</div>
+            <p>Nine times out of ten, refreshing the page (press <kbd>F5</kbd>) or checking that the right cable is plugged in clears the problem. Try that before anything else below.</p>
+          </div>
+        </div>
+
+        <h2 id="printing">Printing &amp; the cash drawer</h2>
+
+        <h3 id="printer-not-printing">The receipt printer isn't printing</h3>
+        <p><strong>Likely cause:</strong> the small helper program that talks to the printer — the <em>print bridge</em> — isn't running, or the printer is off or out of paper.</p>
+        <ol class="steps">
+          <li><span class="step-title">Check the obvious</span><p>Is the printer switched on, has it got paper, and is the lid closed properly? A flashing light usually means paper or a jam.</p></li>
+          <li><span class="step-title">Check the print bridge is running</span><p>The print bridge is the little app that lets the browser reach your printer. Make sure it's open and connected. See <a href="/documentation/hardware.html">Hardware &amp; printing</a> for how to start it.</p></li>
+          <li><span class="step-title">Send a test print</span><p>Use the test/diagnostics button on the Hardware page to print a sample receipt. If the test works, the printer is fine — try the sale again.</p></li>
+          <li><span class="step-title">Let failed prints retry</span><p>If a receipt failed while you were busy, it isn't lost — failed prints are queued and retried automatically. Watch the print icon at the top of the screen; it clears the queue once the printer is back.</p></li>
+        </ol>
+        <div class="callout callout--success">
+          <span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8 12 2.5 2.5L16 9"/></svg></span>
+          <div class="callout__body"><p>You don't have to re-ring the sale to reprint. Open the sale in <a href="/documentation/sales-history.html">Sales history</a> and print the receipt again from there.</p></div>
+        </div>
+
+        <h3 id="garbled">The printer prints garbled text or strange symbols</h3>
+        <p><strong>Likely cause:</strong> the wrong printer type is selected, so the receipt is being sent in a format the printer doesn't understand.</p>
+        <ol class="steps">
+          <li><span class="step-title">Check the printer type</span><p>On the <a href="/documentation/hardware.html">Hardware &amp; printing</a> page, make sure the selected printer matches your actual device (most receipt printers use the common thermal/ESC&nbsp;POS standard).</p></li>
+          <li><span class="step-title">Print a test receipt</span><p>Send a test print after changing the setting. If it's clean, you're done.</p></li>
+          <li><span class="step-title">Re-seat the cable</span><p>A loose USB cable can scramble the data. Unplug it, plug it back in firmly, and test again.</p></li>
+        </ol>
+
+        <h3 id="drawer">The cash drawer won't open</h3>
+        <p><strong>Likely cause:</strong> most drawers open through the receipt printer, so if the printer can't be reached, the drawer won't kick either.</p>
+        <ol class="steps">
+          <li><span class="step-title">Check the printer first</span><p>The drawer plugs into the printer, not the computer. If the printer isn't working, fix that first (see above) and the drawer usually follows.</p></li>
+          <li><span class="step-title">Check the drawer cable</span><p>Make sure the cable from the drawer into the back of the printer is pushed in fully.</p></li>
+          <li><span class="step-title">Use the manual key</span><p>Every drawer has a physical key. If you need it open right now, use the key — then sort the connection afterwards.</p></li>
+        </ol>
+
+        <h3 id="drawer-short">The drawer is short (or over) when I close the shift</h3>
+        <p><strong>Likely cause:</strong> cash moved in or out without being recorded. Expected cash is your opening float, plus cash sales, minus cash refunds, plus pay-ins, minus pay-outs — anything that bypassed that list shows up as a variance.</p>
+        <ol class="steps">
+          <li><span class="step-title">Check the drawer movements</span><p>Open the shift's <strong>Cash drawer</strong> panel and read the list of pay-ins and pay-outs. A float top-up or petty-cash trip that nobody recorded is the usual culprit.</p></li>
+          <li><span class="step-title">Record it as you go, next time</span><p>Use <strong>Cash in / out</strong> from the ⋯ menu on the POS screen the moment money moves. See <a href="/documentation/shifts.html#cash-in-out">Putting cash in and taking cash out</a>.</p></li>
+          <li><span class="step-title">Remember cash expenses and supplier payments</span><p>A cash <a href="/documentation/expenses.html#drawer">expense</a> or a supplier paid in cash during your shift takes money out of the drawer and lowers the expected figure — that's correct, not a shortage.</p></li>
+          <li><span class="step-title">Explain what's left</span><p>If a difference remains, close with a mismatch reason so the record shows what happened. See <a href="/documentation/shifts.html#variance">Cash variance</a>.</p></li>
+        </ol>
+
+        <h2 id="scanner">Barcode scanner</h2>
+        <h3 id="scanner-not-working">The scanner isn't adding items</h3>
+        <p><strong>Likely cause:</strong> the cursor isn't in the right place, or the scanner needs re-plugging. Most scanners simply "type" the barcode, so the app must be focused on the search box.</p>
+        <ol class="steps">
+          <li><span class="step-title">Click the search box first</span><p>On the POS screen, click into the product search field, then scan. The code should appear and the item drop into the cart.</p></li>
+          <li><span class="step-title">Re-plug the scanner</span><p>Unplug it and plug it back into the same USB port. Wait a few seconds for it to be recognised.</p></li>
+          <li><span class="step-title">Test it in any text box</span><p>Open a plain text field anywhere and scan a barcode. If nothing types, the scanner itself isn't sending — check its own power light and manual.</p></li>
+        </ol>
+        <div class="callout callout--info">
+          <span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg></span>
+          <div class="callout__body"><p>No scanner to hand? On a tablet or phone you can use the camera to scan instead. More on <a href="/documentation/hardware.html">Hardware &amp; printing</a>.</p></div>
+        </div>
+
+        <h2 id="login">Logging in &amp; access</h2>
+        <h3 id="cant-login">I can't log in / I forgot my password</h3>
+        <p><strong>Likely cause:</strong> a mistyped password, or caps lock is on.</p>
+        <ol class="steps">
+          <li><span class="step-title">Check the basics</span><p>Make sure caps lock is off and you're using the correct email or username. Type the password slowly.</p></li>
+          <li><span class="step-title">Ask an admin to reset it</span><p>If you still can't get in, any administrator can reset your password from <a href="/documentation/users-roles.html">Users &amp; roles</a>.</p></li>
+        </ol>
+
+        <h3 id="cant-refund">I can't give a refund (the option is missing or greyed out)</h3>
+        <p><strong>Likely cause:</strong> your role doesn't include the refund permission. The app hides actions you're not allowed to use.</p>
+        <ol class="steps">
+          <li><span class="step-title">Ask an admin to grant it</span><p>An administrator can add the <em>refund</em> permission to your role under <a href="/documentation/users-roles.html">Users &amp; roles</a>.</p></li>
+          <li><span class="step-title">Log out and back in</span><p>After your permissions change, log out and in again so the new access takes effect.</p></li>
+        </ol>
+
+        <h3 id="signed-out">I was signed out in the middle of my shift</h3>
+        <p><strong>Likely cause:</strong> your account was deactivated. Switching a user off now takes effect at once, so any session already open is ended the next time it's used — that's deliberate, so someone who's left can't keep working on a browser they never logged out of.</p>
+        <ol class="steps">
+          <li><span class="step-title">Check the message on the login screen</span><p>If it says your account is inactive, this is what happened. An ordinary wrong password says something different.</p></li>
+          <li><span class="step-title">Ask an administrator</span><p>Only an administrator can switch the account back on, under <a href="/documentation/users-roles.html">Users &amp; roles</a>. Once they do, log in as normal.</p></li>
+          <li><span class="step-title">Nothing is lost</span><p>Completed sales are already recorded. If the till had sales queued offline, they stay on that device and sync once someone signs in again.</p></li>
+        </ol>
+
+        <h3 id="cant-see-store">I can't see another branch's sales or stock</h3>
+        <p><strong>Likely cause:</strong> you're assigned to some stores and not others. Lists, reports, exports and scheduled report emails only ever include the stores you're assigned to.</p>
+        <ol class="steps">
+          <li><span class="step-title">Check the store picker</span><p>The top bar shows which store you're working in. If the branch you want isn't in the list, you're not assigned to it.</p></li>
+          <li><span class="step-title">Ask for access</span><p>An administrator can add you to another store under <a href="/documentation/users-roles.html#store-access">Users &amp; roles</a>. Administrators themselves see every store.</p></li>
+        </ol>
+
+        <h2 id="sales">Sales &amp; the checkout</h2>
+        <h3 id="sale-wont-complete">A sale won't complete</h3>
+        <p><strong>Likely cause:</strong> a walk-in (no customer) sale isn't fully paid. The system won't finish it until the money is covered.</p>
+        <ol class="steps">
+          <li><span class="step-title">Cover the full total</span><p>In the Pay window, make sure the amount taken matches or exceeds the total. For cash, type the exact amount handed over.</p></li>
+          <li><span class="step-title">Or attach a customer for credit</span><p>If the customer genuinely wants to pay later, add a saved customer to the sale first — only then can the remainder be left on credit. See <a href="/documentation/customers.html">Customers</a>.</p></li>
+        </ol>
+
+        <h3 id="cant-delete">I made a mistake on a completed sale</h3>
+        <p><strong>Likely cause:</strong> finished sales can't simply be deleted — that's deliberate, to keep your money records trustworthy.</p>
+        <ol class="steps">
+          <li><span class="step-title">Void it (same day, shift open)</span><p>If the shift is still open and you've taken no money back yet, you can void the sale from <a href="/documentation/sales-history.html">Sales history</a>. This reverses the stock and any customer balance.</p></li>
+          <li><span class="step-title">Otherwise, refund it</span><p>If the shift is closed, give the money back as a <a href="/documentation/returns.html">refund</a> instead.</p></li>
+        </ol>
+
+        <h2 id="display">Screen, speed &amp; updates</h2>
+        <h3 id="not-showing">A change I made isn't showing up</h3>
+        <p><strong>Likely cause:</strong> the screen is showing an older copy of the page.</p>
+        <ol class="steps">
+          <li><span class="step-title">Refresh the page</span><p>Press <kbd>F5</kbd> (or pull down to refresh on a tablet). New products, prices and settings usually appear right away after a refresh.</p></li>
+          <li><span class="step-title">On the till, refresh the catalogue</span><p>The POS screen keeps its own copy of products so it works offline. Use the connection menu at the top of the till to <strong>Refresh now</strong> and pull the latest catalogue. See <a href="/documentation/offline.html">Selling offline</a>.</p></li>
+        </ol>
+
+        <h3 id="slow">The app is running slowly</h3>
+        <p><strong>Likely cause:</strong> a browser that's been open a long time, a weak connection, or too many tabs.</p>
+        <ol class="steps">
+          <li><span class="step-title">Refresh and close spare tabs</span><p>Refresh the page and close tabs you don't need. This frees up memory and usually helps immediately.</p></li>
+          <li><span class="step-title">Check your connection</span><p>A slow or dropping internet link makes pages crawl. The connection dot at the top of the till shows whether you're online — see <a href="/documentation/offline.html">Selling offline</a>.</p></li>
+          <li><span class="step-title">Restart the browser</span><p>If it's still sluggish, fully close and reopen the browser.</p></li>
+        </ol>
+
+        <h2 id="offline-issues">Offline &amp; syncing</h2>
+        <h3 id="sync-not-catching-up">Sales I made offline aren't syncing</h3>
+        <p><strong>Likely cause:</strong> the device hasn't fully reconnected yet, so the queued sales are still waiting to upload.</p>
+        <div class="callout callout--warning">
+          <span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 2.5 20h19z"/><path d="M12 10v4M12 17h.01"/></svg></span>
+          <div class="callout__body"><p>Don't close the browser or clear its data while sales are still queued — wait until the queue is empty, or those sales could be lost.</p></div>
+        </div>
+        <ol class="steps">
+          <li><span class="step-title">Get back online and wait</span><p>Reconnect to the internet. Queued sales upload automatically within a minute. The pill at the top of the till shows how many are still waiting.</p></li>
+          <li><span class="step-title">Open the queue to check</span><p>Click the connection indicator at the top to see the queue and watch it drain. Full details are on <a href="/documentation/offline.html">Selling offline</a>.</p></li>
+          <li><span class="step-title">Review the sync log</span><p>If a sale couldn't upload, an administrator can see why on the sync log and resolve it.</p></li>
+        </ol>
+
+        <h3 id="sync-rejected">A sale was rejected and won't go through</h3>
+        <p><strong>Likely cause:</strong> the server refused it for a business reason — the stock was sold on another till while you were offline, or the cashier's shift has since been closed. POS stops retrying after a few attempts rather than looping silently, and waits for someone to decide.</p>
+        <ol class="steps">
+          <li><span class="step-title">Read the reason</span><p>Click the connection indicator on the till. Each unsynced sale is listed with the message the server gave. An administrator sees the same entries under <strong>Insights → Sync log</strong>, on the <strong>Failed</strong> tab.</p></li>
+          <li><span class="step-title">Fix the cause</span><p>Reopen the cashier's shift, correct the stock, or whatever the message points at. A retry is replayed <em>as the original cashier</em>, so their shift needs to be open if your store enforces shifts.</p></li>
+          <li><span class="step-title">Retry it</span><p>Use <strong>Retry</strong> on the till, or <strong>Retry sync</strong> in the sync log. It's safe to repeat — a sale that already landed is never duplicated. The back-office route matters when the original terminal is switched off, broken, or at another branch.</p></li>
+          <li><span class="step-title">Or mark it resolved</span><p>If the sale genuinely shouldn't exist (it was re-rung by hand, say), <strong>Discard</strong> it on the till or <strong>Dismiss</strong> it in the sync log. Nothing is deleted — the record stays for audit, it just stops counting as outstanding. Full details on <a href="/documentation/offline.html#failed">Selling offline</a>.</p></li>
+        </ol>
+
+        <div class="callout callout--warning">
+          <span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 2.5 20h19z"/><path d="M12 10v4M12 17h.01"/></svg></span>
+          <div class="callout__body">
+            <div class="callout__title">Before any big change, back up</div>
+            <p>Before updating the software, restoring data, or making a large import, take a fresh backup from <a href="/documentation/backup.html">Backup &amp; restore</a>. It takes a moment and saves you from a bad day.</p>
+          </div>
+        </div>
+
+        <div class="callout callout--info">
+          <span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg></span>
+          <div class="callout__body">
+            <div class="callout__title">Still need help?</div>
+            <p>Check the <a href="/documentation/faq.html">FAQ</a> for quick answers, or the <a href="/documentation/glossary.html">Glossary</a> if a term is unfamiliar. For anything beyond this guide, contact the person or company who supplied your POS software.</p>
+          </div>
+        </div>
+
+        <hr />
+        <p style="color:var(--text-tertiary);font-size:14px">Related: <a href="/documentation/hardware.html">Hardware &amp; printing</a> · <a href="/documentation/offline.html">Selling offline</a> · <a href="/documentation/users-roles.html">Users &amp; roles</a> · <a href="/documentation/backup.html">Backup &amp; restore</a> · <a href="/documentation/faq.html">FAQ</a></p>
+
+        <nav class="doc-pager" id="docs-pager"></nav>
+      </article>
+    </main>
+
+    <aside class="doc-toc scroll-y"><nav id="docs-toc"></nav></aside>
+  </div>
+
+  <script src="/documentation/assets/nav.js?v=22"></script>
+  <script src="/documentation/assets/docs.js?v=20"></script>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Channel orders · POS User Guide</title>
+  <meta name="description" content="Manage paid Shopify and WooCommerce orders in Hyper POS: reservation, store allocation, fulfilment, cancellation, refunds and retries." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+  <link rel="stylesheet" href="/documentation/assets/docs.css?v=20" />
+  <script>(function () { try { var t = localStorage.getItem("docs-theme"); if (!t) t = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"; document.documentElement.setAttribute("data-theme", t); } catch (e) {} })();</script>
+</head>
+<body data-nav="channel-orders">
+  <div class="doc-progress"><div class="doc-progress__bar" id="docs-progress-bar"></div></div>
+  <header class="doc-topbar">
+    <button class="doc-iconbtn doc-menubtn" id="docs-menu-btn" aria-label="Open menu"></button>
+    <a class="doc-brand" href="/documentation/index.html"><span class="doc-brand__mark"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M3 9h18M7 21h10"/></svg></span><span class="doc-brand__name">POS <span style="color:var(--text-tertiary);font-weight:500">User Guide</span></span><span class="doc-brand__tag">Docs</span></a>
+    <div class="doc-topbar__spacer"></div>
+    <button class="doc-searchbtn" data-open-search aria-label="Search"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span class="label">Search the guide…</span><kbd>Ctrl K</kbd></button>
+    <button class="doc-iconbtn" id="docs-theme-btn" aria-label="Toggle dark mode"><svg class="theme-moon" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg><svg class="theme-sun" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4 12H2M22 12h-2"/></svg></button>
+  </header>
+  <div class="doc-search" id="docs-search" role="dialog" aria-label="Search"><div class="doc-search__backdrop"></div><div class="doc-search__panel"><div class="doc-search__input"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="docs-search-input" type="text" placeholder="Search for a feature…" autocomplete="off" /></div><div class="doc-search__results" id="docs-search-results"></div></div></div>
+  <div class="doc-scrim" id="docs-scrim"></div>
+  <div class="doc-layout">
+    <aside class="doc-sidebar scroll-y"><nav id="docs-sidebar-nav"></nav></aside>
+    <main class="doc-main"><nav class="doc-breadcrumb" id="docs-breadcrumbs"></nav><article class="doc-article">
+      <h1>Channel orders</h1>
+      <p class="lead">Paid Shopify and WooCommerce orders arrive here for stock reservation, automatic store allocation and fulfilment. Hyper POS preserves the original order, customer, address, items, payment state, totals and provider reference.</p>
+
+      <div class="glance">
+        <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="m9 12 2 2 4-4"/></svg><div><b>Who uses it</b><span>Commerce staff preparing and fulfilling paid online orders.</span></div></div>
+        <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg><div><b>Important</b><span>Import reserves available stock; fulfilment creates the real POS sale and stock movement.</span></div></div>
+        <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9v11h14V9"/></svg><div><b>Where to find it</b><span>Open <strong>Channel orders</strong>, or go to <code>/admin/commerce/orders</code>.</span></div></div>
+      </div>
+
+      <h2 id="lifecycle">Order lifecycle</h2>
+      <ol class="steps">
+        <li><span class="step-title">The customer pays online</span><p>Only paid orders enter the normal allocation workflow. Signed Shopify or WooCommerce webhooks are recorded once even if the provider sends the same event again.</p></li>
+        <li><span class="step-title">POS imports and matches each line</span><p>Hyper POS first uses a saved remote mapping, then variant SKU, then product SKU. Unknown SKUs are never guessed; the order is shown with an allocation error for correction.</p></li>
+        <li><span class="step-title">Stock is reserved across eligible stores</span><p>Mappings with <strong>Orders</strong> enabled are considered in priority order. A large order can be split across multiple POS stores. Reservation reduces online availability immediately but does not change on-hand stock.</p></li>
+        <li><span class="step-title">Staff fulfil each allocation</span><p>Hyper POS rechecks store access, stock, mappings and eligible batches, then creates one normal store-scoped POS sale using the connection's online-order payment method.</p></li>
+        <li><span class="step-title">The provider is updated</span><p>Shopify receives fulfilment for the correct lines and mapped location. WooCommerce is marked completed after every local allocation is fulfilled.</p></li>
+      </ol>
+
+      <div class="callout callout--tip"><span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.2 1 2.5h6c0-1.3.3-1.8 1-2.5A6 6 0 0 0 12 3z"/></svg></span><div class="callout__body"><div class="callout__title">Reservation is not a sale</div><p>For 10 on hand and an online order of 2: on hand stays 10, reserved becomes 2 and available becomes 8. After fulfilment: on hand is 8, reserved returns to 0 and available stays 8.</p></div></div>
+
+      <figure class="shot"><div class="shot__frame"><div class="shot__bar"><i></i><i></i><i></i></div><img src="/assets/documentation/images/channel-orders-list.png" alt="Channel orders list showing provider, order number, customer, status, total and received date" /></div><figcaption>Filter the order list by channel or state and open any order that needs attention.</figcaption></figure>
+
+      <h2 id="review">Review an imported order</h2>
+      <p>Open an order to check:</p>
+      <ul>
+        <li>Provider, connection name, remote order number and financial/fulfilment state.</li>
+        <li>Customer, email, phone, billing and shipping address.</li>
+        <li>Every product line, SKU, ordered, fulfilled and refunded quantity, unit price and total.</li>
+        <li>Subtotal, discount, shipping, tax, grand total and refunded total.</li>
+        <li>Store allocations, reserved quantities, generated POS sale and remote-sync status.</li>
+        <li>Any actionable allocation or provider error.</li>
+      </ul>
+
+      <h2 id="fulfill">Fulfil an allocation</h2>
+      <ol class="steps">
+        <li><span class="step-title">Pick and check the stock</span><p>Use the allocation's POS store and exact lines. For batch-tracked items, make sure an eligible positive-quantity batch is available in that store.</p></li>
+        <li><span class="step-title">Open the allocation</span><p>Confirm the store, quantities and total. If an allocation was split, fulfil only the portion that store is actually shipping or handing over.</p></li>
+        <li><span class="step-title">Click "Mark fulfilled"</span><p>Read the store name in the confirmation and continue once. Hyper POS protects against repeat submissions.</p></li>
+        <li><span class="step-title">Verify the result</span><p>The allocation links to its POS sale. The reservation is released, on-hand stock is deducted once, accounting/payment are recorded once, and remote fulfilment work is queued.</p></li>
+      </ol>
+
+      <figure class="shot"><div class="shot__frame"><div class="shot__bar"><i></i><i></i><i></i></div><img src="/assets/documentation/images/channel-order-detail.png" alt="Channel order detail showing items, store allocations, fulfil button, order summary and customer address" /></div><figcaption>The order detail keeps the remote order, local reservations, generated sale and fulfilment state together.</figcaption></figure>
+
+      <h2 id="split">Split orders and provider differences</h2>
+      <div class="doc-tablewrap"><table><thead><tr><th></th><th>Shopify</th><th>WooCommerce</th></tr></thead><tbody>
+        <tr><td>Inventory</td><td>Can map POS stores to distinct Shopify locations or an aggregate location.</td><td>Core WooCommerce has one stock quantity per product/variation, so enabled POS mappings contribute to one online pool.</td></tr>
+        <tr><td>Split fulfilment</td><td>Fulfilment is sent by line quantity and mapped location; eligible lines can be moved to the correct merchant-managed location.</td><td>Partial POS allocations remain local; the remote order becomes completed only after all allocations are fulfilled.</td></tr>
+        <tr><td>Remote order</td><td>Imported Shopify order remains the remote source of truth.</td><td>Imported WooCommerce order remains the remote source of truth.</td></tr>
+      </tbody></table></div>
+
+      <h2 id="cancel-refund">Cancellations and refunds</h2>
+      <ul>
+        <li><strong>Cancelled before fulfilment:</strong> open reservations are released and the increased availability is synchronized. POS does not invent a sale return because no sale was created.</li>
+        <li><strong>Refunded before fulfilment:</strong> the matching reserved quantity is released.</li>
+        <li><strong>Refunded after fulfilment:</strong> Hyper POS can create the matching POS sale return and restock, using the original fulfilled sale lines and an active return reason.</li>
+        <li><strong>Repeated provider event:</strong> the same cancellation or refund is not applied twice.</li>
+        <li>The provider already handled the shopper's refund. POS mirrors the local financial/stock effect and does not call the payment gateway to refund the same money again.</li>
+      </ul>
+
+      <h2 id="retry">Fix and retry a failed order</h2>
+      <div class="doc-tablewrap"><table><thead><tr><th>Error</th><th>Correct it before retry</th></tr></thead><tbody>
+        <tr><td>Product not mapped / unknown SKU</td><td>Give the exact POS product or variant the matching unique SKU, synchronize the product, then use <strong>Retry allocation</strong>.</td></tr>
+        <tr><td>Not enough available stock</td><td>Receive or transfer stock, reduce another reservation, or correct the eligible store mappings.</td></tr>
+        <tr><td>No eligible store</td><td>Enable an accessible active mapping with <strong>Orders</strong> selected and a suitable priority.</td></tr>
+        <tr><td>No eligible batch</td><td>Add/receive a positive-quantity, unexpired batch for that product/variant in the allocation store.</td></tr>
+        <tr><td>Provider fulfilment failed</td><td>Correct credentials, API scopes, remote location or provider availability, then use <strong>Retry provider sync</strong>. Do not fulfil the allocation again.</td></tr>
+      </tbody></table></div>
+      <div class="callout callout--warning"><span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3 2.5 20h19z"/><path d="M12 10v4M12 17h.01"/></svg></span><div class="callout__body"><p>A provider showing <strong>Completed</strong> does not prove POS stock was posted. Confirm the local allocation is fulfilled, a POS sale exists and the stock movement is present.</p></div></div>
+
+      <h2 id="permissions">Access and safety</h2>
+      <ul>
+        <li>Users need channel-order viewing permission to open the list/detail and management permission to allocate, fulfil or retry.</li>
+        <li>Store access is rechecked on fulfilment. A user cannot fulfil through a store they cannot access.</li>
+        <li>Double-clicks and repeated webhooks are idempotent: they must not create a second sale, stock movement, return or provider fulfilment.</li>
+        <li>Do not delete pending commerce records to make a health count disappear. Fix the cause and use the supported retry action.</li>
+      </ul>
+
+      <hr />
+      <p style="color:var(--text-tertiary);font-size:14px">Related: <a href="/documentation/sales-channels.html">Shopify &amp; WooCommerce setup</a> · <a href="/documentation/inventory.html">Inventory</a> · <a href="/documentation/returns.html">Returns &amp; refunds</a> · <a href="/documentation/sales-history.html">Sales history</a></p>
+      <nav class="doc-pager" id="docs-pager"></nav>
+    </article></main>
+    <aside class="doc-toc scroll-y"><nav id="docs-toc"></nav></aside>
+  </div>
+  <script src="/documentation/assets/nav.js?v=22"></script><script src="/documentation/assets/docs.js?v=20"></script>
+</body>
+</html>

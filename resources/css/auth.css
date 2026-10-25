@@ -1,0 +1,7 @@
+/* ============================================================
+   Auth CSS entry — loads the shared design system + auth shell
+   ============================================================ */
+
+@import './app.css';
+
+@import './auth/login.css';

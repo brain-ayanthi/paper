@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hardware &amp; printing · POS User Guide</title>
+  <meta name="description" content="Set up receipt printers, the cash drawer, barcode scanners and label printers — and test everything from the Hardware diagnostics page." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+  <link rel="stylesheet" href="/documentation/assets/docs.css?v=20" />
+  <script>
+    (function () { try { var t = localStorage.getItem("docs-theme"); if (!t) t = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"; document.documentElement.setAttribute("data-theme", t); } catch (e) {} })();
+  </script>
+</head>
+<body data-nav="hardware">
+  <div class="doc-progress"><div class="doc-progress__bar" id="docs-progress-bar"></div></div>
+
+  <header class="doc-topbar">
+    <button class="doc-iconbtn doc-menubtn" id="docs-menu-btn" aria-label="Open menu"></button>
+    <a class="doc-brand" href="/documentation/index.html">
+      <span class="doc-brand__mark"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M3 9h18M7 21h10"/></svg></span>
+      <span class="doc-brand__name">POS <span style="color:var(--text-tertiary);font-weight:500">User Guide</span></span>
+      <span class="doc-brand__tag">Docs</span>
+    </a>
+    <div class="doc-topbar__spacer"></div>
+    <button class="doc-searchbtn" data-open-search aria-label="Search">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <span class="label">Search the guide…</span>
+      <kbd>Ctrl K</kbd>
+    </button>
+    <button class="doc-iconbtn" id="docs-theme-btn" aria-label="Toggle dark mode">
+      <svg class="theme-moon" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg>
+      <svg class="theme-sun" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4 12H2M22 12h-2M5 5 4 4M20 20l-1-1M5 19l-1 1M20 4l-1 1"/></svg>
+    </button>
+  </header>
+
+  <div class="doc-search" id="docs-search" role="dialog" aria-label="Search">
+    <div class="doc-search__backdrop"></div>
+    <div class="doc-search__panel">
+      <div class="doc-search__input">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="docs-search-input" type="text" placeholder="Search for a feature…" autocomplete="off" />
+      </div>
+      <div class="doc-search__results" id="docs-search-results"></div>
+    </div>
+  </div>
+
+  <div class="doc-scrim" id="docs-scrim"></div>
+
+  <div class="doc-layout">
+    <aside class="doc-sidebar scroll-y"><nav id="docs-sidebar-nav"></nav></aside>
+
+    <main class="doc-main">
+      <nav class="doc-breadcrumb" id="docs-breadcrumbs"></nav>
+
+      <article class="doc-article">
+        <h1>Hardware &amp; printing</h1>
+        <p class="lead">A POS counter is only as good as the kit on the desk. This page walks you through connecting the four things most shops use — a receipt printer, a cash drawer, a barcode scanner and (optionally) a label printer — and testing each one so you're confident before the first customer arrives.</p>
+
+        <div class="glance">
+          <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m9 12 2 2 4-4"/></svg><div><b>Who sets this up</b><span>The shop owner or manager, once per counter.</span></div></div>
+          <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg><div><b>How long it takes</b><span>About 5 minutes per counter (till).</span></div></div>
+          <div class="glance__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9v11h14V9"/></svg><div><b>Where to find it</b><span>Open <strong>Settings → Hardware</strong>, or set up a counter from <strong>Stores &amp; terminals</strong>.</span></div></div>
+        </div>
+
+        <h2 id="overview">Overview</h2>
+        <p>The system is designed to work with the inexpensive, widely-available hardware you'll find in any shop: a small <strong>thermal receipt printer</strong> (the kind that prints on a roll of heat-sensitive paper), a <strong>cash drawer</strong> that pops open by itself, a <strong>barcode scanner</strong>, and — if you label your own stock — a <strong>label printer</strong>. None of it needs special drivers or technical installation in most cases.</p>
+        <p>Your hardware setup is saved <strong>per counter</strong> (each till is called a <strong>terminal</strong>). So if you have two checkout desks, each one remembers its own printer and scanner. Set a counter up once and every cashier who logs in there inherits the same setup — no re-configuring.</p>
+        <p>To print directly to a thermal printer, the system uses a tiny built-in helper called the <strong>print bridge</strong>. It runs inside your web browser and quietly hands each receipt to the printer. If your browser or printer can't use it, the system automatically falls back to your browser's normal <strong>Print</strong> dialog instead — you never see a broken button.</p>
+
+        <figure class="shot">
+          <div class="shot__frame">
+            <div class="shot__bar"><i></i><i></i><i></i></div>
+            <img src="/assets/documentation/images/hardware-diagnostics.png" alt="The Hardware diagnostics page showing the status of each connected device" />
+          </div>
+          <figcaption>The Hardware diagnostics page: a status board for your printer, drawer, scanner and labels, with a test button for each.</figcaption>
+        </figure>
+
+        <h2 id="why">Why it's useful</h2>
+        <ul>
+          <li><strong>It works with cheap, common hardware.</strong> A basic thermal printer (around $50) and a USB scanner are all most shops need.</li>
+          <li><strong>No drivers, in most cases.</strong> Scanners behave like a keyboard, and the print bridge talks to the printer for you.</li>
+          <li><strong>It's set up per counter.</strong> Each till keeps its own printer and scanner, so a busy multi-till shop just works.</li>
+          <li><strong>Nothing gets lost.</strong> If a receipt fails to print, it's saved and retried automatically rather than disappearing.</li>
+          <li><strong>You can test before you trade.</strong> The diagnostics page lets you fire a test print, open the drawer and check a scan in seconds.</li>
+        </ul>
+
+        <h2 id="steps">Setting up your hardware, step by step</h2>
+        <ol class="steps">
+          <li>
+            <span class="step-title">Open your counter's hardware setup</span>
+            <p>Go to <strong>Settings → Hardware</strong>. You'll see the setup for the counter (terminal) you're currently using. If you haven't created this counter yet, do that first on the <a href="/documentation/stores.html">Stores &amp; terminals</a> page, then come back.</p>
+          </li>
+          <li>
+            <span class="step-title">Connect the receipt printer</span>
+            <p>Plug your thermal printer into the computer by USB and switch it on. Choose <strong>Thermal receipt printer</strong>, pick your paper width (<strong>80mm</strong> is the most common; small printers use <strong>58mm</strong>), then click <strong>Pair printer</strong>. Your browser shows a short list of devices — pick your printer. The browser remembers it for next time.</p>
+          </li>
+          <li>
+            <span class="step-title">Send a test print</span>
+            <p>Click <strong>Test print</strong>. A small sample receipt should come out of the printer. If it does, you're done with the printer. If nothing happens, see the warnings at the bottom of this page.</p>
+          </li>
+          <li>
+            <span class="step-title">Hook up the cash drawer</span>
+            <p>Most cash drawers connect to the <em>printer</em>, not the computer — a phone-style cable runs from the back of the printer into the drawer. Choose <strong>Connected to receipt printer</strong>. The drawer then pops open automatically whenever a customer pays cash. Click <strong>Test kick</strong> (the term for "open the drawer") to check it.</p>
+          </li>
+          <li>
+            <span class="step-title">Set up the barcode scanner</span>
+            <p>Plug a USB barcode scanner in. There's nothing to install — it simply types the barcode for you, exactly like a fast keyboard. To confirm it's working, scan any product barcode during setup and the system will recognise it. If you'd rather use a tablet or phone camera as a scanner, choose <strong>Camera</strong> instead (covered below).</p>
+          </li>
+          <li>
+            <span class="step-title">Add a label printer (optional)</span>
+            <p>If you print your own price/barcode labels, choose your label printer here the same way you paired the receipt printer. No label printer? You can still print labels onto an ordinary A4 sticker sheet using your normal office printer — see <a href="/documentation/labels.html">Barcode labels</a>.</p>
+          </li>
+          <li>
+            <span class="step-title">Save and you're ready</span>
+            <p>Your choices are saved to this counter. Any cashier who logs in here gets the same setup automatically. Repeat these steps on each counter that has its own hardware.</p>
+          </li>
+        </ol>
+
+        <div class="callout callout--success">
+          <span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8 12 2.5 2.5L16 9"/></svg></span>
+          <div class="callout__body">
+            <div class="callout__title">No printer? You can still sell.</div>
+            <p>Everything works without a thermal printer — receipts print through your browser's normal Print dialog instead, and you open the drawer by hand. A small thermal printer just makes it faster and smoother.</p>
+          </div>
+        </div>
+
+        <h2 id="devices">A closer look at each device</h2>
+
+        <h3 id="receipt-printer">Receipt printers</h3>
+        <p>A thermal receipt printer prints on a roll of heat-sensitive paper — there's no ink to replace. The system supports the standard "ESC/POS" printers sold everywhere (Epson, Star, Bixolon and many generic brands), in both 58mm and 80mm paper widths. When a sale finishes, the receipt prints on its own, including your shop logo and a barcode of the receipt number.</p>
+
+        <figure class="shot">
+          <div class="shot__frame">
+            <div class="shot__bar"><i></i><i></i><i></i></div>
+            <img src="/assets/documentation/images/hardware-printer.png" alt="The receipt printer setup screen with a Pair printer and Test print button" />
+          </div>
+          <figcaption>Pairing a receipt printer: choose the paper width, pair the device once, then fire a test print.</figcaption>
+        </figure>
+
+        <h3 id="drawer">The cash drawer</h3>
+        <p>The cash drawer opens via the receipt printer — when a customer pays cash, the printer sends a quick pulse down the cable to the drawer and it springs open. There's also an <strong>Open drawer</strong> button on the checkout screen (for staff who are allowed to use it) for when you need to open it without a sale, such as giving change for a phone call.</p>
+
+        <h3 id="scanners">Barcode scanners</h3>
+        <p>There are two ways to scan:</p>
+        <ul>
+          <li><strong>A USB scanner</strong> — the most reliable choice. It plugs in and "types" each barcode straight into the screen, so there's nothing to install. Just scan and the product drops into the cart.</li>
+          <li><strong>A camera scanner</strong> — useful on a tablet, laptop or phone that has no USB scanner. Tap the camera button on the checkout screen, point the camera at the barcode, and it reads it. You'll be asked once for permission to use the camera.</li>
+        </ul>
+        <p>Both methods understand the special barcodes that supermarket weighing scales print (which include the weight and price). See <a href="/documentation/weight-items.html">Weighed &amp; scale items</a> for that.</p>
+
+        <h3 id="labels">Label printers</h3>
+        <p>If you stick price and barcode labels on your stock, a thermal label printer prints them one at a time. Don't have one? Print a whole sheet of labels onto A4 sticker paper with an ordinary printer instead. Full details are on the <a href="/documentation/labels.html">Barcode labels</a> page.</p>
+
+        <h3 id="queue">If a print fails — the failed-print queue</h3>
+        <p>Printers run out of paper, get switched off, or lose their cable at the worst moment. When a receipt can't print, the system doesn't lose it — it's tucked into a <strong>failed-print queue</strong> and a small message appears: "1 print failed." The system then quietly tries again every few seconds. Once you fix the printer (load paper, switch it on), the queued receipt prints by itself — or you can press <strong>Retry</strong> to push it through immediately.</p>
+
+        <h3 id="diagnostics">The Hardware diagnostics page</h3>
+        <p>The diagnostics page (<strong>Settings → Hardware</strong>) is your one-stop check-up. It shows a green, amber or red light for each device — receipt printer, label printer, cash drawer and scanner — along with a <strong>Test</strong> button for each. Run these tests after changing any hardware, or as a quick "is everything ready?" check before a busy day.</p>
+
+        <h2 id="tips">Tips &amp; best practices</h2>
+        <div class="callout callout--tip">
+          <span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.2 1 2.5h6c0-1.3.3-1.8 1-2.5A6 6 0 0 0 12 3z"/></svg></span>
+          <div class="callout__body">
+            <ul>
+              <li><strong>Use Chrome, Edge or Opera on the till.</strong> These browsers can talk directly to thermal printers and the cash drawer. Safari and Firefox still work, but fall back to the slower browser-print path with no automatic drawer.</li>
+              <li><strong>Pair the printer once per browser.</strong> The browser remembers it. You only need to pair again if you switch computers or browsers.</li>
+              <li><strong>Run a test print before opening.</strong> Thirty seconds on the diagnostics page saves a queue of frustrated customers later.</li>
+              <li><strong>Keep a spare paper roll under the counter.</strong> A paper-out is the most common reason a print fails — and the queue will hold your receipt until you reload.</li>
+              <li><strong>One small thermal printer transforms the experience.</strong> If you're on browser-print only, it's the single best upgrade you can make.</li>
+            </ul>
+          </div>
+        </div>
+
+        <h2 id="warnings">Notes &amp; warnings</h2>
+        <div class="callout callout--warning">
+          <span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 2.5 20h19z"/><path d="M12 10v4M12 17h.01"/></svg></span>
+          <div class="callout__body">
+            <p><strong>The cash drawer only pops open automatically with a thermal printer.</strong> If you print receipts through the browser dialog instead, the drawer can't be opened by the system — your cashier opens it by hand or with the till key.</p>
+            <p><strong>Apple iPads (Safari) can't print directly to thermal printers.</strong> They still work via the browser's Print dialog. For the fullest experience, use a Windows or Android device with Chrome on the till.</p>
+          </div>
+        </div>
+        <div class="callout callout--danger">
+          <span class="callout__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2h8l6 6v8l-6 6H8l-6-6V8z"/><path d="M12 8v5M12 16h.01"/></svg></span>
+          <div class="callout__body">
+            <p><strong>A test print does nothing?</strong> Check the obvious first: the printer is switched on, has paper, and its USB cable is firmly in. Then re-pair it from <strong>Settings → Hardware</strong>. If it still won't print, switch that counter to browser-print so you can keep trading while you sort it out, and see <a href="/documentation/troubleshooting.html">Troubleshooting</a>.</p>
+          </div>
+        </div>
+
+        <hr />
+        <p style="color:var(--text-tertiary);font-size:14px">Related: <a href="/documentation/labels.html">Barcode labels</a> · <a href="/documentation/cashier.html">The POS screen</a> · <a href="/documentation/stores.html">Stores &amp; terminals</a> · <a href="/documentation/troubleshooting.html">Troubleshooting</a></p>
+
+        <nav class="doc-pager" id="docs-pager"></nav>
+      </article>
+    </main>
+
+    <aside class="doc-toc scroll-y"><nav id="docs-toc"></nav></aside>
+  </div>
+
+  <script src="/documentation/assets/nav.js?v=22"></script>
+  <script src="/documentation/assets/docs.js?v=20"></script>
+</body>
+</html>
